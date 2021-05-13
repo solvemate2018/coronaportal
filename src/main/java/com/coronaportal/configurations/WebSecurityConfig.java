@@ -22,14 +22,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select cpr, password, enabled from employee where cpr=?")
-                .authoritiesByUsernameQuery("select cpr, role from employee where cpr=?")
+                .usersByUsernameQuery("CALL get_authUser(?)")
+                .authoritiesByUsernameQuery("CALL get_authRole(?)")
         ;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/", "/home", "/js/**", "/css/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/secretary").hasRole("SECRETARY")
                 .and()
