@@ -1,9 +1,6 @@
 package com.coronaportal.repositories;
 
-import com.coronaportal.models.Employee;
-import com.coronaportal.models.Person;
-import com.coronaportal.models.TestAppointment;
-import com.coronaportal.models.VaccineAppointment;
+import com.coronaportal.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,31 +15,32 @@ public class PersonRepoImpl implements IPersonRepo{
     JdbcTemplate template;
 
     @Override
-    public List<Person> fetchAll() {
-        String sql="SELECT * FROM coronaportal.person";
+    public Person fetchPersonData(String cpr) {
+        String sql="SELECT * FROM coronaportal.person WHERE cpr=?";
         RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
-        return template.query(sql,rowMapper);
-    }
-
-    @Override
-    public Person findPersonById(int id) {
-        String sql="SELECT * FROM coronaportal.person WHERE id=?";
-        RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
-        Person person = template.queryForObject(sql,rowMapper,id);
+        Person person=template.queryForObject(sql,rowMapper,cpr);
         return person;
     }
 
     @Override
-    public List<TestAppointment> getTestAppointments(int id) {
-        String sql="SELECT * FROM coronaportal.test_appointment WHERE person_id=?";
-        RowMapper<TestAppointment> rowMapper = new BeanPropertyRowMapper<>(TestAppointment.class);
-        return template.query(sql,rowMapper,id);
+    public void setToVaccinated(String cpr) {
+        String sql="UPDATE coroportal.person SET vaccinated=? WHERE cpr=?";
+        template.update(sql,true, cpr);
     }
 
     @Override
-    public List<VaccineAppointment> getVaccineAppointments(int id) {
-        String sql="SELECT * FROM coronaportal.vaccine_appointment WHERE person_id=?";
-        RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
-        return template.query(sql,rowMapper,id);
+    public boolean isVaccinated(String cpr) {
+        String sql="SELECT * FROM coronaportal.person WHERE cpr=?";
+        RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
+        Person person=template.queryForObject(sql,rowMapper,cpr);
+        return person.getVaccinated();
+    }
+
+    @Override
+    public TestResult getLastTestResult(String cpr) {
+        String sql="CALL coronaportal.get_last_test_result_for_person('?');";
+        RowMapper<TestResult> rowMapper = new BeanPropertyRowMapper<>(TestResult.class);
+        TestResult testResult=template.queryForObject(sql,rowMapper,cpr);
+        return testResult;
     }
 }

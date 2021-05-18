@@ -13,24 +13,4 @@ import java.util.List;
 public class PersonServiceImpl implements IPersonService{
     @Autowired
     IPersonRepo personRepo;
-
-    @Override
-    public List<Person> fetchAll() {
-        return personRepo.fetchAll();
-    }
-
-    @Override
-    public Person findPersonById(int id) {
-        return personRepo.findPersonById(id);
-    }
-
-    @Override
-    public List<TestAppointment> getTestAppointments(int id) {
-        return personRepo.getTestAppointments(id);
-    }
-
-    @Override
-    public List<VaccineAppointment> getVaccineAppointments(int id) {
-        return personRepo.getVaccineAppointments(id);
-    }
 }

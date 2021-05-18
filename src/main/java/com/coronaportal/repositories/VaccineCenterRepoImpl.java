@@ -12,39 +12,4 @@ import java.util.List;
 public class VaccineCenterRepoImpl implements IVaccineCenterRepo{
     @Autowired
     JdbcTemplate template;
-
-    @Override
-    public List<VaccineCenter> fetchAll() {
-        return null;
-    }
-
-    @Override
-    public VaccineCenter findById(int centerId) {
-        return null;
-    }
-
-    @Override
-    public List<VaccineAppointment> fetchAppointmentsForTodayById(int centerId) {
-        return null;
-    }
-
-    @Override
-    public List<VaccineAppointment> fetchAllAppointmentsById(int centerId) {
-        return null;
-    }
-
-    @Override
-    public VaccineCenter createVaccineCenter(VaccineCenter vaccineCenter) {
-        return null;
-    }
-
-    @Override
-    public Boolean deleteVaccineCenter(int centerId) {
-        return null;
-    }
-
-    @Override
-    public VaccineCenter updateVaccineCenter(int id, VaccineCenter vaccineCenter) {
-        return null;
-    }
 }

@@ -7,13 +7,4 @@ import com.coronaportal.models.VaccineAppointment;
 import java.util.List;
 
 public interface IVaccineAppointmentRepo {
-    List<VaccineAppointment> fetchAll();
-
-    VaccineAppointment findById(int appointmentId);
-
-    VaccineAppointment createTestAppointment(VaccineAppointment vaccineAppointment);
-
-    Boolean deleteTestAppointment(int appointmentId);
-
-    TestAppointment updateTestAppointment(int appointmentId, VaccineAppointment vaccineAppointment);
 }

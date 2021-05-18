@@ -12,14 +12,4 @@ import java.util.List;
 public class VaccineRepoImpl implements IVaccineRepo{
     @Autowired
     JdbcTemplate template;
-
-    @Override
-    public List<VaccineAppointment> fetchAll() {
-        return null;
-    }
-
-    @Override
-    public List<VaccineAppointment> fetchByPersonId(int personId) {
-        return null;
-    }
 }

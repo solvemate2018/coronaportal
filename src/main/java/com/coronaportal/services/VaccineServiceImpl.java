@@ -13,13 +13,4 @@ import java.util.List;
 public class VaccineServiceImpl implements IVaccineService{
     @Autowired
     IVaccineRepo vaccineRepo;
-    @Override
-    public List<VaccineAppointment> fetchAll() {
-        return vaccineRepo.fetchAll();
-    }
-
-    @Override
-    public List<VaccineAppointment> fetchByPersonId(int personId) {
-        return vaccineRepo.fetchByPersonId(personId);
-    }
 }

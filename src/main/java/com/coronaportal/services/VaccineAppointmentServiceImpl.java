@@ -12,29 +12,4 @@ import java.util.List;
 public class VaccineAppointmentServiceImpl implements IVaccineAppointmentService {
     @Autowired
     IVaccineAppointmentRepo vaccineAppointmentRepo;
-
-    @Override
-    public List<VaccineAppointment> fetchAll() {
-        return vaccineAppointmentRepo.fetchAll();
-    }
-
-    @Override
-    public VaccineAppointment findById(int appointmentId) {
-        return vaccineAppointmentRepo.findById(appointmentId);
-    }
-
-    @Override
-    public VaccineAppointment createTestAppointment(VaccineAppointment vaccineAppointment) {
-        return vaccineAppointmentRepo.createTestAppointment(vaccineAppointment);
-    }
-
-    @Override
-    public Boolean deleteTestAppointment(int appointmentId) {
-        return vaccineAppointmentRepo.deleteTestAppointment(appointmentId);
-    }
-
-    @Override
-    public TestAppointment updateTestAppointment(int appointmentId, VaccineAppointment vaccineAppointment) {
-        return vaccineAppointmentRepo.updateTestAppointment(appointmentId, vaccineAppointment);
-    }
 }

@@ -15,85 +15,35 @@ public class EmployeeRepoImpl implements IEmployeeRepo{
     JdbcTemplate template;
 
     @Override
-    public List<Employee> fetchAll() {
+    public List<Employee> fetchEmployee() {
         String sql="SELECT * FROM coronaportal.employee";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
         return template.query(sql,rowMapper);
     }
 
     @Override
-    public Employee findEmployeeById(int id) {
-        String sql="SELECT * FROM coronaportal.employee WHERE id=?";
+    public void reassignToTestCenter(int id, int test_center_id) {
+        String sql = "CALL coronaportal.reassign_employee_to_test_center(?, ?);";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
-        Employee employee = template.queryForObject(sql,rowMapper,id);
-        return employee;
+        template.query(sql, rowMapper, id, test_center_id);
     }
 
     @Override
-    public void createNewSecretary(Employee employee) {
-        String sql="INSERT INTO coronaportal.employee(" +
-                "role , " +
-                "cpr, " +
-                "password, " +
-                "first_name, " +
-                "last_name, " +
-                "email, " +
-                "phone_number, " +
-                "enabled) " +
-                "VALUES(?,?,?,?,?,?,?,?)";
-        template.update(sql,
-                "ROLE_SECRETARY",
-                employee.getCpr(),
-                employee.getPassword(),
-                employee.getFirst_name(),
-                employee.getLast_name(),
-                employee.getEmail(),
-                employee.getPhone_number(),
-                true);
+    public void reassignToVaccineCenter(int id, int vaccine_center_id) {
+        String sql = "CALL coronaportal.reassign_employee_to_vaccine_center(?, ?);";
+        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
+        template.query(sql, rowMapper, id, vaccine_center_id);
     }
 
     @Override
-    public Boolean deleteEmployee(int id) {
+    public void editEmployee(int id, Employee employee) {
+        String sql="UPDATE coronaportal.employee SET first_name=?,last_name=?, email=?, phone_number=? WHERE id=?";
+        template.update(sql,employee.getFirst_name(), employee.getLast_name(), employee.getEmail(), employee.getPhone_number(), id);
+    }
+
+    @Override
+    public void deleteEmployee(int id) {
         String sql="delete from coronaportal.employee where id=?";
-        return template.update(sql,id)>=0;
-    }
-
-    @Override
-    public void updateEmployee(int id, Employee employee) {
-        String sql="UPDATE coronaportal.employee SET " +
-                "cpr=?," +
-                "password=?, " +
-                "first_name=?, " +
-                "last_name=?, " +
-                "email=?, " +
-                "phone_number=?, " +
-                "WHERE id=?";
-        template.update(sql,
-                employee.getCpr(),
-                employee.getPassword(),
-                employee.getFirst_name(),
-                employee.getLast_name(),
-                employee.getEmail(),
-                employee.getPhone_number(), id);
-    }
-
-    @Override
-    public void assignToTestCenter(int employeeId, int testCenterId) {
-        String sql="UPDATE coronaportal.employee SET " +
-                "test_center_id=?," +
-                "WHERE id=?";
-        template.update(sql,
-                testCenterId
-                , employeeId);
-    }
-
-    @Override
-    public void assignToVaccineCenter(int employeeId, int vaccineCenterId) {
-        String sql="UPDATE coronaportal.employee SET " +
-                "vaccine_center_id=?," +
-                "WHERE id=?";
-        template.update(sql,
-                vaccineCenterId
-                , employeeId);
+        boolean result = template.update(sql,id)>=0;
     }
 }
