@@ -33,8 +33,8 @@ public class TestAppointmentRepoImpl implements ITestAppointmentRepo {
 
     @Override
     public void makeAppointmentForPerson(TestAppointment testAppointment) {
-        String sql="INSERT INTO coronaportal.test_appointments(id, test_time,person_id, test_center_id, person_cpr) VALUES(?,?,?,?,?)";
-        template.update(sql,testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_id(), testAppointment.getTest_center_id(), testAppointment.getPerson_cpr());
+        String sql="INSERT INTO coronaportal.test_appointments(test_time,person_id, test_center_id, person_cpr) VALUES(?,?,?,?)";
+        template.update(sql,testAppointment.getTest_time(), testAppointment.getPerson_id(), testAppointment.getTest_center_id(), testAppointment.getPerson_cpr());
     }
 
     @Override
