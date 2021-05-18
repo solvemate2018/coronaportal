@@ -33,14 +33,14 @@ public class TestResultRepoImpl implements ITestResultRepo{
 
     @Override
     public void addResult(TestResult testResult) {
-        String sql="INSERT INTO coronaportal.test_result(id, test_appointments_id, time_of_result, result) VALUES(?,?,?,?)";
-        template.update(sql,testResult.getId(), testResult.getTest_appointment_id(), testResult.getTime_of_result(), testResult.getResult());
+        String sql="INSERT INTO coronaportal.test_result(test_appointments_id, time_of_result, result) VALUES(?,?,?)";
+        template.update(sql,testResult.getTest_appointment_id(), testResult.getTime_of_result(), testResult.getResult());
     }
 
     @Override
     public void editResult(int id, String result, TestResult testResult) {
-        String sql="UPDATE coronaportal.test_result SET id=?, test_appointments_id=?,time_of_result=?, result=? WHERE id=?";
-        template.update(sql,testResult.getId(), testResult.getTest_appointment_id(), testResult.getTime_of_result(), testResult.getResult(), id);
+        String sql="UPDATE coronaportal.test_result SET test_appointments_id=?,time_of_result=?, result=? WHERE id=?";
+        template.update(sql,testResult.getTest_appointment_id(), testResult.getTime_of_result(), testResult.getResult(), id);
     }
 
     @Override
