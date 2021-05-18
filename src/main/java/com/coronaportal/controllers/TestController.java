@@ -3,6 +3,7 @@ package com.coronaportal.controllers;
 import com.coronaportal.models.TestAppointment;
 import com.coronaportal.models.TestCenter;
 import com.coronaportal.models.TestResult;
+import com.coronaportal.repositories.ITestAppointmentRepo;
 import com.coronaportal.services.ITestAppointmentService;
 import com.coronaportal.services.ITestCenterService;
 import com.coronaportal.services.ITestResultService;
@@ -13,17 +14,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class TestController {
     @Autowired
-    ITestCenterService testCenterService;
+    ITestAppointmentRepo testAppointmentService;
 
-    @Autowired
-    ITestAppointmentService  testAppointmentService;
-
-    @Autowired
-    ITestResultService testResultService;
-
+    @GetMapping("/testCenter/index")
+    public String testCenter(Model model, Principal principal){
+        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments(principal.getName());
+        model.addAttribute("testAppointments", testAppointments);
+        return "user/testCenter";
+    }
 }

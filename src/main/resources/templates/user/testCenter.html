@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -19,18 +19,18 @@
     <meta itemprop="name" content="Template Consultant [Preview]">
     <meta itemprop="description" content="">
     <meta itemprop="image"
-          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1620934622">
+          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1621360642">
 
     <!-- MS Tile - for Microsoft apps-->
     <meta name="msapplication-TileImage"
-          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1620934622">
+          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1621360642">
 
     <!-- Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Template Consultant">
     <meta property="og:description" content="">
     <meta property="og:image"
-          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1620934622">
+          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1621360642">
     <meta property="og:url" content="http://9e9b734.grapedrop.net/index-copy-">
 
     <!-- Twitter Meta Tags -->
@@ -38,9 +38,9 @@
     <meta name="twitter:title" content="Template Consultant">
     <meta name="twitter:description" content="">
     <meta name="twitter:image"
-          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1620934622">
+          content="https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1621360642">
 
-    <link rel="icon" type="image/png" href="https://grapedrop.com/favicon.png">
+    <link rel="icon" type="image/png" href="favIcon.png">
 
     <script type="application/ld+json">
         {
@@ -49,7 +49,7 @@
             "url": "http://9e9b734.grapedrop.net/index-copy-",
             "description": "",
             "name": "Template Consultant",
-            "image": "https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1620934622"
+            "image": "https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1621360642"
         }
     </script>
 
@@ -81,9 +81,11 @@
             opacity: 0;
         }
     </style>
-    <link type="text/css" rel="stylesheet" href="/css/testCenter.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/testCenter.css">
 </head>
-<body data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
+<body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1011.0" data-gr-ext-installed="">
 <div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
      style="animation-name: fadeIn;">
     <div id="ic5a7" class="gpd-container">
@@ -94,22 +96,22 @@
                 </svg>
             </a></div>
             <div id="i0yff" class="cell"><a id="ilani" class="gpd-link-box"><img id="ivm7f"
-                                                                                 src="https://cdn.grapedrop.com/u196e97e03fa74a93a544f80d10103ecd/331c2239d5cd42d38b70cceb81da33d3_corona_portal_logo.png"></a>
+                                                                                 src="Corona portal logo.png"></a>
             </div>
             <div id="izu4n" class="cell gpd-navbar__items">
                 <div id="it3na" class="gdp-row gpd-navbar__items-grid">
-                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="#iva9i"
+                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="http://localhost:8080/testCenter/index/"
                                                                               class="gpd-navbar__item-link">Test
                         center</a></div>
-                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="#i2n5f"
+                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="http://localhost:8080/vaccineCenter/index/"
                                                                               class="gpd-navbar__item-link">Vaccine
                         center</a></div>
-                    <div id="ie1j4e" class="cell gpd-navbar__item nav-item"><a href="#ixxt9l" id="ipcsg8"
+                    <div id="ie1j4e" class="cell gpd-navbar__item nav-item"><a href="/staticPages/contacts.html" id="ipcsg8"
                                                                                class="gpd-navbar__item-link">Contacts</a>
                     </div>
                 </div>
             </div>
-            <div id="i0zoef" class="cell gpd-navbar__items"><h3 class="gpd-header">User name</h3></div>
+            <div id="i0zoef" class="cell gpd-navbar__items"><h3 id="username" class="gpd-header"></h3></div>
             <div id="ihndr" class="cell"><a id="io6we" href="#ih8q3w" class="gpd-link cta-button">Log out</a></div>
         </div>
     </div>
@@ -122,26 +124,85 @@
         <path fill="#006cff" d="M240 24V0L0 24h240z"></path>
     </svg>
 </div>
-<section class="gpd-section" id="i5pml">
-    <div class="gpd-container">
-        <div class="gdp-row" id="idb2sd">
+<section id="i5pml" class="gpd-section">
+    <div id="ifw24" class="gpd-container">
+        <div id="idb2sd" class="gdp-row">
             <div id="i6uv1" data-anim-type="bounceInLeft" class="cell" data-anim-done="1"
                  style="animation-name: bounceInLeft;">
-                <div class="row no-gutters">
-                    <div class="col"><h3 class="gpd-header" id="iojyr">Test center</h3></div>
-                    <div class="col"><h3 class="gpd-header" id="isr5x">Time of appointment</h3></div>
-                    <div class="col"><h3 class="gpd-header" id="i7m5g">Time of result</h3></div>
-                    <div class="col" id="i1s2q"><h3 class="gpd-header">Result</h3></div>
-                </div>
+                <table id="iz66x" data-anim-type="bounceInUp" class="table" data-anim-done="1"
+                       style="animation-name: bounceInUp;">
+                    <thead>
+                    <tr>
+                        <th><span>Test center</span></th>
+                        <th><span>Time of appointment</span></th>
+                        <th><span>Test time</span></th>
+                        <th><span>Result</span></th>
+                        <th><span></span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><a href="#ih8q3w" class="gpd-link cta-button">Delete</a></td>
+                    </tr>
+                    <tr>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                    </tr>
+                    <tr>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                        <td><span>Cell</span></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="cell" id="iucs5j"><a href="#ih8q3w" class="gpd-link cta-button">Log out</a></div>
+            <div id="iucs5j" data-anim-type="bounceInLeft" class="cell" data-anim-done="1"
+                 style="animation-name: bounceInLeft;">
+                <ul id="i0cj17" data-anim-type="bounceInUp" class="list-group" data-anim-done="1"
+                    style="animation-name: bounceInUp;">
+                    <li class="list-group-item"><a href="#ih8q3w" id="iooxa" class="gpd-link cta-button">Make new
+                        appointment</a></li>
+                    <li class="list-group-item"><a href="#ih8q3w" class="gpd-link cta-button">Download test
+                        certificate</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
 <style>html {
     scroll-behavior: smooth;
 }</style>
-<div class="container"><p></p></div>
+<div id="icseg" class="container"><p id="ih0lm"></p></div>
 <section id="im0u3g" class="gpd-section">
     <div id="iobnhd" class="gpd-container">
         <div id="iq4rhi" class="gdp-row">
@@ -281,7 +342,7 @@ for (var i = 0, len = items.length; i < len; i++) {
 <script async="" src="https://grapedrop.com/js/gpd.js?id=941871ee8356f83232d3"></script>
 <script async="" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script>
-    var lastUpdateTime = parseInt("1620934622");
+    var lastUpdateTime = parseInt("1621360642");
 
     var checkLastUpdate = function () {
         $.ajax({

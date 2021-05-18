@@ -54,6 +54,7 @@
         }
     </script>
     <link rel="stylesheet" href="https://grapedrop.com/css/gjs-base.css?id=d0383dd1e92b8b8ea83e">
+    <link rel="script" href="/javascript/allScripts.js">
 
     <script>
         window._formUrl = "https://grapedrop.com/form-collector/9e9b734a3123498c9686fa8f435f8b69";
@@ -87,7 +88,7 @@
     <link href="https://unpkg.com/glightbox@3.0.3/dist/css/glightbox.min.css" rel="stylesheet">
     <script src="https://unpkg.com/glightbox@3.0.3/dist/js/glightbox.min.js"></script>
 </head>
-<body data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
+<body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
 <div sec:authorize="!isAuthenticated()" id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar"
      data-anim-done="1"
      style="animation-name: fadeIn;">
@@ -128,14 +129,14 @@
                 </svg>
             </a></div>
             <div id="i0yff" class="cell"><a id="ilani" class="gpd-link-box"><img id="ivm7f"
-                                                                                 src="https://cdn.grapedrop.com/u196e97e03fa74a93a544f80d10103ecd/331c2239d5cd42d38b70cceb81da33d3_corona_portal_logo.png"></a>
+                                                                                 src="Corona portal logo.png"></a>
             </div>
             <div id="izu4n" class="cell gpd-navbar__items">
                 <div id="it3na" class="gdp-row gpd-navbar__items-grid">
-                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="http://localhost:5050/testCenter/index/"
+                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="http://localhost:8080/testCenter/index/"
                                                                               class="gpd-navbar__item-link">Test
                         center</a></div>
-                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="http://localhost:5050/vaccineCenter/index/"
+                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="http://localhost:8080/vaccineCenter/index/"
                                                                               class="gpd-navbar__item-link">Vaccine
                         center</a></div>
                     <div id="ie1j4e" class="cell gpd-navbar__item nav-item"><a href="/staticPages/contacts.html" id="ipcsg8"
@@ -145,7 +146,7 @@
             </div>
             <div class="cell gpd-navbar__items"
             ></div>
-            <div class="cell gpd-navbar__items" id="i0zoef"><h3 class="gpd-header">CPR:</h3><h3 sec:authentication="name" class="gpd-header"></h3></div>
+            <div class="cell gpd-navbar__items" id="i0zoef"><h3 id="username" class="gpd-header"></h3></div>
             <div id="ihndr" class="cell"><a id="io6we" th:href="@{/logout}" class="gpd-link cta-button">Log out</a></div>
         </div>
     </div>

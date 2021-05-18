@@ -1,14 +1,43 @@
 package com.coronaportal.controllers;
 
+import com.coronaportal.models.Person;
+import com.coronaportal.repositories.IPersonRepo;
+import org.apache.catalina.filters.ExpiresFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @Controller
 public class HomeController {
+    @Autowired
+    IPersonRepo personService;
 
     @GetMapping("/")
-    public String home(){
-        return "home/index";
+    public String home(Principal principal, HttpServletResponse response){
+        if(principal == null){
+            return "home/index";
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_CITIZEN"))) {
+            Person person = personService.fetchPersonData(principal.getName());
+            Cookie cookie1 = new Cookie("firstName", person.getFirst_name());
+            Cookie cookie2 = new Cookie("lastName", person.getLast_name());
+            response.addCookie(cookie1);
+            response.addCookie(cookie2);
+            return "home/index";
+        }
+        else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("SECRETARY"))){
+            return "secretary/index";
+        }
+        else
+            return "admin/index";
     }
 }
