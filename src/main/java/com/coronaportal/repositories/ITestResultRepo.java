@@ -7,4 +7,14 @@ import java.util.Map;
 
 public interface ITestResultRepo {
 
+    List<TestResult> fetchResults();
+
+    List<TestResult> fetchResult(String cpr);
+
+    void addResult(TestResult testResult);
+
+    void editResult(int id, String result, TestResult testResult);
+
+    List<TestResult> fetchResult(int test_appointment_id);
+
 }
