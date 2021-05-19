@@ -53,4 +53,11 @@ public class TestCenterRepoImpl implements ITestCenterRepo {
         template.update(sql,testCenter.getCapacity(), testCenter.getCity(), testCenter.getZip_code(), testCenter.getHouse_number(), testCenter.getStreet(), testCenter.getAvailable_tests(), id);
     }
 
+    @Override
+    public TestCenter findById(int test_center_id) {
+        String sql="SELECT * FROM coronaportal.test_center WHERE id=?";
+        RowMapper<TestCenter> rowMapper = new BeanPropertyRowMapper<>(TestCenter.class);
+        return template.queryForObject(sql,rowMapper, test_center_id);
+    }
+
 }

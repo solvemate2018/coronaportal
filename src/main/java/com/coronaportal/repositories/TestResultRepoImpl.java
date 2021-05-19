@@ -44,10 +44,15 @@ public class TestResultRepoImpl implements ITestResultRepo{
     }
 
     @Override
-    public List<TestResult> fetchResult(int test_appointment_id) {
+    public TestResult fetchResult(int test_appointment_id) {
         String sql="SELECT * FROM coronaportal.test_result WHERE test_appointments_id = ?";
         RowMapper<TestResult> rowMapper = new BeanPropertyRowMapper<>(TestResult.class);
-        return template.query(sql, rowMapper, test_appointment_id);
+        try {
+            return template.queryForObject(sql, rowMapper, test_appointment_id);
+        }
+        catch(Exception ex){
+            return null;
+        }
     }
 }
 

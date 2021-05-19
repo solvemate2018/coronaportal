@@ -115,7 +115,7 @@
                 </svg>
             </a></div>
             <div id="i0yff" class="cell"><a id="ilani" class="gpd-link-box"><img id="ivm7f"
-                                                                                 src="images/Corona portal logo.png"></a>
+                                                                                 src="src/main/resources/static/images/Corona portal logo.png"></a>
             </div>
             <div id="izu4n" class="cell gpd-navbar__items">
                 <div id="it3na" class="gdp-row gpd-navbar__items-grid">
@@ -156,51 +156,23 @@
                         <th><span>Time of appointment</span></th>
                         <th><span>Test time</span></th>
                         <th><span>Result</span></th>
-                        <th><span></span></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><a href="#ih8q3w" class="gpd-link cta-button">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
-                        <td><span>Cell</span></td>
+                    <tr th:each="userTestCenterIndexViewModel : ${userTestCenterIndexViewModels}">
+                        <td th:text="${userTestCenterIndexViewModel.testCenter}"><span></span></td>
+                        <td th:text="${userTestCenterIndexViewModel.appointmentTime}"><span></span></td>
+                        <td>
+                            <span th:if="${userTestCenterIndexViewModel.result == '0'}">
+                            </span>
+                            <span th:unless="${userTestCenterIndexViewModel.result == '0'}" th:text="${userTestCenterIndexViewModel.testTime}"></span>
+                        </td>
+                        <td>
+                            <span th:if="${userTestCenterIndexViewModel.result == '0'}">
+                                <a href="#ih8q3w" class="gpd-link cta-button">Delete</a>
+                            </span>
+                            <span th:unless="${userTestCenterIndexViewModel.result == '0'}" th:text="${userTestCenterIndexViewModel.result}"></span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
