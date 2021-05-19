@@ -8,10 +8,13 @@ function getCookie(name) {
     }
     return null;
 }
-
 function getUsername() {
     let user=getCookie("firstName") +" "+ getCookie("lastName");
-    document.getElementById("username").innerHTML = user;
+    let x = document.getElementsByClassName("gpd-header");
+    let i;
+    for (i = 0; i < x.length; i++) {
+        x[i].innerHTML = user;
+    }
 }
 
 function setCookie(cname, cvalue, exdays) {

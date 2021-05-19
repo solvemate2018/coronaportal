@@ -32,7 +32,7 @@ public class HomeController {
             Cookie cookie2 = new Cookie("lastName", person.getLast_name());
             response.addCookie(cookie1);
             response.addCookie(cookie2);
-            return "home/index";
+            return "user/index";
         }
         else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("SECRETARY"))){
             return "secretary/index";

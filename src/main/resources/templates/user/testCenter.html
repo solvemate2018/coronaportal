@@ -68,7 +68,26 @@
             })
         }
     </script>
-
+    <script>
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        function getUsername() {
+            let user=getCookie("firstName") +" "+ getCookie("lastName");
+            let x = document.getElementsByClassName("gpd-header");
+            let i;
+            for (i = 0; i < x.length; i++) {
+                x[i].innerHTML = user;
+            }
+        }
+    </script>
     <style>
         body {
             margin: 0;
@@ -96,7 +115,7 @@
                 </svg>
             </a></div>
             <div id="i0yff" class="cell"><a id="ilani" class="gpd-link-box"><img id="ivm7f"
-                                                                                 src="Corona portal logo.png"></a>
+                                                                                 src="images/Corona portal logo.png"></a>
             </div>
             <div id="izu4n" class="cell gpd-navbar__items">
                 <div id="it3na" class="gdp-row gpd-navbar__items-grid">
@@ -111,8 +130,8 @@
                     </div>
                 </div>
             </div>
-            <div id="i0zoef" class="cell gpd-navbar__items"><h3 id="username" class="gpd-header"></h3></div>
-            <div id="ihndr" class="cell"><a id="io6we" href="#ih8q3w" class="gpd-link cta-button">Log out</a></div>
+            <div id="i0zoef" class="cell gpd-navbar__items"><h3 name="username" class="gpd-header"></h3></div>
+            <div id="ihndr" class="cell"><a id="io6we" th:href="@{/logout}" class="gpd-link cta-button">Log out</a></div>
         </div>
     </div>
 </div>

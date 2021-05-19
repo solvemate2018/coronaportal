@@ -57,6 +57,28 @@
     <link rel="script" href="/javascript/allScripts.js">
 
     <script>
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+
+        function getUsername() {
+            let user=getCookie("firstName") +" "+ getCookie("lastName");
+            let x = document.getElementsByClassName("gpd-header");
+            let i;
+            for (i = 0; i < x.length; i++) {
+                x[i].innerHTML = user;
+            }
+        }
+    </script>
+
+    <script>
         window._formUrl = "https://grapedrop.com/form-collector/9e9b734a3123498c9686fa8f435f8b69";
         window.__gRecapKey = "";
         window.postJQCnt = [];
@@ -80,16 +102,14 @@
             opacity: 0;
         }
     </style>
-
-    <link rel="stylesheet" type="text/css" href="/css/anonStyle.css">
+    <link sec:authorize="hasRole('CITIZEN')" rel="stylesheet" type="text/css" href="/css/userStyle.css">
 
     <link href="https://unpkg.com/glightbox@3.0.3/dist/css/glightbox.min.css" rel="stylesheet">
     <script src="https://unpkg.com/glightbox@3.0.3/dist/js/glightbox.min.js"></script>
 </head>
-<body data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
-<div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar"
-     data-anim-done="1"
-     style="animation-name: fadeIn;">
+<body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
+<div sec:authorize="hasRole('CITIZEN')" id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar"
+     data-anim-done="1" style="animation-name: fadeIn;">
     <div id="ic5a7" class="gpd-container">
         <div id="iu8dq" class="gdp-row">
             <div id="i6ls5" class="cell gpd-navbar__menu"><a id="i3vv9" class="gpd-icon">
@@ -102,18 +122,19 @@
             </div>
             <div id="izu4n" class="cell gpd-navbar__items">
                 <div id="it3na" class="gdp-row gpd-navbar__items-grid">
-                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="/staticPages/aboutUs.html"
-                                                                              class="gpd-navbar__item-link">About us</a>
-                    </div>
-                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="/staticPages/getTestedToday.html"
-                                                                              class="gpd-navbar__item-link">Get tested
-                        today</a></div>
+                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="http://localhost:8080/testCenter/index/"
+                                                                              class="gpd-navbar__item-link">Test
+                        center</a></div>
+                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="http://localhost:8080/vaccineCenter/index/"
+                                                                              class="gpd-navbar__item-link">Vaccine
+                        center</a></div>
                     <div id="ie1j4e" class="cell gpd-navbar__item nav-item"><a href="/staticPages/contacts.html" id="ipcsg8"
                                                                                class="gpd-navbar__item-link">Contacts</a>
                     </div>
                 </div>
             </div>
-            <div id="ihndr" class="cell"><a id="io6we" href="login" class="gpd-link cta-button">Log in</a></div>
+            <div class="cell gpd-navbar__items" id="i0zoef"><h3 class="gpd-header"></h3></div>
+            <div id="ihndr" class="cell"><a id="io6we" th:href="@{/logout}" class="gpd-link cta-button">Log out</a></div>
         </div>
     </div>
 </div>
