@@ -21,5 +21,6 @@ public interface ITestAppointmentRepo {
 
     List<TestAppointment> fetchDailyAppointments(int test_center_id, LocalDateTime test_time);
 
+    boolean checkForResult(int id);
 }
 

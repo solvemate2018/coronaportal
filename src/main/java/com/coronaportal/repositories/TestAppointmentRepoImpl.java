@@ -64,5 +64,18 @@ public class TestAppointmentRepoImpl implements ITestAppointmentRepo {
         return template.query(sql,rowMapper,test_center_id, test_time);
     }
 
+    @Override
+    public boolean checkForResult(int id) {
+        String sql="SELECT * FROM coronaportal.test_result WHERE test_appointments_id = ?";
+        RowMapper<TestResult> rowMapper = new BeanPropertyRowMapper<>(TestResult.class);
+        try{
+            template.queryForObject(sql,rowMapper,id);
+            return true;
+        }
+        catch(Exception exception){
+            return false;
+        }
+    }
+
 }
 

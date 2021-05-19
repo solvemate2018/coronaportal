@@ -16,27 +16,27 @@ public class TestResultServiceImpl implements ITestResultService{
 
     @Override
     public List<TestResult> fetchResults() {
-        return fetchResults();
+        return testResultRepo.fetchResults();
     }
 
     @Override
     public List<TestResult> fetchResult(String cpr) {
-        return fetchResult(cpr);
+        return testResultRepo.fetchResult(cpr);
     }
 
     @Override
     public void addResult(TestResult testResult) {
-
+        testResultRepo.addResult(testResult);
     }
 
     @Override
     public void editResult(int id, String result, TestResult testResult) {
-
+        testResultRepo.editResult(id, result, testResult);
     }
 
     @Override
-    public List<TestResult> fetchResult(int test_appointment_id) {
-        return fetchResult(test_appointment_id);
+    public TestResult fetchResult(int test_appointment_id) {
+        return testResultRepo.fetchResult(test_appointment_id);
     }
 }
 

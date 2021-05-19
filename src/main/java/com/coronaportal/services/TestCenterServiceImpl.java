@@ -15,32 +15,37 @@ public class TestCenterServiceImpl implements ITestCenterService{
 
     @Override
     public List<TestCenter> fetchTestCenters() {
-        return fetchTestCenters();
+        return testCenterRepo.fetchTestCenters();
     }
 
     @Override
     public void addTestCenter(TestCenter testCenter) {
-
+        testCenterRepo.addTestCenter(testCenter);
     }
 
     @Override
     public void addTests(int id, int testsNumber) {
-
+        testCenterRepo.addTests(id, testsNumber);
     }
 
     @Override
     public List<TestCenter> fetchOrderedByCity(String city) {
-        return fetchOrderedByCity(city);
+        return testCenterRepo.fetchOrderedByCity(city);
     }
 
     @Override
     public void deleteTestCenter(int id) {
-
+        testCenterRepo.deleteTestCenter(id);
     }
 
     @Override
     public void updateTestCenter(int id, TestCenter testCenter) {
+        testCenterRepo.updateTestCenter(id, testCenter);
+    }
 
+    @Override
+    public TestCenter findById(int test_center_id) {
+        return testCenterRepo.findById(test_center_id);
     }
 }
 

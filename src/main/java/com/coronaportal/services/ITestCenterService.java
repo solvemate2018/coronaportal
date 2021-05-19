@@ -16,4 +16,6 @@ public interface ITestCenterService {
     void deleteTestCenter(int id);
 
     void updateTestCenter(int id, TestCenter testCenter);
+
+    TestCenter findById(int test_center_id);
 }

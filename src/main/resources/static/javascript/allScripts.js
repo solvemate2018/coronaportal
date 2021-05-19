@@ -1,25 +1,44 @@
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+class App extends Component {
+    state = {
+        isLoading: true,
+        groups: []
+    };
+
+    async componentDidMount() {
+        const response = await fetch('/api/groups');
+        const body = await response.json();
+        this.setState({ groups: body, isLoading: false });
     }
-    return null;
-}
-function getUsername() {
-    let user=getCookie("firstName") +" "+ getCookie("lastName");
-    let x = document.getElementsByClassName("gpd-header");
-    let i;
-    for (i = 0; i < x.length; i++) {
-        x[i].innerHTML = user;
+
+    render() {
+        const {groups, isLoading} = this.state;
+
+        if (isLoading) {
+            return <p>Loading...</p>;
+        }
+
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <div className="App-intro">
+                        <h2>JUG List</h2>
+                        {groups.map(group =>
+                            <div key={group.id}>
+                                {group.name}
+                            </div>
+                        )}
+                    </div>
+                </header>
+            </div>
+        );
     }
 }
 
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+export default App;

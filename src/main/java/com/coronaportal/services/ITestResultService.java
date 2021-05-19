@@ -13,6 +13,6 @@ public interface ITestResultService {
 
     void editResult(int id, String result, TestResult testResult);
 
-    List<TestResult> fetchResult(int test_appointment_id);
+    TestResult fetchResult(int test_appointment_id);
 
 }

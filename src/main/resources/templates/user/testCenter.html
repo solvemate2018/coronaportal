@@ -169,7 +169,7 @@
                         </td>
                         <td>
                             <span th:if="${userTestCenterIndexViewModel.result == '0'}">
-                                <a href="#ih8q3w" class="gpd-link cta-button">Delete</a>
+                                <a th:href="@{'http://localhost:8080/testCenter/delete/'+${userTestCenterIndexViewModel.appointmentId}}" class="gpd-link cta-button">Delete</a>
                             </span>
                             <span th:unless="${userTestCenterIndexViewModel.result == '0'}" th:text="${userTestCenterIndexViewModel.result}"></span>
                         </td>
