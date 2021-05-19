@@ -13,4 +13,31 @@ import java.util.Map;
 public class TestResultServiceImpl implements ITestResultService{
     @Autowired
     ITestResultRepo testResultRepo;
+
+    @Override
+    public List<TestResult> fetchResults() {
+        return fetchResults();
+    }
+
+    @Override
+    public List<TestResult> fetchResult(String cpr) {
+        return fetchResult(cpr);
+    }
+
+    @Override
+    public void addResult(TestResult testResult) {
+
+    }
+
+    @Override
+    public void editResult(int id, String result, TestResult testResult) {
+
+    }
+
+    @Override
+    public List<TestResult> fetchResult(int test_appointment_id) {
+        return fetchResult(test_appointment_id);
+    }
 }
+
+
