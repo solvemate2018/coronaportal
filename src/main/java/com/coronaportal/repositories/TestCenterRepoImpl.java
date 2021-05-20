@@ -29,7 +29,7 @@ public class TestCenterRepoImpl implements ITestCenterRepo {
     }
 
     @Override
-    public void addTests(int id, int testsNumber) {
+    public void addTests(int id, int testsNumber) {//needs to be changed to add on top of existing tests
         String sql="UPDATE coronaportal.test_center SET available_tests= ? WHERE id =?";
         template.update(sql,testsNumber, id);
     }
