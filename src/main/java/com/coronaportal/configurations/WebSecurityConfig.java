@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll()
                 .and()
                 .logout().permitAll();
+        http.cors().and().csrf().disable(); //disabling csfr protection
     }
 
     @Bean

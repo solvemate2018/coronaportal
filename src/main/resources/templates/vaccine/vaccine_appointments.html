@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccines</title>
+</head>
+<body>
+<h1> Vaccine management test page</h1>
+<h2> All vaccine appointments</h2>
+<table>
+    <thead>
+    <tr>
+        <th> id </th>
+        <th> person_id</th>
+        <th> vaccine_time </th>
+        <th> vaccine_center_id </th>
+        <th> person_cpr </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vaccineAppointment : ${allAppointments}">
+        <td th:text="${vaccineAppointment.id}"></td>
+        <td th:text="${vaccineAppointment.person_id}"></td>
+        <td th:text="${vaccineAppointment.vaccine_time}"></td>
+        <td th:text="${vaccineAppointment.vaccine_center_id}"></td>
+        <td th:text="${vaccineAppointment.person_cpr}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+
+<h2> Fetch vaccine appointments by cpr</h2>
+<form method="get" action="/fetchVaccineAppointmentsByCPR">
+    <input type="number" placeholder="CPR" name="person_cpr">
+    <input type="submit" value="Filter by cpr">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th> id </th>
+        <th> person_id</th>
+        <th> vaccine_time </th>
+        <th> vaccine_center_id </th>
+        <th> person_cpr </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vaccineAppointment : ${vaccineAppointmentsByCPR}">
+        <td th:text="${vaccineAppointment.id}"></td>
+        <td th:text="${vaccineAppointment.person_id}"></td>
+        <td th:text="${vaccineAppointment.vaccine_time}"></td>
+        <td th:text="${vaccineAppointment.vaccine_center_id}"></td>
+        <td th:text="${vaccineAppointment.person_cpr}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+
+<h2> Delete vaccine appointment</h2>
+<form method="post" action="/deleteVaccineAppointment">
+    <input type="number" placeholder="ID" name="id">
+    <input type="submit" value="DELETE">
+</form>
+
+<br>
+<br>
+
+<h2> Fetch vaccine appointments by  vaccine Center</h2>
+<form method="get" action="/fetchVaccineAppointmentsByCenter">
+    <input type="number" placeholder="Center ID" name="vaccine_center_id">
+    <input type="submit" value="Filter by center">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th> id </th>
+        <th> person_id</th>
+        <th> vaccine_time </th>
+        <th> vaccine_center_id </th>
+        <th> person_cpr </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vaccineAppointment : ${vaccineAppointmentsByCenter}">
+        <td th:text="${vaccineAppointment.id}"></td>
+        <td th:text="${vaccineAppointment.person_id}"></td>
+        <td th:text="${vaccineAppointment.vaccine_time}"></td>
+        <td th:text="${vaccineAppointment.vaccine_center_id}"></td>
+        <td th:text="${vaccineAppointment.person_cpr}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+
+<h2> Fetch Daily vaccine appointments by  vaccine Center</h2>
+<form method="get" action="/fetchDailyVaccineAppointmentsByCenter">
+    <input type="number" placeholder="Center ID" name="vaccine_center_id">
+    <input type="submit" value="Filter by center">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th> id </th>
+        <th> person_id</th>
+        <th> vaccine_time </th>
+        <th> vaccine_center_id </th>
+        <th> person_cpr </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vaccineAppointment : ${dailyVaccineAppointmentsByCenter}">
+        <td th:text="${vaccineAppointment.id}"></td>
+        <td th:text="${vaccineAppointment.person_id}"></td>
+        <td th:text="${vaccineAppointment.vaccine_time}"></td>
+        <td th:text="${vaccineAppointment.vaccine_center_id}"></td>
+        <td th:text="${vaccineAppointment.person_cpr}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2> Fetch vaccine appointments by vaccine Center and date(not working bcs of type mismatch)</h2>
+<form method="get" action="/fetchDailyVaccineAppointmentsByCenterAndDate">
+    <input type="number" placeholder="Center ID" name="vaccine_center_id">
+    <input type="date" placeholder="Date(yyyy-mm-dd)" name="vaccine_time">
+    <input type="submit" value="Filter by center and date">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th> id </th>
+        <th> person_id</th>
+        <th> vaccine_time </th>
+        <th> vaccine_center_id </th>
+        <th> person_cpr </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vaccineAppointment : ${dailyVaccineAppointmentsByCenterAndDay}">
+        <td th:text="${vaccineAppointment.id}"></td>
+        <td th:text="${vaccineAppointment.person_id}"></td>
+        <td th:text="${vaccineAppointment.vaccine_time}"></td>
+        <td th:text="${vaccineAppointment.vaccine_center_id}"></td>
+        <td th:text="${vaccineAppointment.person_cpr}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<h2> Create vaccine appointment(not working bcs of type mismatch)</h2>
+<form method="post" action="/makeAppointmentForPerson">
+    <input type="number" placeholder="Person ID" name="person_id">
+    <input type="datetime-local"  name="vaccine_time">
+    <input type="number" placeholder="Vaccine center id" name="vaccine_center_id">
+    <input type="number" placeholder="Person CPR" name="person_cpr">
+    <input type="submit" value="Create appointment">
+</form>
+
+
+</body>
+</html>
