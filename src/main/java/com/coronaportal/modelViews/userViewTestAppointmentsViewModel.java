@@ -2,8 +2,8 @@ package com.coronaportal.modelViews;
 
 import java.time.LocalDateTime;
 
-public class userTestCenterIndexViewModel{
-    public userTestCenterIndexViewModel(int appointmentId, LocalDateTime appointmentTime, String testCenter, LocalDateTime testTime, String result) {
+public class userViewTestAppointmentsViewModel {
+    public userViewTestAppointmentsViewModel(int appointmentId, LocalDateTime appointmentTime, String testCenter, LocalDateTime testTime, String result) {
         this.appointmentId = appointmentId;
         this.appointmentTime = appointmentTime;
         this.testCenter = testCenter;

@@ -32,12 +32,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/home", "/js/**", "/css/**","/images/**").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/secretary").hasRole("SECRETARY")
+                .antMatchers("/user/**").hasRole("CITIZEN")
+                .antMatchers("/secretary/**").hasRole("SECRETARY")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout().permitAll();
-        http.cors().and().csrf().disable(); //disabling csfr protection
+        http.cors().and().csrf().disable();
     }
 
     @Bean

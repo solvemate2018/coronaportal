@@ -16,4 +16,6 @@ public interface IVaccineCenterRepo {
 
     void deleteVaccineCenter(int id);
     void updateVaccineCenter(int id, VaccineCenter vaccineCenter);
+
+    VaccineCenter findById(int vaccine_center_id);
 }

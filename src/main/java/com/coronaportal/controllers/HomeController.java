@@ -36,21 +36,10 @@ public class HomeController {
             response.addCookie(cookie2);
             return "user/index";
         }
-        else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("SECRETARY"))){
+        else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_SECRETARY"))){
             return "secretary/index";
         }
         else
             return "admin/index";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("errorMsg", "Your username and password are invalid.");
-
-        if (logout != null)
-            model.addAttribute("msg", "You have been logged out successfully.");
-
-        return "home/login";
     }
 }

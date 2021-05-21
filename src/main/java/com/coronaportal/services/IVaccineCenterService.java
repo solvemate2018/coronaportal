@@ -13,4 +13,5 @@ public interface IVaccineCenterService {
     List<VaccineCenter> fetchOrderedByCity(String city);
     void deleteVaccineCenter(int id);
     void updateVaccineCenter(int id, VaccineCenter vaccineCenter);
+    VaccineCenter findById(int vaccine_center_id);
 }

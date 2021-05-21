@@ -1,5 +1,6 @@
 package com.coronaportal.repositories;
 
+import com.coronaportal.models.Person;
 import com.coronaportal.models.VaccineAppointment;
 import com.coronaportal.models.VaccineCenter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,14 @@ public class VaccineCenterRepoImpl implements IVaccineCenterRepo{
     public void updateVaccineCenter(int id, VaccineCenter vaccineCenter) {
         String sql = "UPDATE vaccine_center SET capacity = ?, city = ?, zip_code = ?, house_number = ?, street = ? WHERE id = ?";
         template.update(sql,vaccineCenter.getCapacity(),vaccineCenter.getCity(),vaccineCenter.getZip_code(),vaccineCenter.getHouse_number(),vaccineCenter.getStreet(),id);
+    }
+
+    @Override
+    public VaccineCenter findById(int vaccine_center_id) {
+        String sql = "SELECT * FROM vaccine_center WHERE id=?";
+        RowMapper<VaccineCenter> rowMapper = new BeanPropertyRowMapper<>(VaccineCenter.class);
+        VaccineCenter center=template.queryForObject(sql,rowMapper,vaccine_center_id);
+        return center;
     }
 }
 

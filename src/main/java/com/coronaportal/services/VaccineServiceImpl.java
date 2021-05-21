@@ -3,9 +3,11 @@ package com.coronaportal.services;
 import com.coronaportal.models.Vaccine;
 import com.coronaportal.repositories.IVaccineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class VaccineServiceImpl implements IVaccineService{
     @Autowired
     IVaccineRepo vaccineRepo;

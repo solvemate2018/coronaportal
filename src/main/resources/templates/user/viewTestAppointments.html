@@ -7,7 +7,10 @@
     <title>Corona portal</title>
 
     <meta name="description" content="">
-    <link rel="icon" type="image/png" href="/images/favIcon.png">
+    <link rel="icon" type="image/png"
+          href="images/favIcon">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <style>
         body {
@@ -21,7 +24,6 @@
             opacity: 0;
         }
     </style>
-
     <script>
         function getCookie(name) {
             var nameEQ = name + "=";
@@ -38,11 +40,10 @@
             let x = document.getElementsByName("userFirstName");
             let i;
             for(i = 0; i < x.length; i++)
-            x.item(i).innerHTML += user;
+                x.item(i).innerHTML += user;
         }
     </script>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/css/userHomePageStyle.css}">
+    <link rel="stylesheet" type="text/css" href="/css/viewTestAppointmentsStyle.css">
 </head>
 <body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
 <div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
@@ -50,7 +51,7 @@
     <div id="ic5a7" class="gpd-container">
         <div id="iu8dq" class="gdp-row">
             <div id="i0yff" class="cell"><a id="ilani" href="/" class="gpd-link-box"><img id="ivm7f"
-                                                                                         src="/images/Corona portal logo.png"></a>
+                                                                                         src="images/Corona portal logo.png"></a>
             </div>
             <div id="i6ls5" class="cell gpd-navbar__menu"><a id="i3vv9" class="gpd-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -82,42 +83,48 @@
     scroll-behavior: smooth;
 }</style>
 <section id="iftl" class="gpd-section">
-    <div id="ia0i" class="gpd-container">
+    <div id="ia0i" class="gpd-container"><h1 id="ine3v">YOUR COVID-19 TEST RECORD</h1>
+        <table id="it3lh" class="table table-bordered">
+            <thead>
+            <tr>
+                <th id="i8juk"><span id="i65d1">Test appointment ID</span></th>
+                <th id="ialqv"><span id="i7gu8">Test center name</span></th>
+                <th id="i1yl8"><span id="ithg6">Test date</span></th>
+                <th id="i9u9g"><span id="i8bty">Result</span></th>
+                <th id="ikwav"><span id="ivh1g">Result time</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="appointment : ${appointments}" id="i4tag">
+                <td th:text="${appointment.appointmentId}" id="ifwo6"><span id="i2z0f"><br></span></td>
+                <td th:text="${appointment.testCenter}" id="ij6mc"><span id="i3mu7"></span></td>
+                <td th:text="${appointment.appointmentTime}" id="izq8j"><span id="iwv9p"></span></td>
+                <td id="ilo4n">
+                            <span id="i1njg" th:if="${appointment.result == '0'}">
+                                N/A
+                            </span>
+                    <span id="i1njg" th:unless="${appointment.result == '0'}" th:text="${appointment.testTime}"></span>
+                </td>
+                <td id="iu4wg">
+                            <span id="i2evs" th:if="${appointment.result == '0'}">
+                                N/A
+                            </span>
+                    <span id="i2evs" th:unless="${appointment.result == '0'}" th:text="${appointment.result}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <div id="idd1fa" class="gdp-row gpd-grid">
-            <div id="iydljl" class="cell gpd-clm photo"><a id="ich0vk" href="" class="gpd-link-box">
-                <div id="iy0yae" class="gpd-text">
-                    <div>REGISTER FOR<br>COVID-19<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;VACCINATION
-                    </div>
-                </div>
-            </a></div>
-            <div id="inx6fv" class="cell gpd-clm photo"><a id="i1fa2" href="##" class="gpd-link-box">
-                <div id="ih8pmz" class="gpd-text text">
-                    <div>BOOK YOUR<br>COVID-19<br>TEST</div>
-                </div>
-            </a></div>
-            <div id="ivyf4r" class="cell gpd-clm photo"><a id="ig6oa" href="/user/selectVaccineOrTestAppointments" class="gpd-link-box">
-                <div id="i9p16r" class="gpd-text text">
-                    <div>VIEW YOUR <br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;APPOINTMENTS
-                    </div>
-                </div>
-            </a></div>
-            <div id="i5phqh" class="cell gpd-clm photo"><a id="ie8s4" class="gpd-link-box">
-                <div id="inisqj" class="gpd-text text">
-                    <div>VIEW YOUR<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;CORONAPAS
-                    </div>
-                </div>
-            </a></div>
+            <div id="iydljl" class="cell gpd-clm photo"></div>
         </div>
     </div>
 </section>
 <section id="im0u3g" class="gpd-section">
     <div id="iobnhd" class="gpd-container">
         <div id="iq4rhi" class="gdp-row">
-            <div id="idggm4" class="cell footer-column"><a id="i104le" href="" target="_blank"
-                                                           class="gpd-link footer-link">About us</a><a id="iqbv5"
-                                                                                                       href="https://www.sst.dk/da/corona"
-                                                                                                       target="_blank"
-                                                                                                       class="gpd-link footer-link">Learn
+            <div id="idggm4" class="cell footer-column"><a id="i104le" href="https://www.sst.dk/en/English"
+                                                           target="_blank" class="gpd-link footer-link">About us</a><a
+                    id="iqbv5" href="https://www.sst.dk/en/English" target="_blank" class="gpd-link footer-link">Learn
                 more</a><a id="ie0c3h" href="" class="gpd-link footer-link">Services we offer</a><a href="" id="ijtnb"
                                                                                                     class="gpd-link footer-link">Meet
                 our developers</a></div>
@@ -172,6 +179,7 @@ for (var i = 0, len = items.length; i < len; i++) {
 }</script>
 
 <script async="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="postJQ()"></script>
+<script async="" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

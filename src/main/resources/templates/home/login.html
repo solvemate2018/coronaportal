@@ -1,10 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Log in</title>
+
+
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="Template Consultant [Preview]">
+    <meta itemprop="description" content="">
+
+    <link rel="icon" type="image/png" href="/images/favIcon.png">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+    </style>
+    <style data-css-anim="">
+        [data-anim-type]:not([data-anim-done]) {
+            opacity: 0;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="/css/loginPageStyle.css">
+
 </head>
-<body>
+<body data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
+<div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
+     style="animation-name: fadeIn;">
+    <div id="ic5a7" class="gpd-container">
+        <div id="iu8dq" class="gdp-row">
+            <div id="i0yff" class="cell" href="/"><a id="ilani" href="/" class="gpd-link-box"><img id="ivm7f"
+                                                                                 src="/images/Corona portal logo.png" th:src="@{images/Corona portal logo.png}"></a>
+            </div>
+            <div id="i6ls5" class="cell gpd-navbar__menu"><a id="i3vv9" class="gpd-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path>
+                </svg>
+            </a></div>
+            <div id="izu4n" class="cell gpd-navbar__items">
+                <div id="it3na" class="gdp-row gpd-navbar__items-grid">
+                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="#iva9i"
+                                                                              class="gpd-navbar__item-link">About us<br></a>
+                    </div>
+                    <div id="iy63k" class="cell gpd-navbar__item nav-item"><a href="#iftl" id="i0tql"
+                                                                              class="gpd-navbar__item-link">Services we
+                        offer<br></a></div>
+                    <div id="iq1c6" class="cell gpd-navbar__item nav-item"><a
+                            href="https://www.who.int/health-topics/coronavirus#tab=tab_1" target="_blank" id="iq1sw"
+                            class="gpd-navbar__item-link">Find out about COVID-19<br></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="ii9qk" class="section-form2">
+    <div th:fragment="content" id="i4182" class="container">
+        <div id="i5vd3"><h1 id="iykii" class="gpd-header">Sign in</h1>
+            <div id="i5kwh">Sign in with your CPR and password</div>
+            <form  name="form-signin" th:action="@{/login}" method="post" data-redirect="" id="igdq3">
+                <div id="iwiia" class="form-group">
+                    <label id="i91ye" class="label">
+                        CPR
+                        <br>
+                    </label>
+                    <input type="text" id="username" name="username" class="form-control"
+                             placeholder="CPR"  autofocus="true">
+                </div>
+                <div id="izvjl" class="form-group">
+                    <label id="ijgyk" class="label">
+                        Password
+                    </label>
+                    <input placeholder="Password"  name="password" type="password" id="password"  class="form-control">
+                </div>
+                <div id="im3e6" class="form-group">
+                    <button type="submit" id="ibj14" class="button">Login</button>
+                </div>
+                <div data-form-state="success" id="i9oupl" class="state-success" style="display: none;">Thanks! We
+                    received your request
+                </div>
+                <div data-form-state="error" id="i3wfvk" class="state-error" style="display: none;">An error occurred on
+                    processing your request, try again!
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<style>html {
+    scroll-behavior: smooth;
+}</style>
+<section id="im0u3g" class="gpd-section">
+    <div id="iobnhd" class="gpd-container">
+        <div id="iq4rhi" class="gdp-row">
+            <div id="idggm4" class="cell footer-column"><a id="i104le" class="gpd-link footer-link">About Us</a><a
+                    id="iqbv5" class="gpd-link footer-link">Learn more</a><a id="iq460j" class="gpd-link footer-link">Contact</a><a
+                    id="ie0c3h" class="gpd-link footer-link">Services We Offer</a></div>
+            <div id="i4a6eg" class="cell footer-column"><h4 id="ijx38l" class="footer-title">Contact us</h4><a
+                    id="isxhjm" href="" class="gpd-link">support@coronaportal.com</a><a id="iqhrd9"
+                                                                                        class="gpd-link footer-link">+45
+                60 54 42 21</a></div>
+        </div>
+        <div id="ivi361" class="gpd-divider"></div>
+        <div id="infzsb" class="gdp-row">
+            <div id="i0bvnn" class="cell">
+                <div id="ird0zk" class="gpd-text">© 2020 Copyright, All Right Reserved. Made by EEB Dev Group</div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>var items = document.querySelectorAll('#i3vv9');
+for (var i = 0, len = items.length; i < len; i++) {
+    (function () {
+        var t, e = 0, n = 'gjs-collapse', r = 'max-height', i = 'ease-in-out', o = .25, a = function () {
+            var t, e = document.createElement('void'), n = {
+                transition: 'transitionend',
+                OTransition: 'oTransitionEnd',
+                MozTransition: 'transitionend',
+                WebkitTransition: 'webkitTransitionEnd'
+            };
+            for (t in n) if (void 0 !== e.style[t]) return n[t]
+        }(), s = function (t) {
+            e = 1;
+            var n = function (t) {
+                var e = window.getComputedStyle(t), n = e.display, i = parseInt(e[r]);
+                if ('none' !== n && '0' !== i) return t.offsetHeight;
+                t.style.height = 'auto', t.style.display = 'block', t.style.position = 'absolute', t.style.visibility = 'hidden';
+                var o = t.offsetHeight;
+                return t.style.height = '', t.style.display = '', t.style.position = '', t.style.visibility = '', o
+            }(t), a = t.style;
+            a.display = 'block', a.transition = r + ' ' + o + 's ' + i, a.overflowY = 'hidden', '' == a[r] && (a[r] = 0), 0 == parseInt(a[r]) ? (a[r] = '0', setTimeout(function () {
+                a[r] = n + 'px'
+            }, 10)) : a[r] = '0'
+        };
+        n in this || this.addEventListener('click', function (n) {
+            if (n.preventDefault(), !e) {
+                var i = this.closest('.gpd-navbar').querySelector(".gpd-navbar__items");
+                s(i), t || (i.addEventListener(a, function () {
+                    e = 0;
+                    var t = i.style;
+                    0 == parseInt(t[r]) && (t.display = '', t[r] = '')
+                }), t = 1)
+            }
+        }), this[n] = 1
+    }.bind(items[i]))();
+}</script>
+
+<script async="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="postJQ()"></script>
+<script async="" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

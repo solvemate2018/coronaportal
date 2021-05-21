@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -15,16 +16,7 @@
     <link rel="icon" type="image/png" href="/images/favIcon.png">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "WebPage",
-            "url": "http://9e9b734.grapedrop.net",
-            "description": "",
-            "name": "Template Consultant",
-            "image": "https://cdn.grapedrop.com/u9ea0154168a24ce5be62672fcb3e0565/pb1582f5aec314a1f8b6043ad7032dcc9/ogimage.jpeg?1620855618"
-        }
-    </script>
+
     <style>
         body {
             margin: 0;
@@ -32,11 +24,13 @@
             overflow-x: hidden;
         }
     </style>
+
     <style data-css-anim="">
         [data-anim-type]:not([data-anim-done]) {
             opacity: 0;
         }
     </style>
+
     <link rel="stylesheet" type="text/css" href="/css/homePageStyle.css">
 </head>
 <body data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
@@ -44,9 +38,9 @@
      style="animation-name: fadeIn;">
     <div id="ic5a7" class="gpd-container">
         <div id="iu8dq" class="gdp-row">
-            <div id="i0yff" class="cell"><a id="ilani"
+            <div id="i0yff" class="cell" href="/"><a id="ilani" href="/"
                                             class="gpd-link-box"><img id="ivm7f"
-                                                                      src="/images/Corona portal logo.png"></a>
+                                                                      src="/images/Corona portal logo.png" th:src="@{images/Corona portal logo.png}"></a>
             </div>
             <div id="i6ls5" class="cell gpd-navbar__menu"><a id="i3vv9" class="gpd-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -121,17 +115,17 @@
     <div id="itsfi" class="container"><h1 id="ixehb" class="gpd-header">Meet Our Developers</h1>
         <div data-columns="1" id="ignb8" class="row no-gutters">
             <div data-column="1" class="cell"><img id="ik68v"
-                                                   src="../../static/images/Franek image.png">
+                                                   src="../../static/images/Franek%20image.png">
                 <div id="igp6l" class="team-name1">Franek Liszka</div>
                 <div id="ielgh" class="team-pos1">Computer Science student</div>
             </div>
             <div data-column="1" class="cell"><img id="iqne1"
-                                                   src="../../static/images/Georgi image.png">
+                                                   src="../../static/images/Georgi%20image.png">
                 <div id="ihpsl" class="team-name1">Georgi Dimitrov</div>
                 <div id="iaai5" class="team-pos1">Computer Science student</div>
             </div>
             <div data-column="1" class="cell"><img id="imelk"
-                                                   src="../../static/images/Marek image.png">
+                                                   src="../../static/images/Marek%20image.png">
                 <div id="i6nmt" class="team-name1">Marek Lipnitsky</div>
                 <div id="izxly" class="team-pos1">Computer Science student</div>
             </div>
