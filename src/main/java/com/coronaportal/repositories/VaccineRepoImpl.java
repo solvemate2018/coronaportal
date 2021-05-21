@@ -41,7 +41,9 @@ public class VaccineRepoImpl implements IVaccineRepo{
 
         if (count>0) { //if more then 0 - updating count
             String sql2 = "UPDATE vaccine SET count = ? WHERE id=?";
-            template.update(sql2, vaccine.getCount(), vaccine.getId()); //not sure about that - are we updating the whole count,
+            String sqlCount = "SELECT count FROM vaccine WHERE id = ? ";
+            int oldCount = template.queryForObject(sqlCount, new Object[] {vaccine.getId()}, Integer.class);
+            template.update(sql2, oldCount + vaccine.getCount(), vaccine.getId()); //not sure about that - are we updating the whole count,
                                                                         // or just adding on top of existing count?
         }else if (count==0){ //if 0 - create new vaccine
             String sql2 = "INSERT INTO vaccine VALUES(?,?,?,?)";
