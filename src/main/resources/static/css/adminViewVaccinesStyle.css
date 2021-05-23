@@ -16,9 +16,7 @@ body {
     background-size: auto;
     background-color: rgba(12, 6, 9, 0);
 }
-#ijklr{
-    text-align:left;
-}
+
 #iftl {
     background-image: linear-gradient(to top, #1a1517 77%, rgba(34, 29, 31, 245) 81%, rgba(69, 67, 67, 0.78) 100%);
     background-repeat: repeat;
@@ -467,6 +465,35 @@ body {
     margin: 0 auto;
     max-width: 1200px
 }
+.gpd-box{
+    padding:5px 0;
+}
+#is69q{
+    padding:5px 0 5px 2%;
+}
+#ib57n{
+    text-align:left;
+}
+#il7fe{
+    flex-basis:20%;
+}
+#iwoa2{
+    text-align:left;
+    padding:5px 0 5px 20px;
+}
+#i6xgf6{
+    text-align:left;
+    background-color:#9a6a80;
+}
+
+#ir7nb {
+    background-color: transparent;
+    padding-bottom: 0px;
+    height: 140px;
+}
+#ijklr{
+    text-align:left;
+}
 
 .gpd-section {
     display: flex;
@@ -540,7 +567,7 @@ b, i, img, label, small, span, u {
 }
 
 .form-group-gut {
-    padding-right: 10px
+    padding-right: 0px
 }
 
 @media (max-width: 768px) {

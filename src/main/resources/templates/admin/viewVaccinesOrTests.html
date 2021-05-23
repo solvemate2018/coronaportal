@@ -8,11 +8,8 @@
 
     <meta name="description" content="">
 
-    <link rel="icon" type="image/png" href="images/favIcon.png">
-
-
-    <link rel="stylesheet" href="css/adminHomePageStyle.css">
-
+    <link rel="icon" type="image/png"
+          href="images/favIcon.png">
     <style>
         body {
             margin: 0;
@@ -25,14 +22,36 @@
             opacity: 0;
         }
     </style>
+
+    <script>
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        function getUsername() {
+            let user=getCookie("firstName");
+            let x = document.getElementsByName("userFirstName");
+            let i;
+            for(i = 0; i < x.length; i++)
+                x.item(i).innerHTML += user;
+        }
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="/css/adminViewVaccinesOrTestsStyle.css">
 </head>
-<body data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
+<body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
 <div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
      style="animation-name: fadeIn;">
     <div id="ic5a7" class="gpd-container">
         <div id="iu8dq" class="gdp-row">
             <div id="i0yff" class="cell"><a id="ilani" href="/" class="gpd-link-box"><img id="ivm7f"
-                                                                                         src="images/Corona portal logo.png"></a>
+                                                                                          src="/images/Corona portal logo.png"></a>
             </div>
             <div id="i6ls5" class="cell gpd-navbar__menu"><a id="i3vv9" class="gpd-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -41,14 +60,18 @@
             </a></div>
             <div id="izu4n" class="cell gpd-navbar__items">
                 <div id="it3na" class="gdp-row gpd-navbar__items-grid">
-                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h" href="#iva9i"
+                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h"
+                                                                              href="https://www.sst.dk/en/English"
+                                                                              target="_blank"
                                                                               class="gpd-navbar__item-link">About us<br></a>
                     </div>
-                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="#i2n5f"
+                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6"
+                                                                              href="https://www.sst.dk/en/English"
+                                                                              target="_blank"
                                                                               class="gpd-navbar__item-link">Learn
                         more</a></div>
                     <div id="iguu8" class="cell gpd-navbar__item nav-item">
-                        <div id="iitzx" class="gpd-text">Welcome, Admin</div>
+                        <div id="iitzx" name="userFirstName" class="gpd-text">Welcome, </div>
                     </div>
                 </div>
             </div>
@@ -62,30 +85,17 @@
 <section id="iftl" class="gpd-section">
     <div id="ia0i" class="gpd-container">
         <div id="idd1fa" class="gdp-row gpd-grid">
-            <div id="iydljl" class="cell gpd-clm photo"><a id="ich0vk" href="/admin/selectManageVaccinesOrTests" class="gpd-link-box">
+            <div id="iydljl" class="cell gpd-clm photo"><a id="ich0vk"
+                                                           href="/admin/viewVaccines"
+                                                           class="gpd-link-box">
                 <div id="iy0yae" class="gpd-text">
-                    <div>OVERVIEW OF<br>COVID-19<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;TESTS
-                        AND VACCINES
-                    </div>
+                    <div>VIEW COVID-19<br>VACCINES<br></div>
                 </div>
             </a></div>
-            <div id="inx6fv" class="cell gpd-clm photo"><a id="i1fa2" href="" class="gpd-link-box">
+            <div id="inx6fv" class="cell gpd-clm photo"><a id="i1fa2" href="/" class="gpd-link-box">
                 <div id="ih8pmz" class="gpd-text text">
-                    <div>MANAGE<br>COVID-19<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;TESTS
-                        AND VACCINE <br> CENTERS
-                    </div>
-                </div>
-            </a></div>
-            <div id="ivyf4r" class="cell gpd-clm photo"><a id="ig6oa" href="" class="gpd-link-box">
-                <div id="i9p16r" class="gpd-text text">
-                    <div>MANAGE<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;SECRETARIES
-                    </div>
-                </div>
-            </a></div>
-            <div id="i5phqh" class="cell gpd-clm photo"><a id="ie8s4" class="gpd-link-box">
-                <div id="inisqj" class="gpd-text text">
-                    <div>ORDER<br>COVID-19<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;TESTS/VACCINES
-                    </div>
+                    <div>VIEW <br>COVID-19<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;TESTS
+                        <br></div>
                 </div>
             </a></div>
         </div>
@@ -94,9 +104,11 @@
 <section id="im0u3g" class="gpd-section">
     <div id="iobnhd" class="gpd-container">
         <div id="iq4rhi" class="gdp-row">
-            <div id="idggm4" class="cell footer-column"><a id="i104le" href="https://www.sst.dk/en/English"
-                                                           target="_blank" class="gpd-link footer-link">About us</a><a
-                    id="iqbv5" href="https://www.sst.dk/da/corona" target="_blank" class="gpd-link footer-link">Learn
+            <div id="idggm4" class="cell footer-column"><a id="i104le" href="" target="_blank"
+                                                           class="gpd-link footer-link">About us</a><a id="iqbv5"
+                                                                                                       href="https://www.sst.dk/da/corona"
+                                                                                                       target="_blank"
+                                                                                                       class="gpd-link footer-link">Learn
                 more</a><a id="ie0c3h" href="" class="gpd-link footer-link">Services we offer</a><a href="" id="ijtnb"
                                                                                                     class="gpd-link footer-link">Meet
                 our developers</a></div>
@@ -151,6 +163,7 @@ for (var i = 0, len = items.length; i < len; i++) {
 }</script>
 
 <script async="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="postJQ()"></script>
+
 
 </body>
 </html>

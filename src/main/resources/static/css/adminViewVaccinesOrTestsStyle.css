@@ -16,9 +16,7 @@ body {
     background-size: auto;
     background-color: rgba(12, 6, 9, 0);
 }
-#ijklr{
-    text-align:left;
-}
+
 #iftl {
     background-image: linear-gradient(to top, #1a1517 77%, rgba(34, 29, 31, 245) 81%, rgba(69, 67, 67, 0.78) 100%);
     background-repeat: repeat;
@@ -274,9 +272,9 @@ body {
     opacity: 0.68;
     font-size: 22px;
     color: #000000;
-    background-image: url('https://cdn.grapedrop.com/u196e97e03fa74a93a544f80d10103ecd/9df5aa30cf7e43488c44b87235040e24_day-planner-828611_1920.jpg');
+    background-image: url('https://cdn.grapedrop.com/u6ada49d4c96d45bf868b1ea7724190a2/4ae8a697aa1a44b1ae1a90d97cfcf0e5_vaccine-6165772_1280.jpg');
     background-repeat: repeat;
-    background-position: center center;
+    background-position: right center;
     background-attachment: local;
     background-size: cover;
     height: 300px;
@@ -297,6 +295,47 @@ body {
     background-position: center center;
     background-attachment: local;
     background-size: cover;
+}
+
+#iy0yae {
+    background-color: rgba(33, 34, 43, 0);
+    opacity: 1;
+    color: #000000;
+    mix-blend-mode: darken;
+    font-weight: 300;
+    text-transform: none;
+    border: 0 solid rgb(0, 0, 0);
+    text-shadow: 5px 5px 17px black;
+    perspective: 0;
+}
+
+#ih8pmz {
+    background-color: rgba(33, 34, 43, 0);
+    opacity: 1;
+    color: #000000;
+    mix-blend-mode: darken;
+    font-weight: 300;
+    text-transform: none;
+    border: 0 solid rgb(0, 0, 0);
+    text-shadow: 5px 5px 17px black;
+    perspective: 0;
+}
+
+#inx6fv {
+    opacity: 0.68;
+    font-size: 22px;
+    color: #000000;
+    background-image: url('https://cdn.grapedrop.com/u6ada49d4c96d45bf868b1ea7724190a2/110712f1741845d6a3e88942c2a9f188_corona-test-6116891_1920.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: local;
+    background-size: cover;
+    height: 300px;
+    margin: 50px 15px -10px 15px;
+    box-shadow: 0 0 15px 0 black inset;
+    transform: translateX(0);
+    transition: width 2s ease;
+    backdrop-filter: blur(80px);
 }
 
 #iqbv5 {
@@ -371,24 +410,6 @@ body {
     padding: 7px 5px 7px 0;
     margin: 0 0 10px 0;
     font-weight: 200;
-}
-
-#it3lh {
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    font-weight: 200;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    font-size: 17px;
-    border-radius: 0 0 0 0;
-    margin: 60px 0 16px 0;
-    padding: 0 0 0 0;
-}
-
-#ine3v {
-    font-size: 2.5rem;
-    font-weight: 200;
-    margin: 30px 0 40px 0;
 }
 
 @media (max-width: 768px) {
