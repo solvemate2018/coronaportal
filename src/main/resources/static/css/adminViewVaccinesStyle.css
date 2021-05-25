@@ -5,6 +5,10 @@
 body {
     margin: 0;
 }
+.form-buttons{
+    margin-top: 3%;
+}
+
 
 body {
     font-size: 17px;
@@ -15,6 +19,66 @@ body {
     background-attachment: scroll;
     background-size: auto;
     background-color: rgba(12, 6, 9, 0);
+}
+/* The popup form - hidden by default */
+.form-popup {
+    visibility: hidden;
+    position: center;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+#myForm{
+    display: block;
+    position: absolute;
+    background-color: #443535;
+    margin: auto;
+    left: 15px;
+    width: 50%;
+    height: 70%;
+    top: 120%;
+    visibility: hidden;
+}
+#myFormDelete{
+    display: block;
+    position: absolute;
+    background-color: #443535;
+    margin: auto;
+    left: 15px;
+    width: 50%;
+    height: 70%;
+    top: 120%;
+    display: none;
 }
 
 #iftl {
@@ -46,6 +110,7 @@ body {
 .cta-button:hover {
     background-color: #BE185D;
 }
+
 
 .gpd-navbar {
     width: 100%;
@@ -382,6 +447,17 @@ body {
     margin: 60px 0 16px 0;
     padding: 0 0 0 0;
 }
+#it3lj {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-weight: 200;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 17px;
+    border-radius: 0 0 0 0;
+    margin: 60px 0 16px 0;
+    padding: 0 0 0 0;
+}
 
 #ine3v {
     font-size: 2.5rem;
@@ -470,18 +546,135 @@ body {
 }
 #is69q{
     padding:5px 0 5px 2%;
+    height: 30px;
+}
+#is69z{
+    padding:5px 0 5px 2%;
+    height: 30px;
+}#is69x{
+    padding:5px 0 5px 2%;
+    height: 30px;
 }
 #ib57n{
     text-align:left;
+    font-size: 1.5em;
+}
+#ib57e{
+    text-align:left;
+}#ib57f{
+    text-align:left;
 }
 #il7fe{
-    flex-basis:20%;
+    flex-basis:60%;
 }
+#il7ff{
+    flex-basis:60%;
+}
+#il7fg1{
+    flex-basis:15%;
+}
+#il7fg2{
+    flex-basis:15%;
+}
+#il7fg3{
+    flex-basis:15%;
+}
+#il7fg4{
+    flex-basis:15%;
+}
+#il7fg5{
+    flex-basis:15%;
+}
+#il7fg6{
+    flex-basis:15%;
+}
+
 #iwoa2{
+    text-align:left;
+    padding:5px 0 5px 2%;
+    flex-basis: 14%;
+}
+#iwoa4{
+    text-align:left;
+    padding:5px 0 5px 2%;
+    flex-basis: 14%;
+}#iwoa5{
+    text-align:left;
+    padding:5px 0 5px 2%;
+    flex-basis: 14%;
+}
+#iwoa3{
     text-align:left;
     padding:5px 0 5px 20px;
 }
 #i6xgf6{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgf99{
+    text-align:left;
+    background-color:#9a6a80;
+    margin-right: 3%;
+}
+
+#i6xg4{
+    text-align:left;
+    background-color:#9a6a80;
+    margin-left: 3%;
+}
+.ib575{
+    text-align: left;
+    font-size: 1.5em;
+}
+
+#i6xgf8{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgf9{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgf0{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgf1{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgf9{
+    text-align:left;
+    background-color:#9a6a80;
+    margin-right: 1.5%;
+}
+#i6xgfz{
+    text-align:left;
+    background-color:#9a6a80;
+}
+
+#i6xgf2{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgf3{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgfa{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgfb{
+    text-align:left;
+    background-color:#9a6a80;
+}
+
+#i6xgf7{
+    text-align:left;
+    background-color:#9a6a80;
+}
+#i6xgf9{
     text-align:left;
     background-color:#9a6a80;
 }
@@ -491,7 +684,28 @@ body {
     padding-bottom: 0px;
     height: 140px;
 }
+#ir7nc {
+    background-color: transparent;
+    padding-bottom: 0px;
+    height: 140px;
+}
+
+#ir7nc {
+    background-color: transparent;
+    padding-bottom: 0px;
+    height: 140px;
+}#ir7nd {
+    background-color: transparent;
+    padding-bottom: 0px;
+    height: 140px;
+}
+
 #ijklr{
+    text-align:left;
+}
+#ijklj{
+    text-align:left;
+}#ijklx{
     text-align:left;
 }
 
@@ -647,7 +861,6 @@ b, i, img, label, small, span, u {
 
 .form {
     background-color: #fff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
     padding: 20px
 }
 
@@ -844,6 +1057,43 @@ b, i, img, label, small, span, u {
     min-height: 75px;
     flex-direction: row
 }
+.input-form{
+    display: flex;
+}
+#i0bve1{
+    width: 8%;
+    margin-right: 3%;
+}
+#i0bvf1{
+    width: 10%;
+    margin-right: 3%;
+}
+
+#i0bve0{
+    width: 8%;
+    margin-right: 3%;
+}
+.hidden{
+    display: none;
+}
+
+#i0bve2{
+    width: 20%;
+}
+#i0bvf2{
+    width: 10%;
+    margin-right: 3%;
+}
+#i0bvf3{
+    width: 10%;
+    margin-right: 3%;
+}
+
+#i0bve3{
+    height: 39px;
+    margin-left: 3%;
+}
+
 
 @media (max-width: 768px) {
     .gdp-row, .row {

@@ -25,7 +25,7 @@ public class TestCenterRepoImpl implements ITestCenterRepo {
     @Override
     public void addTestCenter(TestCenter testCenter) {
         String sql="INSERT INTO coronaportal.test_center(capacity,city, zip_code, house_number, street, available_tests) VALUES(?,?,?,?,?,?)";
-        template.update(sql,testCenter.getCapacity(), testCenter.getCity(), testCenter.getZip_code(), testCenter.getHouse_number(), testCenter.getStreet(), testCenter.getAvailable_tests());
+        template.update(sql,testCenter.getCapacity(), testCenter.getCity(), testCenter.getZip_code(), testCenter.getHouse_number(), testCenter.getStreet(), 0);
     }
 
     @Override
@@ -61,7 +61,11 @@ public class TestCenterRepoImpl implements ITestCenterRepo {
     public TestCenter findById(int test_center_id) {
         String sql="SELECT * FROM coronaportal.test_center WHERE id=?";
         RowMapper<TestCenter> rowMapper = new BeanPropertyRowMapper<>(TestCenter.class);
-        return template.queryForObject(sql,rowMapper, test_center_id);
+        try {
+           return template.queryForObject(sql, rowMapper, test_center_id);
+        }catch (Exception e){
+            return null;
+        }
     }
 
 }

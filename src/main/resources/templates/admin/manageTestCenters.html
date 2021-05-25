@@ -13,7 +13,18 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/adminViewVaccinesStyle.css">
-
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+    </style>
+    <style data-css-anim="">
+        [data-anim-type]:not([data-anim-done]) {
+            opacity: 0;
+        }
+    </style>
 
     <script>
         function getCookie(name) {
@@ -32,6 +43,20 @@
             let i;
             for(i = 0; i < x.length; i++)
                 x.item(i).innerHTML += user;
+        }
+        function openForm() {
+            document.getElementById("myForm").style.visibility = "visible";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.visibility = "hidden";
+        }
+        function openFormDelete() {
+            document.getElementById("myFormDelete").style.display = "block";
+        }
+
+        function closeFormDelete() {
+            document.getElementById("myFormDelete").style.display = "none";
         }
     </script>
 </head>
@@ -73,62 +98,114 @@
     scroll-behavior: smooth;
 }</style>
 <section id="iftl" class="gpd-section">
-    <div id="ia0i" class="gpd-container"><h1 id="ine3v">COVID-19 VACCINES</h1>
+    <div id="ia0i" class="gpd-container"><h1 id="ine3v">COVID-19 TEST CENTERS</h1>
+        <form method="get" action="/admin/findTestCenterById" data-redirect="" class="form" id="ir7nb">
+            <div class="form-group">
+                <div class="gpd-box">
+                    <div class="form-group" id="ijklr">
+                        <div class="gpd-box" id="is69q">
+                            <label class="label" id="ib57n">Find test center by ID</label>
+                        </div>
+                        <div class="gdp-row gpd-grid">
+                            <div class="cell gpd-clm" id="il7fe">
+                                <input type="number" placeholder="Type in the test center ID" name="id" class="input" required style="width:100%"/>
+                            </div>
+                            <div class="cell gpd-clm" id="iwoa2">
+                                <button type="submit" class="button"  id="i6xgf6">Find</button>
+                            </div>
+                            <div class="cell gpd-clm">
+                                <button onclick="location.href='/admin/manageTestCenters'" type="button" class="button" id="i6xgf7">Reset filtering</button>
 
-        <form method="get" action="/admin/viewVaccinesByCenter" data-redirect="" class="form" id="ir7nb">
-
-            <h2 class="ib575" >Sort by vaccine center id</h2>
-            <div class="input-form">
-            <input type="number" placeholder="ID" name="vaccine_center_id" class="input" id="i0bve1" required/>
-            <button type="submit" class="button"  id="i6xgf99">Sort</button>
-            <button onclick="location.href='/admin/viewVaccines'" type="button" class="button" id="i6xgf7">Reset filtering</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </form>
+        <form method="get" action="/admin/findTestCenterByCity" data-redirect="" class="form" id="ir7nc">
+            <div class="form-group">
+                <div class="gpd-box">
+                    <div class="form-group" id="ijklj">
+                        <div class="gpd-box" id="is69z">
+                            <label class="label" id="ib57e">Search test centers by city</label>
+                        </div>
+                        <div class="gdp-row gpd-grid">
+                            <div class="cell gpd-clm" id="il7ff">
+                                <input type="text" placeholder="Type in the test center city" name="city" class="input" required style="width:100%"/>
+                            </div>
+                            <div class="cell gpd-clm" id="iwoa4">
+                                <button type="submit" class="button"  id="i6xgf8">Search</button>
+                            </div>
+                            <div class="cell gpd-clm">
+                                <button onclick="location.href='/admin/manageTestCenters'" type="button" class="button" id="i6xgf9">Reset filtering</button>
 
-
-
-        <form method="post" action="/admin/addVaccines/"  class="form" id="ir7nb" >
-
-            <h2 class="ib575" >Order vaccines</h2>
-            <div class="input-form">
-                <input type="number" placeholder="Center ID" name="vaccine_center_id" class="input" id="i0bvf1" required />
-                <input type="text" placeholder="Brand" name="brand" class="input" id="i0bvf2" required/>
-                <input type="number" placeholder="Amount" name="count" class="input" id="i0bvf3" required/>
-                <button type="submit" class="button"  id="i6xgf99">Order</button>
-
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </form>
+        <form method="post" action="/admin/createNewTestCenter" data-redirect="" class="form" id="ir7nd">
+            <div class="form-group">
+                <div class="gpd-box">
+                    <div class="form-group" id="ijklx">
+                        <div class="gpd-box" id="is69x">
+                            <label class="label" id="ib57f">Add new test center</label>
+                        </div>
+                        <div class="gdp-row gpd-grid">
+                            <div class="cell gpd-clm" id="il7fg2">
+                                <input type="number" placeholder="Capacity" name="capacity" class="input" required style="width:100%"/>
+                            </div>
+                            <div class="cell gpd-clm" id="il7fg1">
+                                <input type="text" placeholder="City" name="city" class="input" required style="width:100%"/>
+                            </div>
+                             <div class="cell gpd-clm" id="il7fg3">
+                                <input type="number" placeholder="Zip code" name="zip_code" class="input" required style="width:100%"/>
+                            </div>
+                             <div class="cell gpd-clm" id="il7fg4">
+                                <input type="text" placeholder="Street" name="street" class="input" required style="width:100%"/>
+                            </div>
+                             <div class="cell gpd-clm" id="il7fg5">
+                                <input type="number" placeholder="House number" name="house_number" class="input" required style="width:100%"/>
+                            </div>
+                            <div class="cell gpd-clm" id="iwoa5">
+                                <button type="submit" class="button"  id="i6xgf0">Create</button>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
         <table id="it3lh" class="table table-bordered" style="
     margin-top: 20px;">
             <thead>
             <tr>
-                <th id="i8juk"><span id="i65d1">Vaccine ID</span></th>
-                <th id="ialqv"><span id="i7gu8">Vaccine Brand</span></th>
-                <th id="i1yl8"><span id="ithg6">Vaccine count</span></th>
-                <th ><span >Vaccine center ID</span></th>
+                <th id="i8juk"><span id="i65d1">Test center ID</span></th>
+                <th ><span >Center capacity</span></th>
                 <th colspan="4" ><span >Center address</span></th>
+                <th  ><span >Action</span></th>
 
             </tr>
             </thead>
             <tbody>
-            <tr id="i4tag" th:each="vaccine : ${vaccines}">
-                <td id="ifwo6" th:text="${vaccine.id}" ><span id="i2z0f"><br></span></td>
-                <td id="ij6mc" th:text="${vaccine.brand}" ><span id="i3mu7"></span></td>
-                <td  th:text="${vaccine.count}" ><span ></span></td>
-                <td  th:text="${vaccine.vaccine_center_id}" ><span ></span></td>
+            <tr id="i4tag" th:each="testcenter : ${testcenters}">
+                <td id="ifwo6" th:text="${testcenter.id}" ><span id="i2z0f"><br></span></td>
+                <td  th:text="${testcenter.capacity}" ><span ><br></span></td>
                 <th:block>
-                <td  th:text="${vaccine.city}"  ></td>
-                <td  th:text="${vaccine.zip_code}" ></td>
-                <td  th:text="${vaccine.street}" ></td>
-                <td  th:text="${vaccine.house_number}" ></td>
+                    <td  th:text="${testcenter.city}"  ></td>
+                    <td  th:text="${testcenter.zip_code}" ></td>
+                    <td  th:text="${testcenter.street}" ></td>
+                    <td  th:text="${testcenter.house_number}" ></td>
                 </th:block>
+                <td> <a th:href="@{'/admin/updateTestCenter/'+${testcenter.id}}" class="button"  id="i6xgf1" >Update</a>
+                     <a  th:href="@{'/admin/deleteTestCenter/'+${testcenter.id}}" class="button"  id="i6xgf1" >Delete</a>
+                </td>
             </tr>
             </tbody>
         </table>
+
         <div id="idd1fa" class="gdp-row gpd-grid">
             <div id="iydljl" class="cell gpd-clm photo"></div>
         </div>

@@ -36,18 +36,18 @@ public class VaccineRepoImpl implements IVaccineRepo{
     @Override
     public void addVaccines(Vaccine vaccine) {
 
-        String sql = "SELECT count(*) FROM vaccine WHERE id = ? ";
-        int count = template.queryForObject(sql, new Object[] {vaccine.getId()}, Integer.class); //getting how much records exist with this data
+        String sql = "SELECT count(*) FROM vaccine WHERE brand = ? AND vaccine_center_id = ? ";
+        int count = template.queryForObject(sql, new Object[] {vaccine.getBrand(),vaccine.getVaccine_center_id()}, Integer.class); //getting how much records exist with this data
 
         if (count>0) { //if more then 0 - updating count
-            String sql2 = "UPDATE vaccine SET count = ? WHERE id=?";
-            String sqlCount = "SELECT count FROM vaccine WHERE id = ? ";
-            int oldCount = template.queryForObject(sqlCount, new Object[] {vaccine.getId()}, Integer.class);
-            template.update(sql2, oldCount + vaccine.getCount(), vaccine.getId()); //not sure about that - are we updating the whole count,
+            String sql2 = "UPDATE vaccine SET count = ? WHERE brand = ? AND vaccine_center_id = ?";
+            String sqlCount = "SELECT count FROM vaccine WHERE brand = ? AND vaccine_center_id = ? ";
+            int oldCount = template.queryForObject(sqlCount, new Object[] {vaccine.getBrand(),vaccine.getVaccine_center_id()}, Integer.class);
+            template.update(sql2, oldCount + vaccine.getCount(), vaccine.getBrand(),vaccine.getVaccine_center_id()); //not sure about that - are we updating the whole count,
                                                                         // or just adding on top of existing count?
-        }else if (count==0){ //if 0 - create new vaccine
-            String sql2 = "INSERT INTO vaccine VALUES(?,?,?,?)";
-            template.update(sql2,null,vaccine.getVaccine_center_id(), vaccine.getBrand(),vaccine.getCount());
+        }else { //if 0 - create new vaccine
+            String sql3 = "INSERT INTO vaccine VALUES(?,?,?,?)";
+            template.update(sql3,null,vaccine.getVaccine_center_id(), vaccine.getBrand(),vaccine.getCount());
         }
 
     }
