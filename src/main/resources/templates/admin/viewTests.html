@@ -101,16 +101,18 @@
     margin-top: 20px;">
       <thead>
       <tr>
-        <th id="i8juk"><span id="i65d1">Test center ID</span></th>
-        <th id="ialqv"><span id="i7gu8">Test available</span></th>
-        <th colspan="4" ><span >Center address</span></th>
+        <th>Test center ID</th>
+        <th>Test available</th>
+        <th>Center name</th>
+        <th colspan="4" >Center address</th>
 
       </tr>
       </thead>
       <tbody>
-      <tr id="i4tag" th:each="test : ${tests}">
-        <td id="ifwo6" th:text="${test.id}" ><span id="i2z0f"><br></span></td>
-        <td id="ij6mc" th:text="${test.available_tests}" ><span id="i3mu7"></span></td>
+      <tr  th:each="test : ${tests}">
+        <td  th:text="${test.id}" ></td>
+        <td  th:text="${test.available_tests}" ></td>
+        <td  th:text="${test.name}" ></td>
         <th:block>
           <td  th:text="${test.city}"  ></td>
           <td  th:text="${test.zip_code}" ></td>

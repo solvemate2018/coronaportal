@@ -15,6 +15,7 @@ public class VaccineCenter {
 	private int zip_code;
 	private String street;
 	private int house_number;
+	private String name;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -90,4 +91,11 @@ public class VaccineCenter {
 		this.house_number = house_number;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -25,8 +25,8 @@ public class VaccineCenterRepoImpl implements IVaccineCenterRepo{
 
     @Override
     public void addVaccineCenter(VaccineCenter vaccineCenter) {
-    String sql = "INSERT INTO vaccine_center VALUES(?,?,?,?,?,?)";
-    template.update(sql, null, vaccineCenter.getCapacity(),vaccineCenter.getCity(),vaccineCenter.getZip_code(),vaccineCenter.getHouse_number(),vaccineCenter.getStreet());
+    String sql = "INSERT INTO vaccine_center VALUES(?,?,?,?,?,?,?)";
+    template.update(sql, null, vaccineCenter.getCapacity(),vaccineCenter.getCity(),vaccineCenter.getZip_code(),vaccineCenter.getHouse_number(),vaccineCenter.getStreet(), vaccineCenter.getName());
     }
 
     @Override
@@ -45,8 +45,8 @@ public class VaccineCenterRepoImpl implements IVaccineCenterRepo{
 
     @Override
     public void updateVaccineCenter(int id, VaccineCenter vaccineCenter) {
-        String sql = "UPDATE vaccine_center SET capacity = ?, city = ?, zip_code = ?, house_number = ?, street = ? WHERE id = ?";
-        template.update(sql,vaccineCenter.getCapacity(),vaccineCenter.getCity(),vaccineCenter.getZip_code(),vaccineCenter.getHouse_number(),vaccineCenter.getStreet(),id);
+        String sql = "UPDATE vaccine_center SET capacity = ?, city = ?, zip_code = ?, house_number = ?, street = ?, name=? WHERE id = ?";
+        template.update(sql,vaccineCenter.getCapacity(),vaccineCenter.getCity(),vaccineCenter.getZip_code(),vaccineCenter.getHouse_number(),vaccineCenter.getStreet(),vaccineCenter.getName() ,id);
     }
 
     @Override

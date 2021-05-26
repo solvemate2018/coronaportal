@@ -93,7 +93,14 @@
             <h2 class="ib575" >Order vaccines</h2>
             <div class="input-form">
                 <input type="number" placeholder="Center ID" name="vaccine_center_id" class="input" id="i0bvf1" required />
-                <input type="text" placeholder="Brand" name="brand" class="input" id="i0bvf2" required/>
+
+                <select name="brand" class="input" id="i0bvf2"  required>
+                    <option selected disabled >Brand</option>
+                    <option value="Pfizer" >Pfizer</option>
+                    <option value="Moderna" >Moderna</option>
+                    <option value="AstraZeneca" >AstraZeneca</option>
+                </select>
+
                 <input type="number" placeholder="Amount" name="count" class="input" id="i0bvf3" required/>
                 <button type="submit" class="button"  id="i6xgf99">Order</button>
 
@@ -106,20 +113,22 @@
     margin-top: 20px;">
             <thead>
             <tr>
-                <th id="i8juk"><span id="i65d1">Vaccine ID</span></th>
-                <th id="ialqv"><span id="i7gu8">Vaccine Brand</span></th>
-                <th id="i1yl8"><span id="ithg6">Vaccine count</span></th>
-                <th ><span >Vaccine center ID</span></th>
+                <th>Vaccine ID</th>
+                <th>Vaccine Brand</th>
+                <th>Vaccine count</th>
+                <th>Vaccine center name</th>
+                <th>Vaccine center ID</th>
                 <th colspan="4" ><span >Center address</span></th>
 
             </tr>
             </thead>
             <tbody>
-            <tr id="i4tag" th:each="vaccine : ${vaccines}">
-                <td id="ifwo6" th:text="${vaccine.id}" ><span id="i2z0f"><br></span></td>
-                <td id="ij6mc" th:text="${vaccine.brand}" ><span id="i3mu7"></span></td>
-                <td  th:text="${vaccine.count}" ><span ></span></td>
-                <td  th:text="${vaccine.vaccine_center_id}" ><span ></span></td>
+            <tr  th:each="vaccine : ${vaccines}">
+                <td  th:text="${vaccine.id}" ></td>
+                <td  th:text="${vaccine.brand}" ></td>
+                <td  th:text="${vaccine.count}" ></td>
+                <td  th:text="${vaccine.name}" ></td>
+                <td  th:text="${vaccine.vaccine_center_id}" ></td>
                 <th:block>
                 <td  th:text="${vaccine.city}"  ></td>
                 <td  th:text="${vaccine.zip_code}" ></td>

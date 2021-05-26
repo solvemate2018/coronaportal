@@ -45,7 +45,7 @@ public class AdminController {
         for (Vaccine vaccine:
                 vaccines) {
             VaccineCenter center = vaccineCenterService.findById(vaccine.getVaccine_center_id());
-            modelList.add(new adminViewVaccinesModel(vaccine.getId(),vaccine.getBrand(),vaccine.getCount(),vaccine.getVaccine_center_id(),center.getCity(),center.getZip_code(), center.getStreet(),center.getHouse_number()));
+            modelList.add(new adminViewVaccinesModel(vaccine.getId(),vaccine.getBrand(),vaccine.getCount(),vaccine.getVaccine_center_id(),center.getCity(),center.getZip_code(), center.getStreet(),center.getHouse_number(), center.getName()));
         }
         model.addAttribute("vaccines", modelList);
         return "/admin/viewVaccines";
@@ -58,7 +58,7 @@ public class AdminController {
         for (Vaccine vaccine:
                 vaccines) {
             VaccineCenter center = vaccineCenterService.findById(vaccine.getVaccine_center_id());
-            modelList.add(new adminViewVaccinesModel(vaccine.getId(),vaccine.getBrand(),vaccine.getCount(),vaccine.getVaccine_center_id(),center.getCity(),center.getZip_code(), center.getStreet(),center.getHouse_number()));
+            modelList.add(new adminViewVaccinesModel(vaccine.getId(),vaccine.getBrand(),vaccine.getCount(),vaccine.getVaccine_center_id(),center.getCity(),center.getZip_code(), center.getStreet(),center.getHouse_number(), center.getName()));
         }
         model.addAttribute("vaccines", modelList);
         return "/admin/viewVaccines";

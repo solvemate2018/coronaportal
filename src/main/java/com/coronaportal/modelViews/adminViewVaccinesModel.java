@@ -9,6 +9,7 @@ public class adminViewVaccinesModel {
     private int zip_code;
     private String street;
     private int house_number;
+    private String name;
 
     public int getId() {
         return id;
@@ -74,7 +75,15 @@ public class adminViewVaccinesModel {
         this.house_number = house_number;
     }
 
-    public adminViewVaccinesModel(int id, String brand, int count, int vaccine_center_id, String city, int zip_code, String street, int house_number) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public adminViewVaccinesModel(int id, String brand, int count, int vaccine_center_id, String city, int zip_code, String street, int house_number, String name) {
         this.id = id;
         this.brand = brand;
         this.count = count;
@@ -83,5 +92,6 @@ public class adminViewVaccinesModel {
         this.zip_code = zip_code;
         this.street = street;
         this.house_number = house_number;
+        this.name = name;
     }
 }

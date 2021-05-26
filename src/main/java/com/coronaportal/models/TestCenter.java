@@ -15,6 +15,7 @@ public class TestCenter {
 	private String street;
 	private int house_number;
 	private int available_tests;
+	private String name;
 
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public int getId() {
@@ -101,4 +102,11 @@ public class TestCenter {
 		this.available_tests = available_tests;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

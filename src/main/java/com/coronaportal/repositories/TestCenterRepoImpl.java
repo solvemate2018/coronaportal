@@ -24,8 +24,8 @@ public class TestCenterRepoImpl implements ITestCenterRepo {
 
     @Override
     public void addTestCenter(TestCenter testCenter) {
-        String sql="INSERT INTO coronaportal.test_center(capacity,city, zip_code, house_number, street, available_tests) VALUES(?,?,?,?,?,?)";
-        template.update(sql,testCenter.getCapacity(), testCenter.getCity(), testCenter.getZip_code(), testCenter.getHouse_number(), testCenter.getStreet(), 0);
+        String sql="INSERT INTO coronaportal.test_center(capacity,city, zip_code, house_number, street, available_tests, name) VALUES(?,?,?,?,?,?,?)";
+        template.update(sql,testCenter.getCapacity(), testCenter.getCity(), testCenter.getZip_code(), testCenter.getHouse_number(), testCenter.getStreet(), 0, testCenter.getName());
     }
 
     @Override
@@ -53,8 +53,8 @@ public class TestCenterRepoImpl implements ITestCenterRepo {
 
     @Override
     public void updateTestCenter(int id, TestCenter testCenter) {
-        String sql ="UPDATE coronaportal.test_center SET capacity=?,city=?, zip_code=?, house_number=?, street=?, available_tests=? WHERE id=?";
-        template.update(sql,testCenter.getCapacity(), testCenter.getCity(), testCenter.getZip_code(), testCenter.getHouse_number(), testCenter.getStreet(), testCenter.getAvailable_tests(), id);
+        String sql ="UPDATE coronaportal.test_center SET capacity=?,city=?, zip_code=?, house_number=?, street=?, available_tests=?, name=? WHERE id=?";
+        template.update(sql,testCenter.getCapacity(), testCenter.getCity(), testCenter.getZip_code(), testCenter.getHouse_number(), testCenter.getStreet(), testCenter.getAvailable_tests(), testCenter.getName() ,id);
     }
 
     @Override
