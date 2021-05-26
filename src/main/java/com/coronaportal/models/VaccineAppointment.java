@@ -16,6 +16,16 @@ public class VaccineAppointment {
 	private LocalDateTime vaccine_time;
 	private int vaccine_center_id;
 	private String person_cpr;
+	
+	private boolean approved;
+
+	public boolean getApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
 
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public int getId() {
