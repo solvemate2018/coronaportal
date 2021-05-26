@@ -1,6 +1,7 @@
 package com.coronaportal.repositories;
 
 import com.coronaportal.models.Employee;
+import com.coronaportal.models.VaccineCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,14 +26,18 @@ public class EmployeeRepoImpl implements IEmployeeRepo{
     public void reassignToTestCenter(int id, int test_center_id) {
         String sql = "CALL coronaportal.reassign_employee_to_test_center(?, ?);";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
-        template.query(sql, rowMapper, id, test_center_id);
+        try {
+            template.query(sql, rowMapper, id, test_center_id);
+        }catch (Exception e){}
     }
 
     @Override
     public void reassignToVaccineCenter(int id, int vaccine_center_id) {
         String sql = "CALL coronaportal.reassign_employee_to_vaccine_center(?, ?);";
         RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
-        template.query(sql, rowMapper, id, vaccine_center_id);
+        try {
+            template.query(sql, rowMapper, id, vaccine_center_id);
+        }catch (Exception e){}
     }
 
     @Override
@@ -46,4 +51,18 @@ public class EmployeeRepoImpl implements IEmployeeRepo{
         String sql="delete from coronaportal.employee where id=?";
         boolean result = template.update(sql,id)>=0;
     }
+
+
+    @Override
+    public Employee findById(int id) {
+        String sql = "SELECT * FROM coronaportal.employee WHERE id=?";
+        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
+        try {
+            return template.queryForObject(sql, rowMapper, id);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+
 }

@@ -1,4 +1,3 @@
-
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
@@ -8,12 +7,9 @@
     <title>Corona portal</title>
 
     <meta name="description" content="">
-    <link rel="icon" type="/image/png"
-          href="/images/favIcon.png">
 
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/adminViewVaccinesStyle.css">
+    <link rel="icon" type="image/png"
+          href="images/favIcon.png">
 
 
     <script>
@@ -35,6 +31,8 @@
                 x.item(i).innerHTML += user;
         }
     </script>
+
+    <link rel="stylesheet" type="text/css" href="/css/adminViewVaccinesOrTestsStyle.css">
 </head>
 <body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
 <div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
@@ -74,47 +72,31 @@
     scroll-behavior: smooth;
 }</style>
 <section id="iftl" class="gpd-section">
-    <div id="ia0i" class="gpd-container"><h1 id="ine3v">UPDATE TEST CENTER RECORD</h1>
-        <form method="post" th:action="@{'/admin/updateTestCenter/'+${testcenter.id}}">
-
-            <label for="id"><b>ID</b></label><br>
-            <input type="number" th:value="${testcenter.id}" name="id" id="id" disabled><br>
-
-            <label for="capacity"><b>Capacity</b></label><br>
-            <input type="number" th:value="${testcenter.capacity}" name="capacity" id="capacity" required><br>
-
-            <label for="name"><b>Name</b></label><br>
-            <input type="text" th:value="${testcenter.name}" name="name" id="name" required><br>
-
-            <label for="city"><b>City</b></label><br>
-            <input type="text" th:value="${testcenter.city}" name="city" id="city" required><br>
-
-            <label for="zip_code"><b>Zip code</b></label><br>
-            <input type="number" th:value="${testcenter.zip_code}" name="zip_code" id="zip_code" required><br>
-
-            <label for="street"><b>Street</b></label><br>
-            <input type="text" th:value="${testcenter.street}" name="street" id="street" required><br>
-
-            <label for="house_number"><b>House number</b></label><br>
-            <input type="number" th:value="${testcenter.house_number}" name="house_number" id="house_number" required><br>
-
-            <div class="form-buttons" >
-            <button type="submit" class="button"  id="i6xgf9">Update</button>
-            <button onclick="location.href='/admin/manageTestCenters'"  type="button" class="button"  id="i6xgf1" >Cancel</button>
-            </div>
-        </form>
-
+    <div id="ia0i" class="gpd-container">
         <div id="idd1fa" class="gdp-row gpd-grid">
-            <div id="iydljl" class="cell gpd-clm photo"></div>
+            <div id="iydljl" class="cell gpd-clm photo"><a id="ich0vk"
+                                                           href="/admin/viewTestAppointments"
+                                                           class="gpd-link-box">
+                <div id="iy0yae" class="gpd-text">
+                    <div>VIEW <br>COVID-19<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;VACCINATION APPOINTMENTS<br></div>
+                </div>
+            </a></div>
+            <div id="inx6fv" class="cell gpd-clm photo"><a id="i1fa2" href="/admin/viewVaccinationAppointments" class="gpd-link-box">
+                <div id="ih8pmz" class="gpd-text text">
+                    <div>VIEW <br> COVID-19<br>TEST APPOINTMENTS<br></div>
+                </div>
+            </a></div>
         </div>
     </div>
 </section>
 <section id="im0u3g" class="gpd-section">
     <div id="iobnhd" class="gpd-container">
         <div id="iq4rhi" class="gdp-row">
-            <div id="idggm4" class="cell footer-column"><a id="i104le" href="https://www.sst.dk/en/English"
-                                                           target="_blank" class="gpd-link footer-link">About us</a><a
-                    id="iqbv5" href="https://www.sst.dk/en/English" target="_blank" class="gpd-link footer-link">Learn
+            <div id="idggm4" class="cell footer-column"><a id="i104le" href="" target="_blank"
+                                                           class="gpd-link footer-link">About us</a><a id="iqbv5"
+                                                                                                       href="https://www.sst.dk/da/corona"
+                                                                                                       target="_blank"
+                                                                                                       class="gpd-link footer-link">Learn
                 more</a><a id="ie0c3h" href="" class="gpd-link footer-link">Services we offer</a><a href="" id="ijtnb"
                                                                                                     class="gpd-link footer-link">Meet
                 our developers</a></div>
@@ -169,7 +151,6 @@ for (var i = 0, len = items.length; i < len; i++) {
 }</script>
 
 <script async="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="postJQ()"></script>
-<script async="" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

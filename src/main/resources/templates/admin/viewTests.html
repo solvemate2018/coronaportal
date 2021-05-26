@@ -84,18 +84,16 @@
 
 
       <form method="post" action="/admin/addTests/"  class="form" id="ir7nc">
-
         <h2  class="ib575">Order tests</h2>
-
               <div class="input-form">
-                  <input type="number" placeholder="ID" name="id" class="input" id="i0bve1" required/>
+                <select name="id" class="input" id="i0bve1" required>
+                  <option selected disabled>Center ID</option>
+                  <option th:each="test : ${tests}" th:value="${test.id}" th:text="${test.id}"></option>
+                </select>
                   <input type="number" placeholder="Number of tests" name="available_tests" class="input" id="i0bve2" required/>
                   <button type="submit" class="button"  id="i6xg4">Order</button>
               </div>
-
-
       </form>
-
 
     <table id="it3lh" class="table table-bordered" style="
     margin-top: 20px;">
