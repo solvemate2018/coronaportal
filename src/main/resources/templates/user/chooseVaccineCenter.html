@@ -81,21 +81,21 @@
 }</style>
 <section id="iftl" class="gpd-section">
     <div id="ia0i" class="gpd-container">
-            <table class="table table-bordered table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">Center name</th>
-                    <th scope="col" colspan="2">Center address</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="testCenter : ${testCenters}" >
-                    <td ><a th:text="${testCenter.name}" th:href="@{'/user/chooseTestTimeSlot/'+${testCenter.id}}"></a></td>
-                    <td colspan="2" ><a th:text="${testCenter.printAddress()}" th:href="@{'/user/chooseTestTimeSlot/'+${testCenter.id}}"></a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Center name</th>
+                <th scope="col" colspan="2">Center address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="vaccineCenter : ${vaccineCenters}" >
+                <td ><a th:text="${vaccineCenter.name}" th:href="@{'/user/chooseVaccineTimeSlot/'+${vaccineCenter.id}}"></a></td>
+                <td colspan="2" ><a th:text="${vaccineCenter.printAddress()}" th:href="@{'/user/chooseVaccineTimeSlot/'+${vaccineCenter.id}}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
 <section id="im0u3g" class="gpd-section">
     <div id="iobnhd" class="gpd-container">

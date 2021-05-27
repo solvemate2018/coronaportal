@@ -77,6 +77,7 @@ public class PersonController {
 
     @GetMapping("/user/viewVaccineAppointments")
     public String viewVaccineAppointments(Model model, Principal principal){
+        clearOldAppointments();
         List<userViewVaccineAppointmentsViewModel> modelList = new ArrayList<>();
         List<VaccineAppointment> vaccineAppointments = vaccineAppointmentService.fetchAppointments(principal.getName());
         for (VaccineAppointment appointment:
@@ -99,7 +100,14 @@ public class PersonController {
                 this.testAppointmentService.deleteAppointment(appointment.getId());
             }
         }
-
+        List<VaccineAppointment> appointmentList = this.vaccineAppointmentService.fetchAppointments();
+        Iterator var6 = appointmentList.iterator();
+        while(var6.hasNext()) {
+            VaccineAppointment appointment = (VaccineAppointment) var6.next();
+            if (!appointment.getApproved() && appointment.getVaccine_time().getDayOfYear() < LocalDateTime.now().getDayOfYear()) {
+                this.testAppointmentService.deleteAppointment(appointment.getId());
+            }
+        }
     }
 
 @GetMapping("/user/viewCoronapas")
@@ -145,8 +153,8 @@ public class PersonController {
         return "redirect:http://localhost:8080/user/alreadyHasAppointment";
     }
 
-    @GetMapping({"/user/chooseTimeSlot/{id}"})
-    public String chooseTimeSlot(@PathVariable("id") int id, Model model, Principal principal) {
+    @GetMapping({"/user/chooseTestTimeSlot/{id}"})
+    public String chooseTestTimeSlot(@PathVariable("id") int id, Model model, Principal principal) {
         List<TestAppointment> appointments = this.testAppointmentService.fetchAppointments(principal.getName());
         Iterator var5 = appointments.iterator();
 
@@ -180,7 +188,7 @@ public class PersonController {
         return "redirect:http://localhost:8080/user/alreadyHasAppointment";
     }
 
-    @GetMapping({"/user/makeAppointment/{centerId}/{timeSlotId}"})
+    @GetMapping({"/user/makeTestAppointment/{centerId}/{timeSlotId}"})
     public String makeAppointment(@PathVariable("centerId") int centerId, @PathVariable("timeSlotId") int timeSlotId, Principal principal) {
         List<TestAppointment> appointments = this.testAppointmentService.fetchAppointments(principal.getName());
         Iterator var5 = appointments.iterator();
@@ -285,8 +293,112 @@ public class PersonController {
 
     }
 
-    @GetMapping({"user/alreadyHasAppointment"})
+    @GetMapping({"/user/alreadyHasAppointment"})
     public String alreadyWithAppointment() {
         return "user/alreadyHasAppointment";
     }
+
+    @GetMapping({"/user/chooseVaccineCenter"})
+    public String chooseVaccineCenter(Model model, Principal principal) {
+        List<VaccineAppointment> appointments = this.vaccineAppointmentService.fetchAppointments(principal.getName());
+        Iterator var4 = appointments.iterator();
+
+        VaccineAppointment appointment;
+        do {
+            if (!var4.hasNext()) {
+                Person person = this.personService.fetchPersonData(principal.getName());
+                List<VaccineCenter> modelList = this.vaccineCenterService.fetchVaccineCenters();
+                model.addAttribute("vaccineCenters", modelList);
+                return "user/chooseVaccineCenter";
+            }
+
+            appointment = (VaccineAppointment) var4.next();
+        } while(appointment.getApproved());
+
+        return "redirect:http://localhost:8080/user/alreadyHasAppointment";
+    }
+
+    @GetMapping({"/user/chooseVaccineTimeSlot/{id}"})
+    public String chooseVaccineTimeSlot(@PathVariable("id") int id, Model model, Principal principal) {
+        List<VaccineAppointment> appointments = this.vaccineAppointmentService.fetchAppointments(principal.getName());
+        Iterator var5 = appointments.iterator();
+
+        VaccineAppointment appointment;
+        do {
+            if (!var5.hasNext()) {
+                VaccineCenter vaccineCenter = this.vaccineCenterService.findById(id);
+                this.centerCapacity = vaccineCenter.getCapacity();
+                this.prepareData(id);
+                model.addAttribute("timeSpots", this.timeSpotsMap);
+                model.addAttribute("month1", this.today.getMonth());
+                model.addAttribute("year1", this.today.getYear());
+                if (this.cal.getActualMaximum(5) < this.today.getDayOfMonth() + this.numberOfDays) {
+                    model.addAttribute("month2", LocalDate.now().plusMonths(1L).getMonth());
+                    model.addAttribute("year2", LocalDate.now().plusMonths(1L).getYear());
+                    model.addAttribute("firstDay2", LocalDate.of(this.today.getYear(), this.today.getMonthValue() + 1, 1).getDayOfWeek().toString());
+                } else {
+                    model.addAttribute("month2", null);
+                    model.addAttribute("year2", null);
+                    model.addAttribute("firstDay2", null);
+                }
+
+                model.addAttribute("firstDay1", LocalDate.of(this.today.getYear(), this.today.getMonthValue(), 1).getDayOfWeek().toString());
+                model.addAttribute("centerId", vaccineCenter.getId());
+                return "user/chooseVaccineTimeSlot";
+            }
+
+            appointment = (VaccineAppointment) var5.next();
+        } while(appointment.getApproved());
+
+        return "redirect:http://localhost:8080/user/alreadyHasAppointment";
+    }
+
+    @GetMapping({"/user/makeVaccineAppointment/{centerId}/{timeSlotId}"})
+    public String makeVaccineAppointment(@PathVariable("centerId") int centerId, @PathVariable("timeSlotId") int timeSlotId, Principal principal) {
+        List<VaccineAppointment> appointments = this.vaccineAppointmentService.fetchAppointments(principal.getName());
+        Iterator var5 = appointments.iterator();
+
+        VaccineAppointment appointment;
+        while(var5.hasNext()) {
+            appointment = (VaccineAppointment) var5.next();
+            if (!appointment.getApproved()) {
+                return "redirect:http://localhost:8080";
+            }
+        }
+
+        VaccineCenter vaccineCenter = this.vaccineCenterService.findById(centerId);
+        appointment = new VaccineAppointment();
+        appointment.setPerson_cpr(principal.getName());
+        appointment.setPerson_id(this.personService.fetchPersonData(principal.getName()).getId());
+        appointment.setVaccine_center_id(vaccineCenter.getId());
+        boolean added = false;
+        Iterator var8 = this.timeSpotsMap.entrySet().iterator();
+
+        while(var8.hasNext()) {
+            Map.Entry<Date, List<TimeSpot>> entry = (Map.Entry)var8.next();
+            if (entry.getValue() != null) {
+                Iterator var10 = ((List)entry.getValue()).iterator();
+
+                while(var10.hasNext()) {
+                    TimeSpot spot = (TimeSpot)var10.next();
+                    if (spot.getId() == timeSlotId) {
+                        appointment.setVaccine_time(LocalDateTime.of((entry.getKey()).getDate(), spot.getTime()));
+                        added = true;
+                    }
+
+                    if (added) {
+                        break;
+                    }
+                }
+            }
+
+            if (added) {
+                break;
+            }
+        }
+
+        this.vaccineAppointmentService.makeAppointmentForPerson(appointment);
+        return "user/index";
+    }
+
 }

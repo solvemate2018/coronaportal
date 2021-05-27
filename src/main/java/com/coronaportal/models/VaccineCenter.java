@@ -98,4 +98,8 @@ public class VaccineCenter {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String printAddress(){
+		return city + " " + zip_code + ", " + street + " " + house_number;
+	}
 }

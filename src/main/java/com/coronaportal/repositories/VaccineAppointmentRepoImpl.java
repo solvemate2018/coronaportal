@@ -25,8 +25,8 @@ public class VaccineAppointmentRepoImpl implements IVaccineAppointmentRepo{
 
     @Override
     public void makeAppointmentForPerson(VaccineAppointment vaccineAppointment) {
-        String sql = "INSERT INTO vaccine_appointment VALUES(?,?,?,?,?)";
-        template.update(sql,null, vaccineAppointment.getPerson_id(), vaccineAppointment.getVaccine_time(), vaccineAppointment.getVaccine_center_id(), vaccineAppointment.getPerson_cpr());
+        String sql = "INSERT INTO vaccine_appointment(person_id, vaccine_time, vaccine_center_id, person_cpr) VALUES(?,?,?,?)";
+        template.update(sql, vaccineAppointment.getPerson_id(), vaccineAppointment.getVaccine_time(), vaccineAppointment.getVaccine_center_id(), vaccineAppointment.getPerson_cpr());
     }
 
     @Override

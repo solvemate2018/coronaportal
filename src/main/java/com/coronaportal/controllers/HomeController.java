@@ -2,6 +2,7 @@ package com.coronaportal.controllers;
 
 import com.coronaportal.models.Person;
 import com.coronaportal.repositories.IPersonRepo;
+import com.coronaportal.services.IPersonService;
 import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +21,7 @@ import java.security.Principal;
 @Controller
 public class HomeController {
     @Autowired
-    IPersonRepo personService;
+    IPersonService personService;
 
     @GetMapping("/")
     public String home(Principal principal, HttpServletResponse response){
