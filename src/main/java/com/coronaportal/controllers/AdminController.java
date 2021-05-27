@@ -1,14 +1,11 @@
 package com.coronaportal.controllers;
 
-import com.coronaportal.modelViews.adminViewVaccinesModel;
-import com.coronaportal.modelViews.userViewVaccineAppointmentsViewModel;
+
 import com.coronaportal.models.*;
+import com.coronaportal.modelViews.*;
 import com.coronaportal.repositories.IVaccineCenterRepo;
 import com.coronaportal.repositories.IVaccineRepo;
-import com.coronaportal.services.IEmployeeService;
-import com.coronaportal.services.ITestCenterService;
-import com.coronaportal.services.IVaccineCenterService;
-import com.coronaportal.services.IVaccineService;
+import com.coronaportal.services.*;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +32,10 @@ public class AdminController {
     ITestCenterService testCenterService;
     @Autowired
     IEmployeeService employeeService;
+    @Autowired
+    ITestAppointmentService testAppointmentService;
+    @Autowired
+    ITestResultService testResultService;
 
 
     @GetMapping("/admin/selectManageVaccinesOrTests")
@@ -215,6 +219,118 @@ public class AdminController {
     @GetMapping("/admin/viewTestOrVaccineAppointments")
     public String viewTestOrVaccineAppointments(){
         return "/admin/viewTestOrVaccineAppointments";
+    }
+
+    @GetMapping("/admin/viewTestAppointments")
+    public String viewTestAppointments(Model model){
+    List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
+    List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
+    List<TestCenter> testCenters = testCenterService.fetchTestCenters();
+    List<TestResult> testResults = testResultService.fetchResults();
+
+        for(TestAppointment testAppointment : testAppointments){
+            TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
+            TestResult testResult = testResultService.fetchResult(testAppointment.getId());
+            if(testResult==null){
+                modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
+
+            }else {
+                modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
+            }
+            }
+        model.addAttribute("testappointments", modelList);
+        return "/admin/viewTestAppointments";
+    }
+
+    @GetMapping("/admin/viewTestAppointmentsByCenter")
+    public String viewTestAppointmentsByCenter(Model model, TestCenter testCenterIn){
+        List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
+        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
+        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
+        List<TestResult> testResults = testResultService.fetchResults();
+
+        for(TestAppointment testAppointment : testAppointments){
+            TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
+            TestResult testResult = testResultService.fetchResult(testAppointment.getId());
+            if(testCenter.getName().equals(testCenterIn.getName())) {
+                if (testResult == null) {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
+
+                } else {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
+                }
+            }
+        }
+        model.addAttribute("testappointments", modelList);
+        return "/admin/viewTestAppointments";
+    }
+
+    @GetMapping("/admin/viewTestAppointmentsByCPR")
+    public String viewTestAppointmentsByCPR(Model model, TestAppointment testAppointmentIn){
+        List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
+        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
+        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
+        List<TestResult> testResults = testResultService.fetchResults();
+
+        for(TestAppointment testAppointment : testAppointments){
+            TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
+            TestResult testResult = testResultService.fetchResult(testAppointment.getId());
+            if(testAppointment.getPerson_cpr().equals(testAppointmentIn.getPerson_cpr())) {
+                if (testResult == null) {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
+
+                } else {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
+                }
+            }
+        }
+        model.addAttribute("testappointments", modelList);
+        return "/admin/viewTestAppointments";
+    }
+
+    @GetMapping("/admin/viewTestAppointmentsToday")
+    public String viewTestAppointmentsToday(Model model){
+        List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
+        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
+        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
+        List<TestResult> testResults = testResultService.fetchResults();
+
+        for(TestAppointment testAppointment : testAppointments){
+            TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
+            TestResult testResult = testResultService.fetchResult(testAppointment.getId());
+            if(LocalDate.now().isEqual(testAppointment.getTest_time().toLocalDate()) ) {
+                if (testResult == null) {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
+
+                } else {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
+                }
+            }
+        }
+        model.addAttribute("testappointments", modelList);
+        return "/admin/viewTestAppointments";
+    }
+    @GetMapping("/admin/viewTestAppointmentsByDate")
+    public String viewTestAppointmentsByDate(Model model, TestAppointment testAppointmentIn){
+        List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
+        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
+        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
+        List<TestResult> testResults = testResultService.fetchResults();
+
+        for(TestAppointment testAppointment : testAppointments){
+            TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
+            TestResult testResult = testResultService.fetchResult(testAppointment.getId());
+            if(testAppointmentIn.getTest_time().toLocalDate().isEqual(testAppointment.getTest_time().toLocalDate())) {
+                if (testResult == null) {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
+
+                } else {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
+                }
+            }
+        }
+        model.addAttribute("testappointments", modelList);
+        return "/admin/viewTestAppointments";
     }
 
 
