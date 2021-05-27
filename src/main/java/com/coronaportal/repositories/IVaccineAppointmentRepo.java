@@ -11,6 +11,8 @@ public interface IVaccineAppointmentRepo {
 
     List<VaccineAppointment> fetchAppointments(String cpr);
 
+    List<VaccineAppointment> fetchNotApprovedAppointments();
+
     void makeAppointmentForPerson(VaccineAppointment vaccineAppointment);
 
     List<VaccineAppointment> fetchAppointments();
@@ -22,6 +24,10 @@ public interface IVaccineAppointmentRepo {
     List<VaccineAppointment> fetchDailyAppointments(int vaccine_center_id);
 
     List<VaccineAppointment> fetchDailyAppointments(int vaccine_center_id, LocalDate date);
+
+    void updateVaccineStatus(int id, VaccineAppointment vaccineAppointment);
+
+    VaccineAppointment findAppointmentsByID(int id);
 
 
 }
