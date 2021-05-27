@@ -53,8 +53,11 @@ public class VaccineCenterRepoImpl implements IVaccineCenterRepo{
     public VaccineCenter findById(int vaccine_center_id) {
         String sql = "SELECT * FROM vaccine_center WHERE id=?";
         RowMapper<VaccineCenter> rowMapper = new BeanPropertyRowMapper<>(VaccineCenter.class);
-        VaccineCenter center=template.queryForObject(sql,rowMapper,vaccine_center_id);
-        return center;
+        try {
+            return template.queryForObject(sql, rowMapper, vaccine_center_id);
+        }catch (Exception e){
+            return null;
+        }
     }
 }
 

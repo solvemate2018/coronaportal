@@ -557,7 +557,6 @@ body {
 }
 #ib57n{
     text-align:left;
-    font-size: 1.5em;
 }
 #ib57e{
     text-align:left;
@@ -647,6 +646,11 @@ body {
     text-align:left;
     background-color:#9a6a80;
 }
+#deleteButton{
+    text-align:left;
+    background-color:#6b2424;
+}
+
 #i6xgf9{
     text-align:left;
     background-color:#9a6a80;

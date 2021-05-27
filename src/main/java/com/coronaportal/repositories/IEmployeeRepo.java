@@ -10,4 +10,5 @@ public interface IEmployeeRepo {
     public void  reassignToVaccineCenter(int id, int vaccine_center_id);
     public void editEmployee(int id, Employee employee);
     public void deleteEmployee(int id);
+    public Employee findById(int id);
 }

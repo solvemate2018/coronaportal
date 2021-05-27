@@ -92,7 +92,11 @@
 
             <h2 class="ib575" >Order vaccines</h2>
             <div class="input-form">
-                <input type="number" placeholder="Center ID" name="vaccine_center_id" class="input" id="i0bvf1" required />
+
+                <select name="vaccine_center_id" class="input" id="i0bvf2" required>
+                    <option selected disabled>Center ID</option>
+                    <option th:each="vaccinecenter : ${vaccinecenters}" th:value="${vaccinecenter.id}" th:text="${vaccinecenter.id}"></option>
+                </select>
 
                 <select name="brand" class="input" id="i0bvf2"  required>
                     <option selected disabled >Brand</option>

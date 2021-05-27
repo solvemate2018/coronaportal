@@ -1,5 +1,7 @@
 package com.coronaportal.models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +13,10 @@ public class Employee {
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private String role;
-	private int vaccine_center_id;
-	private int test_center_id;
+	@Nullable
+	private Integer vaccine_center_id; //changed to Integer so it can accept null values
+	@Nullable
+	private Integer test_center_id; //changed to Integer so it can accept null values
 	private String cpr;
 	private String password;
 	private String first_name;
@@ -46,7 +50,7 @@ public class Employee {
 		this.role = role;
 	}
 
-	public int getVaccine_center_id() {
+	public Integer getVaccine_center_id() {
 		return this.vaccine_center_id;
 	}
 
@@ -54,11 +58,11 @@ public class Employee {
 	 * 
 	 * @param vaccine_center_id
 	 */
-	public void setVaccine_center_id(int vaccine_center_id) {
+	public void setVaccine_center_id(Integer vaccine_center_id) {
 		this.vaccine_center_id = vaccine_center_id;
 	}
 
-	public int getTest_center_id() {
+	public Integer getTest_center_id() {
 		return this.test_center_id;
 	}
 
@@ -66,7 +70,7 @@ public class Employee {
 	 * 
 	 * @param test_center_id
 	 */
-	public void setTest_center_id(int test_center_id) {
+	public void setTest_center_id(Integer test_center_id) {
 		this.test_center_id = test_center_id;
 	}
 

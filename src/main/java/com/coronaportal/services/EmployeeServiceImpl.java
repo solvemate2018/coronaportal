@@ -35,4 +35,9 @@ public class EmployeeServiceImpl implements IEmployeeService{
     public void deleteEmployee(int id) {
         employeeRepo.deleteEmployee(id);
     }
+
+    @Override
+    public Employee findById(int id) {
+        return employeeRepo.findById(id);
+    }
 }
