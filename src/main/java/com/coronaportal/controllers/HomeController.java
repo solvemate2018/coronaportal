@@ -38,7 +38,7 @@ public class HomeController {
             return "user/index";
         }
         else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_SECRETARY"))){
-            return "secretary/index";
+            return "secretary/indexForVaccine";
         }
         else
             return "admin/index";
