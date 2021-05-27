@@ -18,9 +18,12 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class SecretaryController {
+    @Autowired
+    IEmployeeService employeeService;
 
     @Autowired
     TestAppointmentServiceImpl testAppointmentService;
@@ -35,8 +38,9 @@ public class SecretaryController {
     TestCenterServiceImpl testCenterService;
 
     @GetMapping("/secretary/viewVaccines")
-    public String fetchNotApprovedAppointments(Model model){
-        model.addAttribute("notApprovedAppointments", vaccineAppointmentService.fetchNotApprovedAppointments());
+    public String fetchNotApprovedAppointments(Model model, Principal principal){
+        List<VaccineAppointment> appointments = vaccineAppointmentService.fetchDailyAppointments(employeeService.findByCpr(principal.getName()).getVaccine_center_id()).stream().filter(app -> app.getApproved() == false).collect(Collectors.toList());
+        model.addAttribute("notApprovedAppointments", appointments);
         return "/secretary/viewVaccines";
     }
 

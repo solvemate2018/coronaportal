@@ -218,6 +218,7 @@ public class PersonController {
                     TimeSpot spot = (TimeSpot)var10.next();
                     if (spot.getId() == timeSlotId) {
                         appointment.setTest_time(LocalDateTime.of((entry.getKey()).getDate(), spot.getTime()));
+
                     }
 
                     if (added) {

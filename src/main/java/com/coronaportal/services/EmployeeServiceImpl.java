@@ -40,4 +40,9 @@ public class EmployeeServiceImpl implements IEmployeeService{
     public Employee findById(int id) {
         return employeeRepo.findById(id);
     }
+
+    @Override
+    public Employee findByCpr(String cpr) {
+        return employeeRepo.findByCpr(cpr);
+    }
 }
