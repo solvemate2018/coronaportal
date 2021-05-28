@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class TestCenter {
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String city;
 	private int capacity;
 	private int zip_code;
@@ -18,7 +18,7 @@ public class TestCenter {
 	private String name;
 
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -26,7 +26,7 @@ public class TestCenter {
 	 * 
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

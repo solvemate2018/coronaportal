@@ -56,8 +56,8 @@ public class VaccineAppointmentServiceImpl implements IVaccineAppointmentService
     }
 
     @Override
-    public void updateVaccineStatus(int id, VaccineAppointment vaccineAppointment) {
-        vaccineAppointmentRepo.updateVaccineStatus(id, vaccineAppointment);
+    public Boolean approveAppointment(int id) {
+        return vaccineAppointmentRepo.approveAppointment(id);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.coronaportal.controllers;
 
+import com.coronaportal.modelViews.adminViewTestAppointmentsViewModel;
 import com.coronaportal.modelViews.adminViewVaccinesModel;
 import com.coronaportal.modelViews.userViewTestAppointmentsViewModel;
 import com.coronaportal.models.*;
@@ -43,7 +44,7 @@ public class SecretaryController {
         model.addAttribute("notApprovedAppointments", appointments);
         return "/secretary/viewVaccines";
     }
-
+/*
     @GetMapping("/secretary/updateVaccineStatus/{id}")
     public String viewUpdateVaccineStatus(@PathVariable("id") int id, Model model ){
         model.addAttribute("notapproved",vaccineAppointmentService.findAppointmentsByID(id));
@@ -52,9 +53,58 @@ public class SecretaryController {
 
     @PostMapping("/secretary/updateVaccineStatus/{id}")
     public String updateVaccineStatus(@PathVariable("id") int id, VaccineAppointment vaccineAppointment){
-        vaccineAppointmentService.updateVaccineStatus(id, vaccineAppointment);
+        vaccineAppointmentService.approveAppointment(id);
         return "redirect:/secretary/viewVaccines";
     }
+
+ */
+
+    @GetMapping("/secretary/approve/{id}")
+    public String accept(@PathVariable("id") int id){
+        boolean b = vaccineAppointmentService.approveAppointment(id);
+        return "redirect:/secretary/viewVaccines";
+
+    }
+
+    @GetMapping("/secretary/viewTests")
+    public String viewTestAppointmentsByCenter(Model model, Principal principal){
+        List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
+        List<TestAppointment> testAppointments = testAppointmentService.fetchDailyAppointments(employeeService.findByCpr(principal.getName()).getTest_center_id());
+        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
+        List<TestResult> testResults = testResultService.fetchResults();
+
+        for(TestAppointment testAppointment : testAppointments){
+            TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
+            TestResult testResult = testResultService.fetchResult(testAppointment.getId());
+            if(testAppointment.getTest_center_id() == employeeService.findByCpr(principal.getName()).getTest_center_id()) {
+             if (testResult == null) {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
+
+                } else {
+                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
+                }
+            }
+
+        }
+        model.addAttribute("testappointments", modelList);
+        return "/secretary/viewTests";
+    }
+
+    @GetMapping("/secretary/enterTestResult/{id}")
+    public String viewEnterTestResult(@PathVariable("id") int id, Model model ){
+        model.addAttribute("testappointment",testAppointmentService.findAppointmentsByID(id));
+        model.addAttribute("testcenter", testCenterService.findById(testAppointmentService.findAppointmentsByID(id).getTest_center_id()));
+        model.addAttribute("testresult", testResultService.fetchResult(id));
+        return "/secretary/enterTestResult";
+    }
+
+    @PostMapping("/secretary/enterTestResult/{id}")
+    public String enterTestResult(@PathVariable("id") int id, String result, TestResult testResult){
+        testResultService.editResult(id, result, testResult);
+        return "redirect:/secretary/viewTests";
+    }
+
+
 
 
 }

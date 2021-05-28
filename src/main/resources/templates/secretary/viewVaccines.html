@@ -122,8 +122,7 @@
                 <td  th:text="${notapproved.vaccine_time}" ><span ><br></span></td>
                 <td  th:text="${notapproved.person_cpr}" ><span ><br></span></td>
                 <td  th:text="${notapproved.approved}" ><span ><br></span></td>
-                <td> <a th:href="@{'/secretary/updateVaccineStatus/'+${notapproved.id}}" class="button"  id="i6xgf1" >Update</a>
-
+                <td><a class="nav-link" th:href="@{'/secretary/approve/'+${notapproved.id}}"><span class="btn btn-danger">Approve</span></a></td>
             </tr>
             </tbody>
         </table>

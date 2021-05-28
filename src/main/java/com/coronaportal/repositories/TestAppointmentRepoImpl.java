@@ -3,6 +3,7 @@ package com.coronaportal.repositories;
 import com.coronaportal.models.Employee;
 import com.coronaportal.models.TestAppointment;
 import com.coronaportal.models.TestResult;
+import com.coronaportal.models.VaccineAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -76,6 +77,18 @@ public class TestAppointmentRepoImpl implements ITestAppointmentRepo {
             return false;
         }
     }
+
+    @Override
+    public TestAppointment findAppointmentsByID(int id) {
+        String sql = "SELECT * FROM test_appointments WHERE id = ?";
+        RowMapper<TestAppointment> rowMapper = new BeanPropertyRowMapper<>(TestAppointment.class);
+        try {
+            return template.queryForObject(sql, rowMapper, id);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 
 }
 

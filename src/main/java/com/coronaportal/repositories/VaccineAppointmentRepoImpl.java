@@ -73,9 +73,9 @@ public class VaccineAppointmentRepoImpl implements IVaccineAppointmentRepo {
     }
 
     @Override
-    public void updateVaccineStatus(int id, VaccineAppointment vaccineAppointment) {
-        String sql = "UPDATE vaccine_appointment SET approved = ? WHERE id = ?";
-        template.update(sql, vaccineAppointment.getApproved(), id);
+    public Boolean approveAppointment(int id) {
+        String sql = "UPDATE vaccine_appointment SET approved = 1 WHERE id = ?";
+        return template.update(sql, id) >= 0;
     }
 
 

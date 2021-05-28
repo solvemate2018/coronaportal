@@ -53,5 +53,8 @@ public class TestAppointmentServiceImpl implements ITestAppointmentService {
     public boolean checkForResult(int id) {
         return testAppointmentRepo.checkForResult(id);
     }
+
+    @Override
+    public TestAppointment findAppointmentsByID(int id) { return testAppointmentRepo.findAppointmentsByID(id);}
 }
 

@@ -3,6 +3,7 @@ package com.coronaportal.repositories;
 import com.coronaportal.models.Person;
 import com.coronaportal.models.TestCenter;
 import com.coronaportal.models.TestResult;
+import com.coronaportal.models.VaccineAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -54,5 +55,6 @@ public class TestResultRepoImpl implements ITestResultRepo{
             return null;
         }
     }
+
 }
 

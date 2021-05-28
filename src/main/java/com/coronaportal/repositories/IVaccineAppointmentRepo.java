@@ -25,7 +25,7 @@ public interface IVaccineAppointmentRepo {
 
     List<VaccineAppointment> fetchDailyAppointments(int vaccine_center_id, LocalDate date);
 
-    void updateVaccineStatus(int id, VaccineAppointment vaccineAppointment);
+    Boolean approveAppointment(int id);
 
     VaccineAppointment findAppointmentsByID(int id);
 

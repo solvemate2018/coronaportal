@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 public class TestAppointment {
 
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private LocalDateTime test_time;
 	private int person_id;
-	private int test_center_id;
+	private Integer test_center_id;
 	private String person_cpr;
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -24,7 +24,7 @@ public class TestAppointment {
 	 * 
 	 * @param id
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -52,7 +52,7 @@ public class TestAppointment {
 		this.person_id = person_id;
 	}
 
-	public int getTest_center_id() {
+	public Integer getTest_center_id() {
 		return this.test_center_id;
 	}
 
@@ -60,7 +60,7 @@ public class TestAppointment {
 	 * 
 	 * @param test_center_id
 	 */
-	public void setTest_center_id(int test_center_id) {
+	public void setTest_center_id(Integer test_center_id) {
 		this.test_center_id = test_center_id;
 	}
 
