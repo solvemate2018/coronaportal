@@ -1,6 +1,8 @@
 package com.coronaportal.repositories;
 
 import com.coronaportal.models.TestAppointment;
+import com.coronaportal.models.TestCenter;
+import com.coronaportal.models.TestResult;
 import com.coronaportal.models.VaccineAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public class VaccineAppointmentRepoImpl implements IVaccineAppointmentRepo{
+public class VaccineAppointmentRepoImpl implements IVaccineAppointmentRepo {
     @Autowired
     JdbcTemplate template;
 
@@ -20,7 +22,13 @@ public class VaccineAppointmentRepoImpl implements IVaccineAppointmentRepo{
     public List<VaccineAppointment> fetchAppointments(String cpr) {
         String sql = "SELECT * FROM vaccine_appointment WHERE person_cpr = ?";
         RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
-        return template.query(sql,rowMapper, cpr);
+        return template.query(sql, rowMapper, cpr);
+    }
+
+    public List<VaccineAppointment> fetchNotApprovedAppointments() {
+        String sql = "SELECT * FROM vaccine_appointment WHERE approved = 0";
+        RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
+        return template.query(sql, rowMapper);
     }
 
     @Override
@@ -33,13 +41,13 @@ public class VaccineAppointmentRepoImpl implements IVaccineAppointmentRepo{
     public List<VaccineAppointment> fetchAppointments() {
         String sql = "SELECT * FROM vaccine_appointment";
         RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
-        return  template.query(sql, rowMapper);
+        return template.query(sql, rowMapper);
     }
 
     @Override
     public void deleteAppointment(int id) {
         String sql = "DELETE FROM vaccine_appointment WHERE id = ?";
-        template.update(sql,id);
+        template.update(sql, id);
 
     }
 
@@ -47,20 +55,40 @@ public class VaccineAppointmentRepoImpl implements IVaccineAppointmentRepo{
     public List<VaccineAppointment> fetchAppointments(int vaccine_center_id) {
         String sql = "SELECT * FROM vaccine_appointment WHERE vaccine_center_id = ?";
         RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
-        return template.query(sql,rowMapper,vaccine_center_id);
+        return template.query(sql, rowMapper, vaccine_center_id);
     }
 
     @Override
     public List<VaccineAppointment> fetchDailyAppointments(int vaccine_center_id) {
         String sql = "SELECT * FROM vaccine_appointment WHERE vaccine_center_id = ? AND DATE(`vaccine_time`) = CURDATE()";
         RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
-        return  template.query(sql,rowMapper,vaccine_center_id);
+        return template.query(sql, rowMapper, vaccine_center_id);
     }
 
     @Override
     public List<VaccineAppointment> fetchDailyAppointments(int vaccine_center_id, LocalDate date) {
         String sql = "SELECT * FROM vaccine_appointment WHERE vaccine_center_id = ? AND DATE(`vaccine_time`) = ?";
         RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
-        return  template.query(sql,rowMapper,vaccine_center_id,date);
+        return template.query(sql, rowMapper, vaccine_center_id, date);
     }
+
+    @Override
+    public void updateVaccineStatus(int id, VaccineAppointment vaccineAppointment) {
+        String sql = "UPDATE vaccine_appointment SET approved = ? WHERE id = ?";
+        template.update(sql, vaccineAppointment.getApproved(), id);
+    }
+
+
+    @Override
+    public VaccineAppointment findAppointmentsByID(int id) {
+        String sql = "SELECT * FROM vaccine_appointment WHERE id = ?";
+        RowMapper<VaccineAppointment> rowMapper = new BeanPropertyRowMapper<>(VaccineAppointment.class);
+        try {
+            return template.queryForObject(sql, rowMapper, id);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 }
+

@@ -1,6 +1,7 @@
 package com.coronaportal.repositories;
 
 import com.coronaportal.models.Employee;
+import com.coronaportal.models.Person;
 import com.coronaportal.models.VaccineCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -64,5 +65,11 @@ public class EmployeeRepoImpl implements IEmployeeRepo{
         }
     }
 
-
+    @Override
+    public Employee findByCpr(String cpr) {
+        String sql= "SELECT * FROM coronaportal.employee WHERE cpr=?";
+        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
+        Employee employee=template.queryForObject(sql,rowMapper,cpr);
+        return employee;
+    }
 }

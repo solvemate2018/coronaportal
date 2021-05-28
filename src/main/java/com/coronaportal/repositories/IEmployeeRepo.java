@@ -11,4 +11,5 @@ public interface IEmployeeRepo {
     public void editEmployee(int id, Employee employee);
     public void deleteEmployee(int id);
     public Employee findById(int id);
+    public Employee findByCpr(String cpr);
 }

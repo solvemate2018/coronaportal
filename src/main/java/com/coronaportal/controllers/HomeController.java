@@ -2,6 +2,7 @@ package com.coronaportal.controllers;
 
 import com.coronaportal.models.Person;
 import com.coronaportal.repositories.IPersonRepo;
+import com.coronaportal.services.IEmployeeService;
 import com.coronaportal.services.IPersonService;
 import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class HomeController {
     @Autowired
     IPersonService personService;
 
+    @Autowired
+    IEmployeeService employeeService;
+
     @GetMapping("/")
     public String home(Principal principal, HttpServletResponse response){
         if(principal == null){
@@ -37,7 +41,12 @@ public class HomeController {
             response.addCookie(cookie2);
             return "user/index";
         }
-        else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_SECRETARY"))){
+        else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_SECRETARY"))
+                && employeeService.findByCpr(principal.getName()).getVaccine_center_id() != null){
+            return "secretary/indexForVaccine";
+        }
+        else if(auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_SECRETARY"))
+                && employeeService.findByCpr(principal.getName()).getTest_center_id() != null){
             return "secretary/index";
         }
         else

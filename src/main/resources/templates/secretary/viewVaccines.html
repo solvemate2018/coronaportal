@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
     <title>Corona portal</title>
-    <link rel="icon" type="image/png" href="images/favIcon.png">
 
+    <meta name="description" content="">
+    <link rel="icon" type="/image/png"
+          href="/images/favIcon.png">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/adminViewVaccinesStyle.css">
     <style>
         body {
             margin: 0;
@@ -19,15 +25,48 @@
             opacity: 0;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="css/secretaryHomePageStyle.css">
+
+    <script>
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        function getUsername() {
+            let user=getCookie("firstName");
+            let x = document.getElementsByName("userFirstName");
+            let i;
+            for(i = 0; i < x.length; i++)
+                x.item(i).innerHTML += user;
+        }
+        function openForm() {
+            document.getElementById("myForm").style.visibility = "visible";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.visibility = "hidden";
+        }
+        function openFormDelete() {
+            document.getElementById("myFormDelete").style.display = "block";
+        }
+
+        function closeFormDelete() {
+            document.getElementById("myFormDelete").style.display = "none";
+        }
+    </script>
 </head>
-<body data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
+<body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
 <div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
      style="animation-name: fadeIn;">
     <div id="ic5a7" class="gpd-container">
         <div id="iu8dq" class="gdp-row">
             <div id="i0yff" class="cell"><a id="ilani" href="/" class="gpd-link-box"><img id="ivm7f"
-                                                                                         src="images/Corona portal logo.png"></a>
+                                                                                          src="/images/Corona portal logo.png"></a>
             </div>
             <div id="i6ls5" class="cell gpd-navbar__menu"><a id="i3vv9" class="gpd-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -41,11 +80,13 @@
                                                                               target="_blank"
                                                                               class="gpd-navbar__item-link">About us<br></a>
                     </div>
-                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="#i2n5f"
+                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6"
+                                                                              href="https://www.sst.dk/en/English"
+                                                                              target="_blank"
                                                                               class="gpd-navbar__item-link">Learn
                         more</a></div>
                     <div id="iguu8" class="cell gpd-navbar__item nav-item">
-                        <div id="iitzx" class="gpd-text">Welcome, Secretary</div>
+                        <div id="iitzx" name="" class="gpd-text">Welcome, Secretary </div>
                     </div>
                 </div>
             </div>
@@ -56,20 +97,38 @@
 <style id="ir3pn">html {
     scroll-behavior: smooth;
 }</style>
+
 <section id="iftl" class="gpd-section">
-    <div id="ia0i" class="gpd-container">
+    <div id="ia0i" class="gpd-container"><h1 id="ine3v">CHANGE COVID-19 VACCINATION STATUS</h1>
+
+
+
+        <table id="it3lh" class="table table-bordered" style="
+    margin-top: 20px;">
+            <thead>
+            <tr>
+                <th id="i8juk"><span id="i65d1">ID</span></th>
+                <th><span >Person ID</span></th>
+                <th><span >Vaccine time</span></th>
+                <th><span >Person CPR</span></th>
+                <th><span >Approved</span></th>
+                <th><span ></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="i4tag" th:each="notapproved : ${notApprovedAppointments}">
+                <td id="ifwo6" th:text="${notapproved.id}" ><span id="i2z0f"><br></span></td>
+                <td  th:text="${notapproved.person_id}" ><span ><br></span></td>
+                <td  th:text="${notapproved.vaccine_time}" ><span ><br></span></td>
+                <td  th:text="${notapproved.person_cpr}" ><span ><br></span></td>
+                <td  th:text="${notapproved.approved}" ><span ><br></span></td>
+                <td> <a th:href="@{'/secretary/updateVaccineStatus/'+${notapproved.id}}" class="button"  id="i6xgf1" >Update</a>
+
+            </tr>
+            </tbody>
+        </table>
         <div id="idd1fa" class="gdp-row gpd-grid">
-            <div id="inx6fv" class="cell gpd-clm photo"><a id="i1fa2" href="/secretary/viewTests" class="gpd-link-box">
-                <div id="ih8pmz" class="gpd-text text">ENTER<br>COVID-19<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;TEST
-                    RESULTS<br></div>
-            </a></div>
-            <div id="ivyf4r" class="cell gpd-clm photo"><a id="ig6oa" href="" class="gpd-link-box">
-                <div id="i9p16r" class="gpd-text text">
-                    <div>CREATE <br>COVID-19<br>TEST/VACCINE<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;APPOINTMENT<br>&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;&ZeroWidthSpace;FOR
-                        A USER
-                    </div>
-                </div>
-            </a></div>
+            <div id="iydljl" class="cell gpd-clm photo"></div>
         </div>
     </div>
 </section>
@@ -78,7 +137,7 @@
         <div id="iq4rhi" class="gdp-row">
             <div id="idggm4" class="cell footer-column"><a id="i104le" href="https://www.sst.dk/en/English"
                                                            target="_blank" class="gpd-link footer-link">About us</a><a
-                    id="iqbv5" href="https://www.sst.dk/da/corona" target="_blank" class="gpd-link footer-link">Learn
+                    id="iqbv5" href="https://www.sst.dk/en/English" target="_blank" class="gpd-link footer-link">Learn
                 more</a><a id="ie0c3h" href="" class="gpd-link footer-link">Services we offer</a><a href="" id="ijtnb"
                                                                                                     class="gpd-link footer-link">Meet
                 our developers</a></div>
@@ -133,6 +192,8 @@ for (var i = 0, len = items.length; i < len; i++) {
 }</script>
 
 <script async="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="postJQ()"></script>
+<script async="" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>
