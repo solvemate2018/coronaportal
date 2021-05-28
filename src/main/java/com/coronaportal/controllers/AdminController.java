@@ -8,16 +8,19 @@ import com.coronaportal.repositories.IVaccineRepo;
 import com.coronaportal.services.*;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,8 @@ public class AdminController {
     ITestAppointmentService testAppointmentService;
     @Autowired
     ITestResultService testResultService;
+    @Autowired
+    IVaccineAppointmentService vaccineAppointmentService;
 
 
     @GetMapping("/admin/selectManageVaccinesOrTests")
@@ -225,8 +230,6 @@ public class AdminController {
     public String viewTestAppointments(Model model){
     List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
     List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
-    List<TestCenter> testCenters = testCenterService.fetchTestCenters();
-    List<TestResult> testResults = testResultService.fetchResults();
 
         for(TestAppointment testAppointment : testAppointments){
             TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
@@ -246,8 +249,6 @@ public class AdminController {
     public String viewTestAppointmentsByCenter(Model model, TestCenter testCenterIn){
         List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
         List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
-        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
-        List<TestResult> testResults = testResultService.fetchResults();
 
         for(TestAppointment testAppointment : testAppointments){
             TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
@@ -268,62 +269,34 @@ public class AdminController {
     @GetMapping("/admin/viewTestAppointmentsByCPR")
     public String viewTestAppointmentsByCPR(Model model, TestAppointment testAppointmentIn){
         List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
-        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
-        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
-        List<TestResult> testResults = testResultService.fetchResults();
+        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments(testAppointmentIn.getPerson_cpr());
 
         for(TestAppointment testAppointment : testAppointments){
             TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
             TestResult testResult = testResultService.fetchResult(testAppointment.getId());
-            if(testAppointment.getPerson_cpr().equals(testAppointmentIn.getPerson_cpr())) {
                 if (testResult == null) {
                     modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
 
                 } else {
                     modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
                 }
-            }
+
         }
         model.addAttribute("testappointments", modelList);
         return "/admin/viewTestAppointments";
     }
 
-    @GetMapping("/admin/viewTestAppointmentsToday")
-    public String viewTestAppointmentsToday(Model model){
-        List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
-        List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
-        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
-        List<TestResult> testResults = testResultService.fetchResults();
-
-        for(TestAppointment testAppointment : testAppointments){
-            TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
-            TestResult testResult = testResultService.fetchResult(testAppointment.getId());
-            if(LocalDate.now().isEqual(testAppointment.getTest_time().toLocalDate()) ) {
-                if (testResult == null) {
-                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
-
-                } else {
-                    modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
-                }
-            }
-        }
-        model.addAttribute("testappointments", modelList);
-        return "/admin/viewTestAppointments";
-    }
     @GetMapping("/admin/viewTestAppointmentsByDate")
-    public String viewTestAppointmentsByDate(Model model, TestAppointment testAppointmentIn){
+    public String viewTestAppointmentsByDate(@RequestParam("testtime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model, TestAppointment testAppointmentIn){
         List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
         List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
-        List<TestCenter> testCenters = testCenterService.fetchTestCenters();
-        List<TestResult> testResults = testResultService.fetchResults();
 
         for(TestAppointment testAppointment : testAppointments){
             TestCenter testCenter = testCenterService.findById(testAppointment.getTest_center_id());
             TestResult testResult = testResultService.fetchResult(testAppointment.getId());
-            if(testAppointmentIn.getTest_time().toLocalDate().isEqual(testAppointment.getTest_time().toLocalDate())) {
+            if(date.isEqual((testAppointment.getTest_time().toLocalDate()))) {
                 if (testResult == null) {
                     modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName()));
-
                 } else {
                     modelList.add(new adminViewTestAppointmentsViewModel(testAppointment.getId(), testAppointment.getTest_time(), testAppointment.getPerson_cpr(), testAppointment.getTest_center_id(), testCenter.getName(), testResult.getTime_of_result(), testResult.getResult()));
                 }
@@ -331,6 +304,65 @@ public class AdminController {
         }
         model.addAttribute("testappointments", modelList);
         return "/admin/viewTestAppointments";
+    }
+
+    @GetMapping("/admin/viewVaccinationAppointments")
+    public String viewVaccinationAppointments(Model model){
+        List<adminViewVaccineAppointmentsViewModel> modelList = new ArrayList<>();
+        List<VaccineAppointment> vaccineAppointments = vaccineAppointmentService.fetchAppointments();
+        for(VaccineAppointment vaccineAppointment : vaccineAppointments){
+            VaccineCenter vaccineCenter = vaccineCenterService.findById(vaccineAppointment.getVaccine_center_id());
+            modelList.add(new adminViewVaccineAppointmentsViewModel(vaccineAppointment.getId(), vaccineAppointment.getVaccine_time(), vaccineAppointment.getPerson_cpr(), vaccineAppointment.getVaccine_center_id(), vaccineCenter.getName(),vaccineAppointment.getApproved()));
+
+        }
+        model.addAttribute("vaccineAppointments", modelList);
+        return "/admin/viewVaccinationAppointments";
+    }
+
+    @GetMapping("/admin/viewVaccinationAppointmentsByCenter")
+    public String viewVaccinationAppointmentsByCenter(Model model, VaccineCenter vaccineCenterIn){
+        List<adminViewVaccineAppointmentsViewModel> modelList = new ArrayList<>();
+        List<VaccineAppointment> vaccineAppointments = vaccineAppointmentService.fetchAppointments();
+
+        for(VaccineAppointment vaccineAppointment : vaccineAppointments){
+            VaccineCenter vaccineCenter = vaccineCenterService.findById(vaccineAppointment.getVaccine_center_id());
+            if(vaccineCenterIn.getName().equals(vaccineCenter.getName())) {
+                modelList.add(new adminViewVaccineAppointmentsViewModel(vaccineAppointment.getId(), vaccineAppointment.getVaccine_time(), vaccineAppointment.getPerson_cpr(), vaccineAppointment.getVaccine_center_id(), vaccineCenter.getName(), vaccineAppointment.getApproved()));
+            }
+        }
+        model.addAttribute("vaccineAppointments", modelList);
+        return "/admin/viewVaccinationAppointments";
+    }
+
+    @GetMapping("/admin/viewVaccinationAppointmentsByCPR")
+    public String viewVaccinationAppointmentsByCPR(Model model, VaccineAppointment vaccineAppointmentIn){
+        List<adminViewVaccineAppointmentsViewModel> modelList = new ArrayList<>();
+        List<VaccineAppointment> vaccineAppointments = vaccineAppointmentService.fetchAppointments(vaccineAppointmentIn.getPerson_cpr());
+
+        for(VaccineAppointment vaccineAppointment : vaccineAppointments){
+            VaccineCenter vaccineCenter = vaccineCenterService.findById(vaccineAppointment.getVaccine_center_id());
+            if(vaccineAppointmentIn.getPerson_cpr().equals(vaccineAppointment.getPerson_cpr())) {
+                modelList.add(new adminViewVaccineAppointmentsViewModel(vaccineAppointment.getId(), vaccineAppointment.getVaccine_time(), vaccineAppointment.getPerson_cpr(), vaccineAppointment.getVaccine_center_id(), vaccineCenter.getName(), vaccineAppointment.getApproved()));
+            }
+        }
+        model.addAttribute("vaccineAppointments", modelList);
+        return "/admin/viewVaccinationAppointments";
+    }
+
+    @GetMapping("/admin/viewVaccinationAppointmentsByDate")
+    public String viewVaccinationAppointmentsByDate(@RequestParam("vaccinetime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model, VaccineAppointment vaccineAppointmentIn){
+        List<adminViewVaccineAppointmentsViewModel> modelList = new ArrayList<>();
+        List<VaccineAppointment> vaccineAppointments = vaccineAppointmentService.fetchAppointments();
+
+        for(VaccineAppointment vaccineAppointment : vaccineAppointments){
+            VaccineCenter vaccineCenter = vaccineCenterService.findById(vaccineAppointment.getVaccine_center_id());
+            if(date.isEqual((vaccineAppointment.getVaccine_time().toLocalDate()))) {
+                modelList.add(new adminViewVaccineAppointmentsViewModel(vaccineAppointment.getId(), vaccineAppointment.getVaccine_time(), vaccineAppointment.getPerson_cpr(), vaccineAppointment.getVaccine_center_id(), vaccineCenter.getName(), vaccineAppointment.getApproved()));
+
+            }
+        }
+        model.addAttribute("vaccineAppointments", modelList);
+        return "/admin/viewVaccinationAppointments";
     }
 
 
