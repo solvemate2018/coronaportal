@@ -105,7 +105,7 @@ public class PersonController {
         while(var6.hasNext()) {
             VaccineAppointment appointment = (VaccineAppointment) var6.next();
             if (!appointment.getApproved() && appointment.getVaccine_time().getDayOfYear() < LocalDateTime.now().getDayOfYear()) {
-                this.testAppointmentService.deleteAppointment(appointment.getId());
+                this.vaccineAppointmentService.deleteAppointment(appointment.getId());
             }
         }
     }
@@ -304,9 +304,13 @@ public class PersonController {
         List<VaccineAppointment> appointments = this.vaccineAppointmentService.fetchAppointments(principal.getName());
         Iterator var4 = appointments.iterator();
 
-        VaccineAppointment appointment;
+        VaccineAppointment appointment = new VaccineAppointment();
+        int counter = 0;
         do {
             if (!var4.hasNext()) {
+                if(counter == 2){
+                    return "redirect:http://localhost:8080/user/alreadyHasAppointment";
+                }
                 Person person = this.personService.fetchPersonData(principal.getName());
                 List<VaccineCenter> modelList = this.vaccineCenterService.fetchVaccineCenters();
                 model.addAttribute("vaccineCenters", modelList);
@@ -314,6 +318,8 @@ public class PersonController {
             }
 
             appointment = (VaccineAppointment) var4.next();
+
+            counter++;
         } while(appointment.getApproved());
 
         return "redirect:http://localhost:8080/user/alreadyHasAppointment";
@@ -323,10 +329,18 @@ public class PersonController {
     public String chooseVaccineTimeSlot(@PathVariable("id") int id, Model model, Principal principal) {
         List<VaccineAppointment> appointments = this.vaccineAppointmentService.fetchAppointments(principal.getName());
         Iterator var5 = appointments.iterator();
-
-        VaccineAppointment appointment;
+        int counter = 0;
+        VaccineAppointment appointment = new VaccineAppointment();
         do {
             if (!var5.hasNext()) {
+                if (counter == 1){
+                    today = appointment.getVaccine_time().toLocalDate().plusDays(14);
+                    firstDayOfMonth = LocalDate.of(today.getYear(), today.getMonthValue(), 1);
+                    cal.set(today.getYear(), today.getMonthValue(), today.getDayOfMonth());
+                }
+                else if(counter == 2){
+                    return "redirect:http://localhost:8080/user/alreadyHasAppointment";
+                }
                 VaccineCenter vaccineCenter = this.vaccineCenterService.findById(id);
                 this.centerCapacity = vaccineCenter.getCapacity();
                 this.prepareData(id);
@@ -345,10 +359,14 @@ public class PersonController {
 
                 model.addAttribute("firstDay1", LocalDate.of(this.today.getYear(), this.today.getMonthValue(), 1).getDayOfWeek().toString());
                 model.addAttribute("centerId", vaccineCenter.getId());
+                today = LocalDate.now();
+                cal = Calendar.getInstance();
+                firstDayOfMonth = LocalDate.of(today.getYear(), today.getMonthValue(), 1);
                 return "user/chooseVaccineTimeSlot";
             }
 
             appointment = (VaccineAppointment) var5.next();
+            counter++;
         } while(appointment.getApproved());
 
         return "redirect:http://localhost:8080/user/alreadyHasAppointment";
