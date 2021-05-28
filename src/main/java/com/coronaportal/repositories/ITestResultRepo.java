@@ -13,7 +13,7 @@ public interface ITestResultRepo {
 
     void addResult(TestResult testResult);
 
-    void editResult(int id, String result, TestResult testResult);
+    void editResult(int id, String testResult);
 
     TestResult fetchResult(int test_appointment_id);
 

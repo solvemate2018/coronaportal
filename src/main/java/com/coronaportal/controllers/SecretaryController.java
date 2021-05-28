@@ -99,8 +99,8 @@ public class SecretaryController {
     }
 
     @PostMapping("/secretary/enterTestResult/{id}")
-    public String enterTestResult(@PathVariable("id") int id, String result, TestResult testResult){
-        testResultService.editResult(id, result, testResult);
+    public String enterTestResult(@PathVariable("id") int id, TestResult testResult){
+        testResultService.editResult(id, testResult.getResult());
         return "redirect:/secretary/viewTests";
     }
 

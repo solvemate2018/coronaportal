@@ -39,9 +39,9 @@ public class TestResultRepoImpl implements ITestResultRepo{
     }
 
     @Override
-    public void editResult(int id, String result, TestResult testResult) {
-        String sql="UPDATE coronaportal.test_result SET test_appointments_id=?,time_of_result=?, result=? WHERE id=?";
-        template.update(sql,testResult.getTest_appointment_id(), testResult.getTime_of_result(), testResult.getResult(), id);
+    public void editResult(int id, String testResult) {
+        String sql="UPDATE coronaportal.test_result SET result=? WHERE id=?";
+        template.update(sql, testResult, id);
     }
 
     @Override

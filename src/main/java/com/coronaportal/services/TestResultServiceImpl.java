@@ -30,8 +30,8 @@ public class TestResultServiceImpl implements ITestResultService{
     }
 
     @Override
-    public void editResult(int id, String result, TestResult testResult) {
-        testResultRepo.editResult(id, result, testResult);
+    public void editResult(int id, String testResult) {
+        testResultRepo.editResult(id, testResult);
     }
 
     @Override
