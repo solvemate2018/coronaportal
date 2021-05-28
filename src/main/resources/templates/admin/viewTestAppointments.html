@@ -74,10 +74,10 @@
 
         <form method="get" action="/admin/viewTestAppointmentsByCenter" data-redirect="" class="form" id="ir7nb">
 
-            <h2  class="ib575">Filter appointments by test center name</h2>
+            <h2  class="ib575">Find appointments by test center name</h2>
             <div class="input-form">
                 <input type="text" placeholder="Name" name="name" class="input" id="i0bve0" required />
-                <button type="submit" class="button"  id="i6xgf99">Filter</button>
+                <button type="submit" class="button"  id="i6xgf99">Find</button>
                 <button onclick="location.href='/admin/viewTestAppointments'" type="button" class="button" id="i6xgf7">Reset filtering</button>
             </div>
         </form>
@@ -91,13 +91,16 @@
                 <button onclick="location.href='/admin/viewTestAppointments'" type="button" class="button" id="i6xg4">Reset filtering</button>
             </div>
         </form>
-        <form method="get" action="/admin/viewTestAppointmentsToday/"  class="form" id="ir7nc">
-            <h2  class="ib575">See today's appointments</h2>
+
+        <form method="get" action="/admin/viewTestAppointmentsByDate/"  class="form" id="ir7nc">
+            <h2  class="ib575">Find appointments by date</h2>
             <div class="input-form">
+                <input type="date" name="testtime" class="input"  id="i0vta1" >
                 <button type="submit" class="button"  id="i6xg4">Find</button>
                 <button onclick="location.href='/admin/viewTestAppointments'" type="button" class="button" id="i6xg4">Reset filtering</button>
             </div>
         </form>
+
 
         <table id="it3lh" class="table table-bordered" style="
     margin-top: 20px;">
