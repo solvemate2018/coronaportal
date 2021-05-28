@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
     <title>Corona portal</title>
-
-    <meta name="description" content="">
     <link rel="icon" type="image/png" href="/images/favIcon.png">
 
     <style>
@@ -21,30 +19,9 @@
             opacity: 0;
         }
     </style>
-
-    <script>
-        function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0;i < ca.length;i++) {
-                var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-            }
-            return null;
-        }
-        function getUsername() {
-            let user=getCookie("firstName");
-            let x = document.getElementsByName("userFirstName");
-            let i;
-            for(i = 0; i < x.length; i++)
-                x.item(i).innerHTML += user;
-        }
-    </script>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/css/userHomePageStyle.css}">
+    <link rel="stylesheet" type="text/css" href="/css/secretaryHomePageStyle.css">
 </head>
-<body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
+<body data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
 <div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
      style="animation-name: fadeIn;">
     <div id="ic5a7" class="gpd-container">
@@ -64,13 +41,11 @@
                                                                               target="_blank"
                                                                               class="gpd-navbar__item-link">About us<br></a>
                     </div>
-                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6"
-                                                                              href="https://www.sst.dk/en/English"
-                                                                              target="_blank"
+                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6" href="#i2n5f"
                                                                               class="gpd-navbar__item-link">Learn
                         more</a></div>
                     <div id="iguu8" class="cell gpd-navbar__item nav-item">
-                        <div id="iitzx" name="userFirstName" class="gpd-text">Welcome, </div>
+                        <div id="iitzx" class="gpd-text">Welcome, Secretary</div>
                     </div>
                 </div>
             </div>
@@ -84,19 +59,21 @@
 <section id="iftl" class="gpd-section">
     <div id="ia0i" class="gpd-container">
         <div id="idd1fa" class="gpd-grid">
-            <h2>You already have registered appointment.</h2>
-            <p>Please go to check your appointments and if you find something that is not right, feel free to contact our support!</p>
+            <form method="post" th:action="@{'/secretary/selectTestTimeSlot/'}">
+                <label for="userCpr"><b>Please enter the user CPR</b></label><br>
+                <input type="text" th:value="${userCpr}" name="userCpr" id="userCpr"><br>
+                <p></p>
+                <button type="submit" class="button"  id="i6xgf9">Next</button>
+            </form>
         </div>
     </div>
 </section>
 <section id="im0u3g" class="gpd-section">
     <div id="iobnhd" class="gpd-container">
         <div id="iq4rhi" class="gdp-row">
-            <div id="idggm4" class="cell footer-column"><a id="i104le" href="" target="_blank"
-                                                           class="gpd-link footer-link">About us</a><a id="iqbv5"
-                                                                                                       href="https://www.sst.dk/da/corona"
-                                                                                                       target="_blank"
-                                                                                                       class="gpd-link footer-link">Learn
+            <div id="idggm4" class="cell footer-column"><a id="i104le" href="https://www.sst.dk/en/English"
+                                                           target="_blank" class="gpd-link footer-link">About us</a><a
+                    id="iqbv5" href="https://www.sst.dk/da/corona" target="_blank" class="gpd-link footer-link">Learn
                 more</a><a id="ie0c3h" href="" class="gpd-link footer-link">Services we offer</a><a href="" id="ijtnb"
                                                                                                     class="gpd-link footer-link">Meet
                 our developers</a></div>

@@ -1,0 +1,989 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Corona portal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+    </style>
+    <style data-css-anim="">
+        [data-anim-type]:not([data-anim-done]) {
+            opacity: 0;
+        }
+    </style>
+
+    <script>
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function getUsername() {
+            let user = getCookie("firstName");
+            let x = document.getElementsByName("userFirstName");
+            let i;
+            for (i = 0; i < x.length; i++)
+                x.item(i).innerHTML += user;
+        }
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="/css/chooseTestCenterStyle.css">
+    <script>
+        function showTimeSlots(id) {
+            var x = document.getElementById(id);
+            closeAllTimeSlots();
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function closeAllTimeSlots() {
+            var x = document.getElementsByClassName("timeSpots");
+            for (var index = 0; index < x.length; index++) {
+                x[index].style.display = "none";
+            }
+        }
+
+        function changeCalendarPage(pageNumber) {
+            var x = document.getElementById("calendar-page" + pageNumber);
+            closeAllCalendars();
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function closeAllCalendars() {
+            var x = document.getElementsByClassName("calendar");
+            for (var index = 0; index < x.length; index++) {
+                x[index].style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body onload="getUsername()" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
+<div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
+     style="animation-name: fadeIn;">
+    <div id="ic5a7" class="gpd-container">
+        <div id="iu8dq" class="gdp-row">
+            <div id="i0yff" class="cell"><a id="ilani" href="/" class="gpd-link-box"><img id="ivm7f"
+                                                                                          src="/images/Corona portal logo.png"></a>
+            </div>
+            <div id="i6ls5" class="cell gpd-navbar__menu"><a id="i3vv9" class="gpd-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path>
+                </svg>
+            </a></div>
+            <div id="izu4n" class="cell gpd-navbar__items">
+                <div id="it3na" class="gdp-row gpd-navbar__items-grid">
+                    <div id="im09m" class="cell gpd-navbar__item nav-item"><a id="igq3h"
+                                                                              href="https://www.sst.dk/en/English"
+                                                                              target="_blank"
+                                                                              class="gpd-navbar__item-link">About us<br></a>
+                    </div>
+                    <div id="iq4pk" class="cell gpd-navbar__item nav-item"><a id="ikig6"
+                                                                              href="https://www.sst.dk/en/English"
+                                                                              target="_blank"
+                                                                              class="gpd-navbar__item-link">Learn
+                        more</a></div>
+                    <div id="iguu8" class="cell gpd-navbar__item nav-item">
+                        <div id="iitzx" name="userFirstName" class="gpd-text">Welcome, </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ihndr" class="cell"><a id="io6we" th:href="@{/logout}" class="gpd-link cta-button">Log out</a>
+            </div>
+        </div>
+    </div>
+</div>
+<style id="ir3pn">html {
+    scroll-behavior: smooth;
+}</style>
+<section id="iftl" class="gpd-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="calendar" id="calendar-page1" style="margin: 100px;">
+                    <div class="d-flex align-items-center" style="width: 400px"><i class="far fa-calendar fa-3x me-3"
+                                                                                   style="font-size: 25px;width: 8.25px;height: 32.6px;"></i>
+                        <h1>
+                            <button type="button" class="btn btn-outline-secondary" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+                                </svg>
+                            </button>
+                        </h1>
+                        <h1 class="month fw-bold mb-0 text-uppercase"
+                            style="font-size: 24px;width: 180px;height: 37px;" th:text="${month1}"></h1>
+                        <h1 class="month fw-bold mb-0 text-uppercase"
+                            style="font-size: 24px;width: 180px;height: 37px;" th:text="${year1}"></h1>
+                        <button onclick="changeCalendarPage(2)" type="button" class="btn btn-outline-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-right-square" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <ol class="day-names list-unstyled" style="font-size: 10px;width: 420px;">
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Sun</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Mon</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Tue</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Wed</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Thu</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Fri</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Sat</li>
+                    </ol>
+                    <ol class="days list-unstyled" style="width: 420px;height: 0px;min-height: 50px;">
+                        <div class="emptySpaces"
+                             th:switch="${firstDay1}">
+                            <div th:case="'SUNDAY'">
+                            </div>
+                            <div th:case="'MONDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'TUESDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'WEDNESDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'THURSDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'FRIDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'SATURDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calendar-date" th:each="entry, stats : ${timeSpots}" th:with="date=${entry.key}"
+                             th:if="${entry.getKey().getDate().getMonth() == month1}">
+                            <div class="date">
+                                <li style="min-height: 50px; width: 60px">
+                                    <div th:if="${entry.getValue() != null}" style="min-height: 50px;">
+                                        <button th:onclick="|showTimeSlots('${date.getId()}')|"
+                                                style="height: 43.25px; width: 43.25px" type="button"
+                                                class="btn btn-success">
+                                        <span style="min-height: 50px;" th:text="${date.getDate().getDayOfMonth()}">
+                                        </span>
+                                        </button>
+                                    </div>
+                                    <div th:if="${entry.getValue() == null}" style="min-height: 50px;">
+                                        <button th:onclick="|showTimeSlots('${date.getId()}')|"
+                                                style="height: 43.25px; width: 43.25px" type="button"
+                                                class="btn btn-success" disabled>
+                                        <span style="min-height: 50px;" th:text="${date.getDate().getDayOfMonth()}">
+                                        </span>
+                                        </button>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </ol>
+                </div>
+                <div th:if="${month1 != null}" class="calendar" id="calendar-page2" style="margin: 100px; display:none">
+                    <div class="d-flex align-items-center" style="width: 400px"><i class="far fa-calendar fa-3x me-3"
+                                                                                   style="font-size: 25px;width: 8.25px;height: 32.6px;"></i>
+                        <h1>
+                            <button onclick="changeCalendarPage(1)" type="button" class="btn btn-outline-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+                                </svg>
+                            </button>
+                        </h1>
+                        <h1 class="month fw-bold mb-0 text-uppercase"
+                            style="font-size: 24px;width: 180px;height: 37px;" th:text="${month2}"></h1>
+                        <h1 class="month fw-bold mb-0 text-uppercase"
+                            style="font-size: 24px;width: 180px;height: 37px;" th:text="${year2}"></h1>
+                        <button type="button" class="btn btn-outline-secondary" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-right-square" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <ol class="day-names list-unstyled" style="font-size: 10px;width: 420px;">
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Sun</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Mon</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Tue</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Wed</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Thu</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Fri</li>
+                        <li class="fw-bold text-uppercase" style="font-size: 10px;width: 60px;">Sat</li>
+                    </ol>
+                    <ol class="days list-unstyled" style="width: 420px;height: 0px;min-height: 50px;">
+                        <div class="emptySpaces"
+                             th:switch="${firstDay2}">
+                            <div th:case="'SUNDAY'">
+                            </div>
+                            <div th:case="'MONDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'TUESDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'WEDNESDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'THURSDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'FRIDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:case="'SATURDAY'">
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="calendar-date">
+                                    <div class="date">
+                                        <li style="min-height: 50px; width: 60px">
+                                            <div style="min-height: 50px;">
+                                                <span style="min-height: 50px;">
+                                                 #
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calendar-date" th:each="entry, stats : ${timeSpots}" th:with="date=${entry.key}"
+                             th:if="${entry.getKey().getDate().getMonth() == month2}">
+                            <div class="date">
+                                <li style="min-height: 50px; width: 60px">
+                                    <div th:if="${entry.getValue() != null}" style="min-height: 50px;">
+                                        <button th:onclick="|showTimeSlots('${date.getId()}')|"
+                                                style="height: 43.25px; width: 43.25px" type="button"
+                                                class="btn btn-success">
+                                        <span style="min-height: 50px;" th:text="${date.getDate().getDayOfMonth()}">
+                                        </span>
+                                        </button>
+                                    </div>
+                                    <div th:if="${entry.getValue() == null}" style="min-height: 50px;">
+                                        <button th:onclick="|showTimeSlots('${date.getId()}')|"
+                                                style="height: 43.25px; width: 43.25px" type="button"
+                                                class="btn btn-success" disabled>
+                                        <span style="min-height: 50px;" th:text="${date.getDate().getDayOfMonth()}">
+                                        </span>
+                                        </button>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="timeSpots" th:each="entry, entryStats : ${timeSpots}"
+                     th:id="${entry.key.getId()}" style="display:none;margin: 80px;margin-top: 120px;">
+                    <h3 th:text="${entry.key.getDate()}"></h3>
+                    <div class="dropdown-group">
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"
+                                    style="height: 45px;width: 380.037px;margin-top: 20px;">
+                                Morning
+                            </button>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="dropdownMenuButton" style="width: 380px;">
+                                <div class="dropdown-item" >
+                                    <div class="btn-toolbar">
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 3 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}"  type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 3 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 7 && stats.index > 3 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" th:disabled="${!timeSpot.available}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 7 && stats.index > 3 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"
+                                    style="height: 45px;width: 380.037px;margin-top: 20px;">
+                                Before dinner
+                            </button>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="dropdownMenuButton" style="width: 380px;">
+                                <div class="dropdown-item" >
+                                    <div class="btn-toolbar">
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 11 && stats.index > 7 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 11 && stats.index > 7 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 15 && stats.index > 11 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 15 && stats.index > 11 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"
+                                    style="height: 45px;width: 380.037px;margin-top: 20px;">
+                                Afternoon
+                            </button>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="dropdownMenuButton" style="width: 380px;">
+                                <div class="dropdown-item" >
+                                    <div class="btn-toolbar">
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 19 && stats.index > 15 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 19 && stats.index > 15 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 23 && stats.index > 19 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 23 && stats.index > 19 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"
+                                    style="height: 45px;width: 380.037px;margin-top: 20px;">
+                                Before Evening
+                            </button>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="dropdownMenuButton" style="width: 380px;">
+                                <div class="dropdown-item" >
+                                    <div class="btn-toolbar">
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 27 && stats.index > 23 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 27 && stats.index > 23 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 31 && stats.index > 27 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 31 && stats.index > 27 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"
+                                    style="height: 45px;width: 380.037px;margin-top: 20px;">
+                                Evening
+                            </button>
+                            <div class="dropdown-menu"
+                                 aria-labelledby="dropdownMenuButton" style="width: 380px;">
+                                <div class="dropdown-item" >
+                                    <div class="btn-toolbar">
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 35 && stats.index > 31 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 35 && stats.index > 31 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                        <div role="group" class="btn-group" style="margin-bottom: 10px;">
+                                            <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 39 && stats.index > 35 && timeSpot.available}"
+                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
+                                            </a>
+                                            <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 39 && stats.index > 35 && !timeSpot.available}"
+                                                    th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;" disabled>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="im0u3g" class="gpd-section">
+    <div id="iobnhd" class="gpd-container">
+        <div id="iq4rhi" class="gdp-row">
+            <div id="idggm4" class="cell footer-column"><a id="i104le" href="" target="_blank"
+                                                           class="gpd-link footer-link">About us</a><a id="iqbv5"
+                                                                                                       href="https://www.sst.dk/da/corona"
+                                                                                                       target="_blank"
+                                                                                                       class="gpd-link footer-link">Learn
+                more</a><a id="ie0c3h" href="" class="gpd-link footer-link">Services we offer</a><a href="" id="ijtnb"
+                                                                                                    class="gpd-link footer-link">Meet
+                our developers</a></div>
+            <div id="i4a6eg" class="cell footer-column"><h4 id="ijx38l" class="footer-title">Contact us</h4><a
+                    id="isxhjm" href="tel:" class="gpd-link">support@coronaportal.com</a><a id="iqhrd9" href=""
+                                                                                            class="gpd-link footer-link">+45
+                50 24 40 95</a></div>
+        </div>
+        <div id="ivi361" class="gpd-divider"></div>
+        <div id="infzsb" class="gdp-row">
+            <div id="i0bvnn" class="cell">
+                <div id="ird0zk" class="gpd-text">© 2020 Copyright, All Right Reserved.&nbsp;Made by EEB Dev Group</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>var items = document.querySelectorAll('#i3vv9');
+for (var i = 0, len = items.length; i < len; i++) {
+    (function () {
+        var t, e = 0, n = 'gjs-collapse', r = 'max-height', i = 'ease-in-out', o = .25, a = function () {
+            var t, e = document.createElement('void'), n = {
+                transition: 'transitionend',
+                OTransition: 'oTransitionEnd',
+                MozTransition: 'transitionend',
+                WebkitTransition: 'webkitTransitionEnd'
+            };
+            for (t in n) if (void 0 !== e.style[t]) return n[t]
+        }(), s = function (t) {
+            e = 1;
+            var n = function (t) {
+                var e = window.getComputedStyle(t), n = e.display, i = parseInt(e[r]);
+                if ('none' !== n && '0' !== i) return t.offsetHeight;
+                t.style.height = 'auto', t.style.display = 'block', t.style.position = 'absolute', t.style.visibility = 'hidden';
+                var o = t.offsetHeight;
+                return t.style.height = '', t.style.display = '', t.style.position = '', t.style.visibility = '', o
+            }(t), a = t.style;
+            a.display = 'block', a.transition = r + ' ' + o + 's ' + i, a.overflowY = 'hidden', '' == a[r] && (a[r] = 0), 0 == parseInt(a[r]) ? (a[r] = '0', setTimeout(function () {
+                a[r] = n + 'px'
+            }, 10)) : a[r] = '0'
+        };
+        n in this || this.addEventListener('click', function (n) {
+            if (n.preventDefault(), !e) {
+                var i = this.closest('.gpd-navbar').querySelector(".gpd-navbar__items");
+                s(i), t || (i.addEventListener(a, function () {
+                    e = 0;
+                    var t = i.style;
+                    0 == parseInt(t[r]) && (t.display = '', t[r] = '')
+                }), t = 1)
+            }
+        }), this[n] = 1
+    }.bind(items[i]))();
+}</script>
+<script async="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" onload="postJQ()"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>

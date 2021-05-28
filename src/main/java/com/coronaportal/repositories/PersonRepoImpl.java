@@ -18,7 +18,13 @@ public class PersonRepoImpl implements IPersonRepo{
     public Person fetchPersonData(String cpr) {
         String sql="SELECT * FROM coronaportal.person WHERE cpr=?";
         RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
-        Person person=template.queryForObject(sql,rowMapper,cpr);
+        Person person = new Person();
+        try {
+            person = template.queryForObject(sql, rowMapper, cpr);
+        }
+        catch (Exception e){
+            return null;
+        }
         return person;
     }
 

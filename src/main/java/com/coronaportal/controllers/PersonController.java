@@ -238,7 +238,11 @@ public class PersonController {
 
     private void prepareData(int id) {
         boolean canSign = false;
-
+        this.firstDayOfMonth = LocalDate.of(this.today.getYear(), this.today.getMonth(), 1);
+        this.duration = 15;
+        this.numberOfDays = 10;
+        this.timeSpotsMap = new TreeMap();
+        this.cal = Calendar.getInstance();
         int i;
         TimeSpotsGenerator timeSpotsGenerator;
         for(i = 0; i < this.cal.getActualMaximum(5); ++i) {
