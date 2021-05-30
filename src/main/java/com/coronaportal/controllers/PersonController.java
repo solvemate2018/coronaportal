@@ -116,9 +116,9 @@ public class PersonController {
         Person person = personService.fetchPersonData(principal.getName());
         userViewCoronapasViewModel pas = new userViewCoronapasViewModel();
 
-        if (vaccineAppointments == null) {
-            pas = new userViewCoronapasViewModel(person.getId(), person.getFirst_name(), person.getLast_name(), person.getCpr(), person.getBirth_date(), person.getZip_code(), person.getCity(), "n/a", "n/a");
-
+        if (vaccineAppointments.size() == 0) {
+            //pas = new userViewCoronapasViewModel(person.getId(), person.getFirst_name(), person.getLast_name(), person.getCpr(), person.getBirth_date(), person.getZip_code(), person.getCity(), "n/a", "n/a");
+            return "/user/noVaccineRecord";
         } else if (vaccineAppointments.size() == 2) {
             VaccineAppointment vaccineAppointment = vaccineAppointments.get(0);
             VaccineAppointment vaccineAppointment1 = vaccineAppointments.get(1);

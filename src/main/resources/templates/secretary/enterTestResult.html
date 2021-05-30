@@ -19,18 +19,19 @@
         function getCookie(name) {
             var nameEQ = name + "=";
             var ca = document.cookie.split(';');
-            for(var i=0;i < ca.length;i++) {
+            for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
             }
             return null;
         }
+
         function getUsername() {
-            let user=getCookie("firstName");
+            let user = getCookie("firstName");
             let x = document.getElementsByName("userFirstName");
             let i;
-            for(i = 0; i < x.length; i++)
+            for (i = 0; i < x.length; i++)
                 x.item(i).innerHTML += user;
         }
     </script>
@@ -61,11 +62,12 @@
                                                                               class="gpd-navbar__item-link">Learn
                         more</a></div>
                     <div id="iguu8" class="cell gpd-navbar__item nav-item">
-                        <div id="iitzx" name="" class="gpd-text">Welcome, Secretary </div>
+                        <div id="iitzx" name="" class="gpd-text">Welcome, Secretary</div>
                     </div>
                 </div>
             </div>
-            <div id="ihndr" class="cell"><a id="io6we" th:href="@{/logout}" class="gpd-link cta-button">Log out</a></div>
+            <div id="ihndr" class="cell"><a id="io6we" th:href="@{/logout}" class="gpd-link cta-button">Log out</a>
+            </div>
         </div>
     </div>
 </div>
@@ -74,7 +76,7 @@
 }</style>
 <section id="iftl" class="gpd-section">
     <div id="ia0i" class="gpd-container"><h1 id="ine3v">ENTER COVID-19 TEST RESULT</h1>
-        <form method="post" th:action="@{'/secretary/enterTestResult/'+${testresult.id}}">
+        <form method="post" th:action="@{'/secretary/enterTestResult/'+${testappointment.id}}">
 
             <label for="id"><b>ID</b></label><br>
             <input type="text" th:value="${testappointment.id}" name="id" id="id" disabled><br>
@@ -86,20 +88,40 @@
             <input type="text" th:value="${testappointment.person_cpr}" name="person_cpr" id="person_cpr" disabled><br>
 
             <label for="test_center_id"><b>Test center ID</b></label><br>
-            <input type="text" th:value="${testappointment.test_center_id}" name="test_center_id" id="test_center_id" disabled><br>
+            <input type="text" th:value="${testappointment.test_center_id}" name="test_center_id" id="test_center_id"
+                   disabled><br>
 
             <label for="name"><b>Test center name</b></label><br>
             <input type="text" th:value="${testcenter.getName()}" name="name" id="name" disabled><br>
 
             <label for="time_of_result"><b>Time of the result</b></label><br>
-            <input type="text" th:value="${testresult.time_of_result}" name="time_of_result" id="time_of_result" disabled></input><br>
 
+            <td><span th:if="${testresult.time_of_result == null}"><input type="text" th:text="${#execInfo.now.time}"}
+                                                                          name="time_of_result" id="time_of_result"
+                                                                          disabled></input><br>
+</span>
+                <span th:unless="${testresult.time_of_result == null}"><input type="text"
+                                                                              th:value="${testresult.time_of_result}"
+                                                                              name="time_of_result" id="time_of_result"
+                                                                              disabled></input><br>
+                </span></td>
+<br>
             <label for="result"><b>Result</b></label><br>
-            <select type="text" th:value="${testresult.result}" name="result"><option value="Positive">Positive</option><option value="Negative">Negative</option></select>
+            <td><span th:if="${testresult.result == null}"><select type="text" th:value="${testresult.result}"
+                                                                   name="result"><option
+                    value="Positive">Positive</option><option value="Negative">Negative</option></select>
+<br>
+</span>
+                <span th:unless="${testresult.result == null}"><select type="text" th:value="${testresult.result}"
+                                                                       name="result"><option
+                        value="Positive">Positive</option><option value="Negative">Negative</option></select><br>
+                </span></td>
 
-            <div class="form-buttons" >
-                <button type="submit" class="button"  id="i6xgf9">Update</button>
-                <button onclick="location.href='/secretary/viewTests'"  type="button" class="button"  id="i6xgf1">Cancel</button>
+
+            <div class="form-buttons">
+                <button type="submit" class="button" id="i6xgf9">Update</button>
+                <button onclick="location.href='/secretary/viewTests'" type="button" class="button" id="i6xgf1">Cancel
+                </button>
             </div>
         </form>
 
