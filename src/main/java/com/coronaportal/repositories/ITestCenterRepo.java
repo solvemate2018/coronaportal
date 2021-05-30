@@ -22,4 +22,6 @@ public interface ITestCenterRepo {
     void updateTestCenter(int id, TestCenter testCenter);
 
     TestCenter findById(int test_center_id);
+
+    public void useTest(int id);
 }

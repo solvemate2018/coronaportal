@@ -68,4 +68,14 @@ public class TestCenterRepoImpl implements ITestCenterRepo {
         }
     }
 
+    @Override
+    public void useTest(int id) {
+        String sqlCnt = "SELECT available_tests FROM test_center WHERE id = ? ";
+        int count = template.queryForObject(sqlCnt, new Object[] {id}, Integer.class); //gettin old count
+
+        String sql2 = "UPDATE test_center SET available_tests=? WHERE id = ? ";
+        template.update(sql2,count-1 , id);
+
+    }
+
 }

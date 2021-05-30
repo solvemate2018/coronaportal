@@ -89,8 +89,14 @@
             <input type="text" th:value="${notapproved.person_cpr}" name="person_cpr" id="person_cpr" disabled><br>
 
             <label for="approved"><b>Approved</b></label><br>
-            <!--<input type="text" th:value="${notapproved.approved}" name="approved" id="approved" required><br>-->
-            <select type="text" th:value="${notapproved.approved}" name="approved"><option value="false">False</option><option value="true">True</option></select>
+            <input type="text" placeholder="True" value="True" name="approved" disabled><br>
+
+
+            <label for="brand"><b>Vaccine brand</b></label><br>
+            <select name="brand"  required>
+                <option selected disabled>Brand</option>
+                <option th:each="vaccine : ${vaccines}" th:value="${vaccine.brand}" th:text="${vaccine.brand}"></option>
+            </select>
 
             <div class="form-buttons" >
                 <button type="submit" class="button"  id="i6xgf9">Update</button>

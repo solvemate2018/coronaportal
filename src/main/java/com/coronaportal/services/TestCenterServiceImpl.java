@@ -47,5 +47,10 @@ public class TestCenterServiceImpl implements ITestCenterService{
     public TestCenter findById(int test_center_id) {
         return testCenterRepo.findById(test_center_id);
     }
+
+    @Override
+    public void useTest(int id) {
+        testCenterRepo.useTest(id);
+    }
 }
 

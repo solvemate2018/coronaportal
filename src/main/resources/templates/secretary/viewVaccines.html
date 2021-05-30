@@ -112,7 +112,7 @@
                 <th><span >Vaccine time</span></th>
                 <th><span >Person CPR</span></th>
                 <th><span >Approved</span></th>
-                <th><span ></span></th>
+                <th><span >Action</span></th>
             </tr>
             </thead>
             <tbody>
@@ -122,7 +122,7 @@
                 <td  th:text="${notapproved.vaccine_time}" ><span ><br></span></td>
                 <td  th:text="${notapproved.person_cpr}" ><span ><br></span></td>
                 <td  th:text="${notapproved.approved}" ><span ><br></span></td>
-                <td><a class="nav-link" th:href="@{'/secretary/approve/'+${notapproved.id}}"><span class="btn btn-danger">Approve</span></a></td>
+                <td><a class="nav-link" th:href="@{'/secretary/updateVaccineStatus/'+${notapproved.id}}"><span class="button">Approve</span></a></td>
             </tr>
             </tbody>
         </table>

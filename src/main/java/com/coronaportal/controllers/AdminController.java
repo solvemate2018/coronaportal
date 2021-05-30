@@ -51,7 +51,7 @@ public class AdminController {
 
 
     @GetMapping("/admin/viewVaccines")
-    public String viewVaccines(Model model, Model model2){
+    public String viewVaccines(Model model){
         List<adminViewVaccinesModel> modelList = new ArrayList<>();
         List<Vaccine> vaccines = vaccineService.fetchVaccines();
         for (Vaccine vaccine:
@@ -60,7 +60,7 @@ public class AdminController {
             modelList.add(new adminViewVaccinesModel(vaccine.getId(),vaccine.getBrand(),vaccine.getCount(),vaccine.getVaccine_center_id(),center.getCity(),center.getZip_code(), center.getStreet(),center.getHouse_number(), center.getName()));
         }
         model.addAttribute("vaccines", modelList);
-        model2.addAttribute("vaccinecenters", vaccineCenterService.fetchVaccineCenters());
+        model.addAttribute("vaccinecenters", vaccineCenterService.fetchVaccineCenters());
         return "/admin/viewVaccines";
     }
 
@@ -177,7 +177,7 @@ public class AdminController {
         return "redirect:/admin/manageVaccineCenters";
     }
     @GetMapping("/admin/manageSecretaries")
-    public String fetchSecretaries(Model model, Model model2,Model model3){
+    public String fetchSecretaries(Model model){
         List<Employee> employees = employeeService.fetchEmployee();
         List<Employee> secretaries = new ArrayList<>();
         for (Employee employee : employees){
@@ -186,8 +186,8 @@ public class AdminController {
             }
         }
         model.addAttribute("secretaries", secretaries);
-        model2.addAttribute("vaccinecenters",vaccineCenterService.fetchVaccineCenters());
-        model3.addAttribute("testcenters", testCenterService.fetchTestCenters());
+        model.addAttribute("vaccinecenters",vaccineCenterService.fetchVaccineCenters());
+        model.addAttribute("testcenters", testCenterService.fetchTestCenters());
         return "/admin/manageSecretaries";
     }
 
@@ -287,7 +287,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/viewTestAppointmentsByDate")
-    public String viewTestAppointmentsByDate(@RequestParam("testtime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model, TestAppointment testAppointmentIn){
+    public String viewTestAppointmentsByDate(@RequestParam("testtime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model){
         List<adminViewTestAppointmentsViewModel> modelList = new ArrayList<>();
         List<TestAppointment> testAppointments = testAppointmentService.fetchAppointments();
 
@@ -350,7 +350,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/viewVaccinationAppointmentsByDate")
-    public String viewVaccinationAppointmentsByDate(@RequestParam("vaccinetime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model, VaccineAppointment vaccineAppointmentIn){
+    public String viewVaccinationAppointmentsByDate(@RequestParam("vaccinetime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model){
         List<adminViewVaccineAppointmentsViewModel> modelList = new ArrayList<>();
         List<VaccineAppointment> vaccineAppointments = vaccineAppointmentService.fetchAppointments();
 

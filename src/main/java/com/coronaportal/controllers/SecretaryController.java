@@ -44,6 +44,9 @@ public class SecretaryController {
     @Autowired
     IPersonService personService;
 
+    @Autowired
+    IVaccineService vaccineService;
+
     private TestAppointment testAppointment;
     private LocalDate today = LocalDate.now();
     private LocalDate firstDayOfMonth;
@@ -60,26 +63,19 @@ public class SecretaryController {
         model.addAttribute("notApprovedAppointments", appointments);
         return "/secretary/viewVaccines";
     }
-/*
+
     @GetMapping("/secretary/updateVaccineStatus/{id}")
     public String viewUpdateVaccineStatus(@PathVariable("id") int id, Model model ){
         model.addAttribute("notapproved",vaccineAppointmentService.findAppointmentsByID(id));
+        model.addAttribute("vaccines", vaccineService.fetchVaccines(vaccineAppointmentService.findAppointmentsByID(id).getVaccine_center_id()));
         return "/secretary/updateVaccineStatus";
     }
 
     @PostMapping("/secretary/updateVaccineStatus/{id}")
-    public String updateVaccineStatus(@PathVariable("id") int id, VaccineAppointment vaccineAppointment){
-        vaccineAppointmentService.approveAppointment(id);
-        return "redirect:/secretary/viewVaccines";
-    }
-
- */
-
-    @GetMapping("/secretary/approve/{id}")
-    public String accept(@PathVariable("id") int id){
+    public String updateVaccineStatus(@PathVariable("id") int id,  Vaccine vaccine){
         boolean b = vaccineAppointmentService.approveAppointment(id);
+        vaccineService.useVaccine(vaccine.getBrand(), vaccineAppointmentService.findAppointmentsByID(id).getVaccine_center_id());
         return "redirect:/secretary/viewVaccines";
-
     }
 
     @GetMapping("/secretary/viewTests")
@@ -120,9 +116,10 @@ public class SecretaryController {
     }
 
     @PostMapping("/secretary/enterTestResult/{id}")
-    public String enterTestResult(@PathVariable("id") int id, TestResult testResult){
+    public String enterTestResult(@PathVariable("id") int id, TestResult testResult) {
         if(testResultService.fetchResult(id)==null) {
             testResultService.addResult(id, testResult);
+            testCenterService.useTest(testAppointmentService.findAppointmentsByID(id).getTest_center_id());
         }else{
             testResultService.editResult(testResultService.fetchResult(id).getId(),testResult.getResult());
         }
