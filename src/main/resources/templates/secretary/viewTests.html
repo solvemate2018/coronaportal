@@ -94,8 +94,13 @@
                 <td  th:text="${testappointment.person_cpr}" ></td>
                 <td  th:text="${testappointment.test_center_id}"  ></td>
                 <td  th:text="${testappointment.name}" ></td>
-                <td  th:text="${testappointment.time_of_result}" ></td>
-                <td  th:text="${testappointment.result}" ></td>
+
+                <td><span th:if="${testappointment.time_of_result == null}"><a>N/A</a></span>
+                    <span th:unless="${testappointment.time_of_result == null}" th:text="${testappointment.time_of_result}"></span></td>
+
+                <td><span th:if="${testappointment.result == null}"><a>N/A</a></span>
+                    <span th:unless="${testappointment.result == null}" th:text="${testappointment.result}"></span></td>
+
                 <td> <a th:href="@{'/secretary/enterTestResult/'+${testappointment.id}}" class="button"  id="i6xgf1" >Update</a>
 
             </tr>
