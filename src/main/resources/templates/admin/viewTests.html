@@ -102,7 +102,7 @@
         <th>Test center ID</th>
         <th>Test available</th>
         <th>Center name</th>
-        <th colspan="4" >Center address</th>
+        <th >Center address</th>
 
       </tr>
       </thead>
@@ -111,12 +111,8 @@
         <td  th:text="${test.id}" ></td>
         <td  th:text="${test.available_tests}" ></td>
         <td  th:text="${test.name}" ></td>
-        <th:block>
-          <td  th:text="${test.city}"  ></td>
-          <td  th:text="${test.zip_code}" ></td>
-          <td  th:text="${test.street}" ></td>
-          <td  th:text="${test.house_number}" ></td>
-        </th:block>
+        <td  th:text="${test.printAddress()}"  ></td>
+
       </tr>
       </tbody>
     </table>

@@ -11,6 +11,11 @@ public class adminViewVaccinesModel {
     private int house_number;
     private String name;
 
+    public String printAddress(){
+        return city + " " + zip_code + ", " + street + " " + house_number;
+    }
+
+
     public int getId() {
         return id;
     }

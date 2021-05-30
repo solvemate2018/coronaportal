@@ -122,7 +122,7 @@
                 <th>Vaccine count</th>
                 <th>Vaccine center name</th>
                 <th>Vaccine center ID</th>
-                <th colspan="4" ><span >Center address</span></th>
+                <th><span >Center address</span></th>
 
             </tr>
             </thead>
@@ -133,12 +133,8 @@
                 <td  th:text="${vaccine.count}" ></td>
                 <td  th:text="${vaccine.name}" ></td>
                 <td  th:text="${vaccine.vaccine_center_id}" ></td>
-                <th:block>
-                <td  th:text="${vaccine.city}"  ></td>
-                <td  th:text="${vaccine.zip_code}" ></td>
-                <td  th:text="${vaccine.street}" ></td>
-                <td  th:text="${vaccine.house_number}" ></td>
-                </th:block>
+                <td  th:text="${vaccine.printAddress()}"  ></td>
+
             </tr>
             </tbody>
         </table>

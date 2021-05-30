@@ -189,7 +189,7 @@
                 <th id="i8juk"><span id="i65d1">Vaccine center ID</span></th>
                 <th ><span >Center capacity</span></th>
                 <th ><span >Center name</span></th>
-                <th colspan="4" ><span >Center address</span></th>
+                <th  ><span >Center address</span></th>
                 <th  ><span >Action</span></th>
 
             </tr>
@@ -199,12 +199,8 @@
                 <td id="ifwo6" th:text="${vaccinecenter.id}" ><span id="i2z0f"><br></span></td>
                 <td  th:text="${vaccinecenter.capacity}" ><span ><br></span></td>
                 <td  th:text="${vaccinecenter.name}" ><span ><br></span></td>
-                <th:block>
-                    <td  th:text="${vaccinecenter.city}"  ></td>
-                    <td  th:text="${vaccinecenter.zip_code}" ></td>
-                    <td  th:text="${vaccinecenter.street}" ></td>
-                    <td  th:text="${vaccinecenter.house_number}" ></td>
-                </th:block>
+                <td  th:text="${vaccinecenter.printAddress()}"  ></td>
+
                 <td> <a th:href="@{'/admin/updateVaccineCenter/'+${vaccinecenter.id}}" class="button"  id="i6xgf1" >Update</a>
                     <a  th:href="@{'/admin/deleteVaccineCenter/'+${vaccinecenter.id}}" class="button"  id="deleteButton" >Delete</a>
                 </td>
