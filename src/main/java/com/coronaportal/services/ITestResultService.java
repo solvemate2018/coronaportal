@@ -9,7 +9,7 @@ public interface ITestResultService {
 
     List<TestResult> fetchResult(String cpr);
 
-    void addResult(TestResult testResult);
+    void addResult(int test_appointments_id,TestResult testResult);
 
     void editResult(int id, String testResult);
 

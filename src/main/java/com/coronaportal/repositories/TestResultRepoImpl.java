@@ -9,6 +9,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,9 +36,10 @@ public class TestResultRepoImpl implements ITestResultRepo{
     }
 
     @Override
-    public void addResult(TestResult testResult) {
+    public void addResult(int test_appointments_id, TestResult testResult ) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         String sql="INSERT INTO coronaportal.test_result(test_appointments_id, time_of_result, result) VALUES(?,?,?)";
-        template.update(sql,testResult.getTest_appointment_id(), testResult.getTime_of_result(), testResult.getResult());
+        template.update(sql,test_appointments_id,timeStamp, testResult.getResult());
     }
 
     @Override

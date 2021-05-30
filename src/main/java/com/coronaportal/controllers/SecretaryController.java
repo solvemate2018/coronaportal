@@ -110,13 +110,22 @@ public class SecretaryController {
     public String viewEnterTestResult(@PathVariable("id") int id, Model model ){
         model.addAttribute("testappointment",testAppointmentService.findAppointmentsByID(id));
         model.addAttribute("testcenter", testCenterService.findById(testAppointmentService.findAppointmentsByID(id).getTest_center_id()));
-        model.addAttribute("testresult", testResultService.fetchResult(id));
+        if (testResultService.fetchResult(id)!=null) {
+            model.addAttribute("testresult", testResultService.fetchResult(id));
+        }else{
+            TestResult testres =  new TestResult(null,null,null);
+            model.addAttribute("testresult",testres);
+        }
         return "/secretary/enterTestResult";
     }
 
     @PostMapping("/secretary/enterTestResult/{id}")
     public String enterTestResult(@PathVariable("id") int id, TestResult testResult){
-        testResultService.editResult(id, testResult.getResult());
+        if(testResultService.fetchResult(id)==null) {
+            testResultService.addResult(id, testResult);
+        }else{
+            testResultService.editResult(testResultService.fetchResult(id).getId(),testResult.getResult());
+        }
         return "redirect:/secretary/viewTests";
     }
 

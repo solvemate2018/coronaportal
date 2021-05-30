@@ -74,7 +74,7 @@
 }</style>
 <section id="iftl" class="gpd-section">
     <div id="ia0i" class="gpd-container"><h1 id="ine3v">ENTER COVID-19 TEST RESULT</h1>
-        <form method="post" th:action="@{'/secretary/enterTestResult/'+${testresult.id}}">
+        <form method="post" th:action="@{'/secretary/enterTestResult/'+${testappointment.id}}">
 
             <label for="id"><b>ID</b></label><br>
             <input type="text" th:value="${testappointment.id}" name="id" id="id" disabled><br>
@@ -92,10 +92,10 @@
             <input type="text" th:value="${testcenter.getName()}" name="name" id="name" disabled><br>
 
             <label for="time_of_result"><b>Time of the result</b></label><br>
-            <input type="text" th:value="${testresult.time_of_result}" name="time_of_result" id="time_of_result" disabled></input><br>
+            <input type="text"  th:value="${testresult.time_of_result }" name="time_of_result" id="time_of_result" disabled></input><br>
 
             <label for="result"><b>Result</b></label><br>
-            <select type="text" th:value="${testresult.result}" name="result"><option value="Positive">Positive</option><option value="Negative">Negative</option></select>
+            <select type="text" th:value="${testresult.result }"  name="result"><option value="Positive">Positive</option><option value="Negative">Negative</option></select>
 
             <div class="form-buttons" >
                 <button type="submit" class="button"  id="i6xgf9">Update</button>

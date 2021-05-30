@@ -25,8 +25,8 @@ public class TestResultServiceImpl implements ITestResultService{
     }
 
     @Override
-    public void addResult(TestResult testResult) {
-        testResultRepo.addResult(testResult);
+    public void addResult(int test_appointments_id,TestResult testResult) {
+        testResultRepo.addResult(test_appointments_id,testResult);
     }
 
     @Override

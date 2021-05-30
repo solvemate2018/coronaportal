@@ -13,9 +13,13 @@ public class TestResult {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
-	private Integer test_appointment_id;
+	private Integer test_appointments_id;
 	private LocalDateTime time_of_result;
 	private String result;
+
+	public TestResult() {
+
+	}
 
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
 	public Integer getId() {
@@ -31,20 +35,18 @@ public class TestResult {
 	}
 
 	public Integer getTest_appointment_id() {
-		return this.test_appointment_id;
+		return this.test_appointments_id;
 	}
 
 	/**
 	 * 
-	 * @param test_appointment_id
+	 * @param test_appointments_id
 	 */
-	public void setTest_appointment_id(Integer test_appointment_id) {
-		this.test_appointment_id = test_appointment_id;
+	public void setTest_appointment_id(Integer test_appointments_id) {
+		this.test_appointments_id = test_appointments_id;
 	}
 
-	public LocalDateTime getTime_of_result() {
-		return this.time_of_result;
-	}
+	public LocalDateTime getTime_of_result() { return this.time_of_result; }
 
 	/**
 	 * 
@@ -66,4 +68,9 @@ public class TestResult {
 		this.result = result;
 	}
 
+	public TestResult(Integer test_appointments_id, LocalDateTime time_of_result, String result) {
+		this.test_appointments_id = test_appointments_id;
+		this.time_of_result = time_of_result;
+		this.result = result;
+	}
 }
