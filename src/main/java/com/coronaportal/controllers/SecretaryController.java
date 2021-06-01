@@ -253,14 +253,14 @@ public class SecretaryController {
                 cal = Calendar.getInstance();
                 firstDayOfMonth = LocalDate.of(today.getYear(), today.getMonthValue(), 1);
                 vaccineAppointment.setPerson_cpr(userCpr);
-                return "secretary/selectVaccineTimeSlot";
+                return "/secretary/selectVaccineTimeSlot";
             }
 
             appointment = (VaccineAppointment) var5.next();
             counter++;
         } while(appointment.getApproved());
 
-        return "redirect:http://localhost:8080/user/alreadyHasAppointment";
+        return "/secretary/userAlreadyHasAppointment";
     }
 
     @GetMapping({"/secretary/makeVaccineAppointment/{timeSlotId}"})
