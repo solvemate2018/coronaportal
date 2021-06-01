@@ -23,5 +23,5 @@ public interface ITestCenterRepo {
 
     TestCenter findById(int test_center_id);
 
-    public void useTest(int id);
+    void useTest(int id);
 }

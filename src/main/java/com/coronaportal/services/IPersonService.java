@@ -8,8 +8,8 @@ import com.coronaportal.models.VaccineAppointment;
 import java.util.List;
 
 public interface IPersonService {
-    public Person fetchPersonData(String cpr);
-    public void setToVaccinated(String cpr);
-    public boolean isVaccinated(String cpr);
-    public TestResult getLastTestResult(String cpr);
+    Person fetchPersonData(String cpr);
+    void setToVaccinated(String cpr);
+    boolean isVaccinated(String cpr);
+    TestResult getLastTestResult(String cpr);
 }

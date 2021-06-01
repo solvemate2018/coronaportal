@@ -251,10 +251,7 @@ public class PersonController {
             } else {
                 timeSpotsGenerator = new TimeSpotsGenerator(this.centerCapacity, this.duration);
                 this.timeSpotsMap.put(new Date(this.firstDayOfMonth.plusDays(i)), timeSpotsGenerator.getTimeSpots());
-                canSign = true;
-                if (this.firstDayOfMonth.plusDays(i).equals(this.today.plusDays(this.numberOfDays))) {
-                    canSign = false;
-                }
+                canSign = !this.firstDayOfMonth.plusDays(i).equals(this.today.plusDays(this.numberOfDays));
             }
         }
 
@@ -264,14 +261,11 @@ public class PersonController {
 
             for(i = 0; i < this.cal.getActualMaximum(5) - 1; ++i) {
                 if (!this.firstDayOfMonth.plusDays(i).equals(this.today) && !canSign) {
-                    this.timeSpotsMap.put(new Date(this.firstDayOfMonth.plusDays((long)i)), null);
+                    this.timeSpotsMap.put(new Date(this.firstDayOfMonth.plusDays(i)), null);
                 } else {
                     timeSpotsGenerator = new TimeSpotsGenerator(this.centerCapacity, this.duration);
                     this.timeSpotsMap.put(new Date(this.firstDayOfMonth.plusDays(i)), timeSpotsGenerator.getTimeSpots());
-                    canSign = true;
-                    if (this.firstDayOfMonth.plusDays(i).equals(this.today.plusDays(this.numberOfDays))) {
-                        canSign = false;
-                    }
+                    canSign = !this.firstDayOfMonth.plusDays(i).equals(this.today.plusDays(this.numberOfDays));
                 }
             }
         }
@@ -285,7 +279,7 @@ public class PersonController {
 
         while(var3.hasNext()) {
             TestAppointment appointment = (TestAppointment)var3.next();
-            List<TimeSpot> spots = (List)this.timeSpotsMap.get(new Date(appointment.getTest_time().toLocalDate()));
+            List<TimeSpot> spots = this.timeSpotsMap.get(new Date(appointment.getTest_time().toLocalDate()));
             Iterator var6 = spots.iterator();
 
             while(var6.hasNext()) {

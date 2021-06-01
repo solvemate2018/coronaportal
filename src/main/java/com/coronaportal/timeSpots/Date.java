@@ -3,7 +3,7 @@ package com.coronaportal.timeSpots;
 import java.time.LocalDate;
 
 public class Date implements Comparable<Date> {
-    private int id;
+    private final int id;
     private LocalDate date;
 
     public Date(LocalDate date) {

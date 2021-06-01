@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimeSpotsGenerator {
-    private List<TimeSpot> timeSpots = new ArrayList();
+    private final List<TimeSpot> timeSpots = new ArrayList();
     private LocalTime currentTime = LocalTime.of(8, 0);
 
     public TimeSpotsGenerator(int capacity, int duration) {

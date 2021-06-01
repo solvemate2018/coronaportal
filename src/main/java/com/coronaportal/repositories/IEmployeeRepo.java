@@ -5,11 +5,11 @@ import com.coronaportal.models.*;
 import java.util.List;
 
 public interface IEmployeeRepo {
-    public List<Employee> fetchEmployee();
-    public void   reassignToTestCenter(int id, int test_center_id);
-    public void  reassignToVaccineCenter(int id, int vaccine_center_id);
-    public void editEmployee(int id, Employee employee);
-    public void deleteEmployee(int id);
-    public Employee findById(int id);
-    public Employee findByCpr(String cpr);
+    List<Employee> fetchEmployee();
+    void   reassignToTestCenter(int id, int test_center_id);
+    void  reassignToVaccineCenter(int id, int vaccine_center_id);
+    void editEmployee(int id, Employee employee);
+    void deleteEmployee(int id);
+    Employee findById(int id);
+    Employee findByCpr(String cpr);
 }

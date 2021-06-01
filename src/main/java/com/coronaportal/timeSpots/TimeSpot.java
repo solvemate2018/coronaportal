@@ -6,7 +6,7 @@ public class TimeSpot {
     private int id;
     private int leftSpots;
     private boolean available;
-    private LocalTime time;
+    private final LocalTime time;
 
     public TimeSpot(int leftSpots, LocalTime time) {
         this.leftSpots = leftSpots;
