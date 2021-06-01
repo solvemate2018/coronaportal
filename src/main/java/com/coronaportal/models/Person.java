@@ -11,7 +11,7 @@ public class Person {
 
 	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-	private int cpr;
+	private String cpr;
 	private String password;
 	private String first_name;
 	private String last_name;
@@ -39,7 +39,7 @@ public class Person {
 		this.id = id;
 	}
 
-	public int getCpr() {
+	public String getCpr() {
 		return this.cpr;
 	}
 
@@ -47,7 +47,7 @@ public class Person {
 	 * 
 	 * @param cpr
 	 */
-	public void setCpr(int cpr) {
+	public void setCpr(String cpr) {
 		this.cpr = cpr;
 	}
 

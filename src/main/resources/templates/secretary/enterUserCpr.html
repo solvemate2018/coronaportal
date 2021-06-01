@@ -19,7 +19,7 @@
             opacity: 0;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="/css/secretaryHomePageStyle.css">
+    <link rel="stylesheet" type="text/css" href="/css/appStyle.css">
 </head>
 <body data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
 <div id="ixuj" data-anim-type="fadeIn" data-anim-br="414" class="gpd-navbar" data-anim-done="1"
@@ -59,7 +59,7 @@
 <section id="iftl" class="gpd-section">
     <div id="ia0i" class="gpd-container">
         <div id="idd1fa" class="gpd-grid">
-            <form method="post" th:action="@{'/secretary/selectTestTimeSlot/'}">
+            <form method="post" th:action="@{'/secretary/userTestOverview/'}">
                 <label for="userCpr"><b>Please enter the user CPR</b></label><br>
                 <input type="text" th:value="${userCpr}" name="userCpr" id="userCpr"><br>
                 <p></p>

@@ -733,7 +733,7 @@
                                     <div class="btn-toolbar">
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 3 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}"  type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 3 && !timeSpot.available}"
@@ -742,7 +742,7 @@
                                         </div>
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 7 && stats.index > 3 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" th:disabled="${!timeSpot.available}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 7 && stats.index > 3 && !timeSpot.available}"
@@ -766,7 +766,7 @@
                                     <div class="btn-toolbar">
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 11 && stats.index > 7 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 11 && stats.index > 7 && !timeSpot.available}"
@@ -775,7 +775,7 @@
                                         </div>
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 15 && stats.index > 11 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 15 && stats.index > 11 && !timeSpot.available}"
@@ -799,7 +799,7 @@
                                     <div class="btn-toolbar">
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 19 && stats.index > 15 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 19 && stats.index > 15 && !timeSpot.available}"
@@ -808,7 +808,7 @@
                                         </div>
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 23 && stats.index > 19 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 23 && stats.index > 19 && !timeSpot.available}"
@@ -832,7 +832,7 @@
                                     <div class="btn-toolbar">
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 27 && stats.index > 23 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 27 && stats.index > 23 && !timeSpot.available}"
@@ -841,7 +841,7 @@
                                         </div>
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 31 && stats.index > 27 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 31 && stats.index > 27 && !timeSpot.available}"
@@ -865,7 +865,7 @@
                                     <div class="btn-toolbar">
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 35 && stats.index > 31 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 35 && stats.index > 31 && !timeSpot.available}"
@@ -874,7 +874,7 @@
                                         </div>
                                         <div role="group" class="btn-group" style="margin-bottom: 10px;">
                                             <a class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 39 && stats.index > 35 && timeSpot.available}"
-                                               th:href="@{'/secretary/makeTestAppointment/' + ${timeSpot.getId()}}"
+                                               th:href="@{'/secretary/makeVaccineAppointment/' + ${timeSpot.getId()}}"
                                                th:text="${timeSpot.getTime()}" type="button" style="margin-right: 25px;">
                                             </a>
                                             <button class="btn btn-primary" th:each="timeSpot, stats : ${entry.value}" th:if="${stats.index <= 39 && stats.index > 35 && !timeSpot.available}"

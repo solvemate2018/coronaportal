@@ -2,6 +2,7 @@ package com.coronaportal.controllers;
 
 import com.coronaportal.modelViews.adminViewTestAppointmentsViewModel;
 import com.coronaportal.modelViews.adminViewVaccinesModel;
+import com.coronaportal.modelViews.secretaryViewTestAppointmentsViewModel;
 import com.coronaportal.modelViews.userViewTestAppointmentsViewModel;
 import com.coronaportal.models.*;
 import com.coronaportal.repositories.TestAppointmentRepoImpl;
@@ -13,11 +14,13 @@ import com.coronaportal.timeSpots.TimeSpotsGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,12 +45,16 @@ public class SecretaryController {
     TestCenterServiceImpl testCenterService;
 
     @Autowired
+    IVaccineCenterService vaccineCenterService;
+
+    @Autowired
     IPersonService personService;
 
     @Autowired
     IVaccineService vaccineService;
 
     private TestAppointment testAppointment;
+    private VaccineAppointment vaccineAppointment;
     private LocalDate today = LocalDate.now();
     private LocalDate firstDayOfMonth;
     private int centerCapacity;
@@ -132,11 +139,179 @@ public class SecretaryController {
         return "/secretary/enterUserCpr";
     }
 
-    @PostMapping("/secretary/selectTestTimeSlot")
-    public String selectUserTimeSlot(Model model, Principal principal, String userCpr){
+    @GetMapping("/secretary/enterUserCprVac")
+    public String makeVaccineApppointment(){
+        vaccineAppointment = new VaccineAppointment();
+        return "/secretary/enterUserCprVac";
+    }
+
+    @PostMapping("/secretary/userTestOverview")
+    public String getUserTestOverview(Model model, String userCpr, HttpServletResponse response){
         if(personService.fetchPersonData(userCpr) == null){
             return "/secretary/invalidCpr";
         }
+        Cookie cookie1 = new Cookie("userCpr", userCpr);
+        cookie1.setPath("/");
+        response.addCookie(cookie1);
+
+
+        List<secretaryViewTestAppointmentsViewModel> appointments  = new ArrayList<>();
+        for (TestAppointment appointment:
+                testAppointmentService.fetchAppointments(userCpr)) {
+            if(testAppointmentService.checkForResult(appointment.getId())){
+                TestResult result = testResultService.fetchResult(appointment.getId());
+                appointments.add(new secretaryViewTestAppointmentsViewModel(appointment.getId(), appointment.getTest_time(), result.getTime_of_result(), result.getResult()));
+            }
+            else{
+                appointments.add(new secretaryViewTestAppointmentsViewModel(appointment.getId(), appointment.getTest_time()));
+            }
+        }
+
+        model.addAttribute("testAppointments", appointments);
+        return "/secretary/userTestOverView";
+    }
+
+    @GetMapping("/secretary/deleteUserAppointment/{id}")
+    public String deleteUserAppointment(@PathVariable("id") String id, HttpServletRequest request, @CookieValue(name="userCpr") String userCpr){
+        if(personService.fetchPersonData(userCpr) == null){
+            return "/secretary/invalidCpr";
+        }
+        else if(testAppointmentService.findAppointmentsByID(Integer.parseInt(id)) == null){
+            return "redirect:http://localhost:8080/";
+        }
+        else{
+            testAppointmentService.deleteAppointment(Integer.parseInt(id));
+        }
+        return "redirect:http://localhost:8080/";
+    }
+
+    @PostMapping("/secretary/userVaccineOverView")
+    public String getUserVaccineOverview(Model model, String userCpr, HttpServletResponse response){
+        if(personService.fetchPersonData(userCpr) == null){
+            return "/secretary/invalidCpr";
+        }
+        Cookie cookie1 = new Cookie("userCpr", userCpr);
+        cookie1.setPath("/");
+        response.addCookie(cookie1);
+
+
+        List<VaccineAppointment> appointments  = vaccineAppointmentService.fetchAppointments(userCpr);
+
+        model.addAttribute("vaccineAppointments", appointments);
+        return "/secretary/userVaccineOverView";
+    }
+
+    @GetMapping("/secretary/deleteUserVaccineAppointment/{id}")
+    public String deleteUserVaccineAppointment(@PathVariable("id") String id, HttpServletRequest request, @CookieValue(name="userCpr") String userCpr){
+        if(personService.fetchPersonData(userCpr) == null){
+            return "/secretary/invalidCpr";
+        }
+        else if(vaccineAppointmentService.findAppointmentsByID(Integer.parseInt(id)) == null){
+            return "redirect:http://localhost:8080/";
+        }
+        else{
+            vaccineAppointmentService.deleteAppointment(Integer.parseInt(id));
+        }
+        return "redirect:http://localhost:8080/";
+    }
+
+    @GetMapping({"/secretary/selectVaccineTimeSlot"})
+    public String chooseVaccineTimeSlot(Model model, Principal principal, @CookieValue("userCpr") String userCpr) {
+        List<VaccineAppointment> appointments = this.vaccineAppointmentService.fetchAppointments(userCpr);
+        Iterator var5 = appointments.iterator();
+        int counter = 0;
+        VaccineAppointment appointment = new VaccineAppointment();
+        do {
+            if (!var5.hasNext()) {
+                if (counter == 1){
+                    today = appointment.getVaccine_time().toLocalDate().plusDays(14);
+                    firstDayOfMonth = LocalDate.of(today.getYear(), today.getMonthValue(), 1);
+                    cal.set(today.getYear(), today.getMonthValue(), today.getDayOfMonth());
+                }
+                else if(counter == 2){
+                    return "/secretary/userAlreadyHasAppointment";
+                }
+                VaccineCenter vaccineCenter = this.vaccineCenterService.findById(employeeService.findByCpr(principal.getName()).getVaccine_center_id());
+                this.centerCapacity = vaccineCenter.getCapacity();
+                this.prepareData(vaccineCenter.getId());
+                model.addAttribute("timeSpots", this.timeSpotsMap);
+                model.addAttribute("month1", this.today.getMonth());
+                model.addAttribute("year1", this.today.getYear());
+                if (this.cal.getActualMaximum(5) < this.today.getDayOfMonth() + this.numberOfDays) {
+                    model.addAttribute("month2", LocalDate.now().plusMonths(1L).getMonth());
+                    model.addAttribute("year2", LocalDate.now().plusMonths(1L).getYear());
+                    model.addAttribute("firstDay2", LocalDate.of(this.today.getYear(), this.today.getMonthValue() + 1, 1).getDayOfWeek().toString());
+                } else {
+                    model.addAttribute("month2", null);
+                    model.addAttribute("year2", null);
+                    model.addAttribute("firstDay2", null);
+                }
+
+                model.addAttribute("firstDay1", LocalDate.of(this.today.getYear(), this.today.getMonthValue(), 1).getDayOfWeek().toString());
+                model.addAttribute("centerId", vaccineCenter.getId());
+                today = LocalDate.now();
+                cal = Calendar.getInstance();
+                firstDayOfMonth = LocalDate.of(today.getYear(), today.getMonthValue(), 1);
+                vaccineAppointment.setPerson_cpr(userCpr);
+                return "secretary/selectVaccineTimeSlot";
+            }
+
+            appointment = (VaccineAppointment) var5.next();
+            counter++;
+        } while(appointment.getApproved());
+
+        return "redirect:http://localhost:8080/user/alreadyHasAppointment";
+    }
+
+    @GetMapping({"/secretary/makeVaccineAppointment/{timeSlotId}"})
+    public String makeVaccineAppointment(@PathVariable("timeSlotId") int timeSlotId, Principal principal) {
+        List<VaccineAppointment> appointments = this.vaccineAppointmentService.fetchAppointments(vaccineAppointment.getPerson_cpr());
+        Iterator var5 = appointments.iterator();
+
+        VaccineAppointment appointment;
+        while(var5.hasNext()) {
+            appointment = (VaccineAppointment) var5.next();
+            if (!appointment.getApproved()) {
+                return "redirect:http://localhost:8080";
+            }
+        }
+
+        VaccineCenter vaccineCenter = this.vaccineCenterService.findById(employeeService.findByCpr(principal.getName()).getVaccine_center_id());
+        vaccineAppointment.setPerson_cpr(vaccineAppointment.getPerson_cpr());
+        vaccineAppointment.setPerson_id(this.personService.fetchPersonData(vaccineAppointment.getPerson_cpr()).getId());
+        vaccineAppointment.setVaccine_center_id(vaccineCenter.getId());
+        boolean added = false;
+        Iterator var8 = this.timeSpotsMap.entrySet().iterator();
+
+        while(var8.hasNext()) {
+            Map.Entry<Date, List<TimeSpot>> entry = (Map.Entry)var8.next();
+            if (entry.getValue() != null) {
+                Iterator var10 = ((List)entry.getValue()).iterator();
+
+                while(var10.hasNext()) {
+                    TimeSpot spot = (TimeSpot)var10.next();
+                    if (spot.getId() == timeSlotId) {
+                        vaccineAppointment.setVaccine_time(LocalDateTime.of((entry.getKey()).getDate(), spot.getTime()));
+                        added = true;
+                    }
+
+                    if (added) {
+                        break;
+                    }
+                }
+            }
+
+            if (added) {
+                break;
+            }
+        }
+
+        this.vaccineAppointmentService.makeAppointmentForPerson(vaccineAppointment);
+        return "redirect:http://localhost:8080";
+    }
+
+    @GetMapping("/secretary/selectTestTimeSlot")
+    public String selectUserTimeSlot(Model model, Principal principal, @CookieValue("userCpr") String userCpr){
         List<TestAppointment> appointments = this.testAppointmentService.fetchAppointments(userCpr);
         Iterator var5 = appointments.iterator();
 

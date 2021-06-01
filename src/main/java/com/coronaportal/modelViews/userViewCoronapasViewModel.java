@@ -29,11 +29,11 @@ public class userViewCoronapasViewModel {
         this.last_name = last_name;
     }
 
-    public int getCpr() {
+    public String getCpr() {
         return cpr;
     }
 
-    public void setCpr(int cpr) {
+    public void setCpr(String cpr) {
         this.cpr = cpr;
     }
 
@@ -88,7 +88,7 @@ public class userViewCoronapasViewModel {
     private int id;
     private String first_name;
     private String last_name;
-    private int cpr;
+    private String cpr;
     private Date birth_date;
     private int zip_code;
     private String city;
@@ -120,7 +120,7 @@ public class userViewCoronapasViewModel {
 
     }
 
-    public userViewCoronapasViewModel(int id, String first_name, String last_name, int cpr, Date birth_date, int zip_code, String city, LocalDateTime vaccine_time, LocalDateTime vaccine_time2, boolean approved) {
+    public userViewCoronapasViewModel(int id, String first_name, String last_name, String cpr, Date birth_date, int zip_code, String city, LocalDateTime vaccine_time, LocalDateTime vaccine_time2, boolean approved) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -136,7 +136,7 @@ public class userViewCoronapasViewModel {
     //for when we do not have any vaccine record
     private String s;
     private String s1;
-    public userViewCoronapasViewModel(int id, String first_name, String last_name, int cpr, Date birth_date, int zip_code, String city, String s, String s1) {
+    public userViewCoronapasViewModel(int id, String first_name, String last_name, String cpr, Date birth_date, int zip_code, String city, String s, String s1) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
