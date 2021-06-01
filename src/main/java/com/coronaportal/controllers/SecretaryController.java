@@ -172,7 +172,7 @@ public class SecretaryController {
     }
 
     @GetMapping("/secretary/deleteUserAppointment/{id}")
-    public String deleteUserAppointment(@PathVariable("id") String id, HttpServletRequest request, @CookieValue(name="userCpr") String userCpr){
+    public String deleteUserAppointment(@PathVariable("id") String id, @CookieValue(name="userCpr") String userCpr){
         if(personService.fetchPersonData(userCpr) == null){
             return "/secretary/invalidCpr";
         }
@@ -202,7 +202,7 @@ public class SecretaryController {
     }
 
     @GetMapping("/secretary/deleteUserVaccineAppointment/{id}")
-    public String deleteUserVaccineAppointment(@PathVariable("id") String id, HttpServletRequest request, @CookieValue(name="userCpr") String userCpr){
+    public String deleteUserVaccineAppointment(@PathVariable("id") String id, @CookieValue(name="userCpr") String userCpr){
         if(personService.fetchPersonData(userCpr) == null){
             return "/secretary/invalidCpr";
         }

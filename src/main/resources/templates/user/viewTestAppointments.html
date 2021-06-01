@@ -107,7 +107,11 @@
                 </td>
                 <td id="iu4wg">
                             <span id="i2evs" th:if="${appointment.result == '0'}">
-                                N/A
+                                <a th:href="@{'/user/deleteTestAppointment/' + ${appointment.appointmentId}}">
+                                        <button type="button" class="btn btn-primary btn-lg">
+                                            Delete
+                                        </button>
+                                    </a>
                             </span>
                     <span id="i2evs" th:unless="${appointment.result == '0'}" th:text="${appointment.result}"></span>
                 </td>

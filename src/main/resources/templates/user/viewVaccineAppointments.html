@@ -91,6 +91,7 @@
                 <th id="i8juk"><span id="i65d1">Vaccine appointment ID</span></th>
                 <th id="ialqv"><span id="i7gu8">Vaccine center name</span></th>
                 <th id="i1yl8"><span id="ithg6">Vaccine date</span></th>
+                <th ><span>Verified</span></th>
             </tr>
             </thead>
             <tbody>
@@ -98,6 +99,16 @@
                 <td id="ifwo6" th:text="${appointment.appointmentId}" ><span id="i2z0f"><br></span></td>
                 <td id="ij6mc" th:text="${appointment.vaccineCenter}" ><span id="i3mu7"></span></td>
                 <td id="izq8j" th:text="${appointment.vaccineTime}" ><span id="iwv9p"></span></td>
+                <td th:if="${appointment.approved == 'true'}" th:text="appointment.approved"><span></span></td>
+                <td th:unless="${!appointment.approved == 'false'}"><span>
+                    <span id="i2evs">
+                                <a th:href="@{'/user/deleteVaccineAppointment/' + ${appointment.appointmentId}}">
+                                        <button type="button" class="btn btn-primary btn-lg">
+                                            Delete
+                                        </button>
+                                    </a>
+                            </span>
+                </span></td>
             </tr>
             </tbody>
         </table>

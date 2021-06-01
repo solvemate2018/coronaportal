@@ -83,7 +83,7 @@ public class PersonController {
         for (VaccineAppointment appointment:
                 vaccineAppointments) {
             VaccineCenter center = vaccineCenterService.findById(appointment.getVaccine_center_id());
-            modelList.add(new userViewVaccineAppointmentsViewModel(appointment.getId(), center.getCity(), appointment.getVaccine_time()));
+            modelList.add(new userViewVaccineAppointmentsViewModel(appointment.getId(), center.getCity(), appointment.getVaccine_time(), appointment.getApproved()));
         }
         model.addAttribute("appointments", modelList);
 
@@ -422,6 +422,28 @@ public class PersonController {
 
         this.vaccineAppointmentService.makeAppointmentForPerson(appointment);
         return "user/index";
+    }
+
+    @GetMapping("/user/deleteVaccineAppointment/{id}")
+    public String deleteVaccineAppointment(@PathVariable("id") String id){
+        if(vaccineAppointmentService.findAppointmentsByID(Integer.parseInt(id)) == null){
+            return "redirect:http://localhost:8080/";
+        }
+        else{
+            vaccineAppointmentService.deleteAppointment(Integer.parseInt(id));
+        }
+        return "redirect:http://localhost:8080/";
+    }
+
+    @GetMapping("/user/deleteTestAppointment/{id}")
+    public String deleteTestAppointment(@PathVariable("id") String id){
+        if(testAppointmentService.findAppointmentsByID(Integer.parseInt(id)) == null){
+            return "redirect:http://localhost:8080/";
+        }
+        else{
+            testAppointmentService.deleteAppointment(Integer.parseInt(id));
+        }
+        return "redirect:http://localhost:8080/";
     }
 
 }
