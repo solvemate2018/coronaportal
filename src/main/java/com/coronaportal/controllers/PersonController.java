@@ -332,7 +332,9 @@ public class PersonController {
         do {
             if (!var5.hasNext()) {
                 if (counter == 1){
-                    today = appointment.getVaccine_time().toLocalDate().plusDays(14);
+                    if(appointment.getVaccine_time().toLocalDate().plusDays(14).compareTo(LocalDate.now()) > 0){
+                        today = appointment.getVaccine_time().toLocalDate().plusDays(14);
+                    }
                     firstDayOfMonth = LocalDate.of(today.getYear(), today.getMonthValue(), 1);
                     cal.set(today.getYear(), today.getMonthValue(), today.getDayOfMonth());
                 }

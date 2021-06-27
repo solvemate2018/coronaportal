@@ -99,16 +99,17 @@
                 <td id="ifwo6" th:text="${appointment.appointmentId}" ><span id="i2z0f"><br></span></td>
                 <td id="ij6mc" th:text="${appointment.vaccineCenter}" ><span id="i3mu7"></span></td>
                 <td id="izq8j" th:text="${appointment.vaccineTime}" ><span id="iwv9p"></span></td>
-                <td th:if="${appointment.approved == 'true'}" th:text="appointment.approved"><span></span></td>
-                <td th:unless="${!appointment.approved == 'false'}"><span>
-                    <span id="i2evs">
+                <td>
+                    <span th:if="${appointment.approved}" th:text="Approved"></span>
+                    <span th:if="${!appointment.approved}">
+                        <span id="i2evs">
                                 <a th:href="@{'/user/deleteVaccineAppointment/' + ${appointment.appointmentId}}">
                                         <button type="button" class="btn btn-primary btn-lg">
                                             Delete
                                         </button>
                                     </a>
                             </span>
-                </span></td>
+                    </span></td>
             </tr>
             </tbody>
         </table>

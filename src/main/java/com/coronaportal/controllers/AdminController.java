@@ -59,6 +59,7 @@ public class AdminController {
             VaccineCenter center = vaccineCenterService.findById(vaccine.getVaccine_center_id());
             modelList.add(new adminViewVaccinesModel(vaccine.getId(),vaccine.getBrand(),vaccine.getCount(),vaccine.getVaccine_center_id(),center.getCity(),center.getZip_code(), center.getStreet(),center.getHouse_number(), center.getName()));
         }
+        int a, b, c;
         model.addAttribute("vaccines", modelList);
         model.addAttribute("vaccinecenters", vaccineCenterService.fetchVaccineCenters());
         return "/admin/viewVaccines";
